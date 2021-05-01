@@ -11,6 +11,9 @@
 " Git: https://github.com/TheoStanfield/dotfiles.git
 "
 
+" ---------- Initialization ---------- "
+filetype indent plugin on
+
 " ---------- Plugins ---------- "
 " Install plugins via vim-plug.
 call plug#begin("~/.local/share/nvim/site/plugged")
