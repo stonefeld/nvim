@@ -48,7 +48,7 @@ Plug 'lervag/vimtex'
 
 " Syntax highlighting.
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'nvim-treesitter/playground'
+Plug 'sheerun/vim-polyglot'
 
 " Colorschemes.
 Plug 'stonefeld/nordokai'

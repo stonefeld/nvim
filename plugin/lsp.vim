@@ -1,7 +1,7 @@
 " ---------- LSP ---------- "
 " Autocomplete options.
 set complete+=kspell
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noinsert,noselect,preview
 
 " Set python path.
 let	g:python3_host_prog='~/.pyenv/versions/neovim3.9.1/bin/python'

@@ -1,3 +1,9 @@
+-- Run 'npm i -g bash-language-server'
+require('lspconfig').bashls.setup {  }
+
+-- Run 'npm i -g vim-language-server'.
+require('lspconfig').vimls.setup { }
+
 -- Run 'pip3 install python-language-server[all]'.
 require('lspconfig').pyls.setup { }
 
@@ -13,11 +19,8 @@ require('lspconfig').cssls.setup { }
 -- Run 'npm i -g vscode-json-languague-server'.
 require('lspconfig').jsonls.setup { }
 
--- Install 'clangd with your package manager'.
+-- Install 'clang' with your package manager.
 require('lspconfig').clangd.setup { }
-
--- Run 'npm i -g vim-language-server'.
-require('lspconfig').vimls.setup { }
 
 -- Run 'pip3 install cmake-language-server'.
 require('lspconfig').cmake.setup { }
