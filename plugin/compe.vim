@@ -1,6 +1,7 @@
 " ---------- LSP Compe ---------- "
 " Keybindings.
 inoremap <silent><expr> <C-o> compe#complete()
+inoremap <silent><expr> <CR> compe#confirm('<CR>')
 
 " General setup.
 let g:compe = {}

@@ -27,6 +27,9 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 " LSP.
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 " Quick commentaries.
 Plug 'tpope/vim-commentary'

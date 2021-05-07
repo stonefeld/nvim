@@ -1,26 +1,47 @@
+-- ---------- LSP ---------- --
+-- Import lspconfig module.
+local lspconfig = require('lspconfig')
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
+
 -- Run 'npm i -g bash-language-server'
-require('lspconfig').bashls.setup {  }
+lspconfig.bashls.setup { }
 
 -- Run 'npm i -g vim-language-server'.
-require('lspconfig').vimls.setup { }
+lspconfig.vimls.setup { }
 
 -- Run 'pip3 install python-language-server[all]'.
-require('lspconfig').pyls.setup { }
-
--- Run 'npm i -g typescript typescript-language-server'.
-require('lspconfig').tsserver.setup { }
-
--- Run 'npm i -g vscode-html-languague-server'.
-require('lspconfig').html.setup { }
-
--- Run 'npm i -g vscode-css-languague-server'.
-require('lspconfig').cssls.setup { }
-
--- Run 'npm i -g vscode-json-languague-server'.
-require('lspconfig').jsonls.setup { }
+lspconfig.pyls.setup {
+    capabilities = capabilities,
+}
 
 -- Install 'clang' with your package manager.
-require('lspconfig').clangd.setup { }
+lspconfig.clangd.setup { }
+
+-- Run 'npm i -g typescript typescript-language-server'.
+lspconfig.tsserver.setup { }
+
+-- Run 'npm i -g vscode-html-languague-server'.
+lspconfig.html.setup {
+    capabilities = capabilities,
+}
+
+-- Run 'npm i -g vscode-css-languague-server'.
+lspconfig.cssls.setup { }
+
+-- Run 'npm i -g vscode-json-languague-server'.
+lspconfig.jsonls.setup { }
 
 -- Run 'pip3 install cmake-language-server'.
-require('lspconfig').cmake.setup { }
+lspconfig.cmake.setup { }
+
+-- Install 'texlab' with your package manager.
+lspconfig.texlab.setup { }
