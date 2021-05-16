@@ -97,7 +97,7 @@ vnoremap <silent> K :m '<-2<CR>gv=gv
 " Navigate through buffers.
 nnoremap <silent> <M-l> :bnext<CR>
 nnoremap <silent> <M-h> :bprevious<CR>
-nnoremap <silent> <M-w> :bdelete<CR>
+nnoremap <silent> <M-w> :b#<CR> :bd#<CR>
 nnoremap <silent> <leader>o :call JumpToBuffer()<CR>
 
 " Fold code blocks.
