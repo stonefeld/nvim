@@ -84,6 +84,10 @@ nnoremap <A-C-l> :vertical resize -5<CR>
 nnoremap <A-C-k> :resize +1<CR>
 nnoremap <A-C-j> :resize -1<CR>
 
+" Jump to next or previous entry on quickfix list.
+nnoremap <leader>n :cnext<CR>
+nnoremap <leader>p :cprevious<CR>
+
 " Move between window panes.
 nnoremap <silent> <C-l> :wincmd l<CR>
 nnoremap <silent> <C-h> :wincmd h<CR>
