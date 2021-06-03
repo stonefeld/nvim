@@ -1,7 +1,6 @@
 " ---------- Global Preferences ---------- "
 " Enable syntax highlighting.
 syntax on
-
 " Disable spell check.
 set nospell
 
@@ -13,7 +12,7 @@ set noundofile
 set shell=/bin/zsh
 
 " Improve some visual effects.
-set cmdheight=2
+set cmdheight=1
 set scrolloff=8
 set sidescrolloff=8
 set signcolumn=yes
@@ -55,3 +54,6 @@ set clipboard=unnamedplus
 " Enable incremental search.
 set incsearch
 set nohlsearch
+
+set list
+set listchars=tab:>\ ,trail:.,eol:⇐
