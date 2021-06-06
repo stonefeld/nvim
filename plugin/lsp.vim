@@ -4,7 +4,7 @@ set complete+=kspell
 set completeopt=menuone,noinsert,noselect,preview
 
 " Set python path.
-let	g:python3_host_prog='~/.pyenv/versions/neovim3.9.1/bin/python'
+let g:python3_host_prog='~/.local/share/pyenv/versions/neovim3.9.1/bin/python'
 
 " Keybindings.
 nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>

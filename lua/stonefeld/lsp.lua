@@ -45,3 +45,6 @@ lspconfig.cmake.setup { }
 
 -- Install 'texlab' with your package manager.
 lspconfig.texlab.setup { }
+
+-- Install 'rust' with your package manager.
+lspconfig.rls.setup { }
