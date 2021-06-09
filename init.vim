@@ -41,11 +41,11 @@ Plug 'ap/vim-buftabline'
 " Git integration.
 Plug 'tpope/vim-fugitive'
 
-" Auto Pairs.
-Plug 'jiangmiao/auto-pairs'
-
 " LaTeX compiler.
 Plug 'lervag/vimtex'
+
+" Markdown preview.
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 " Syntax highlighting.
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -54,6 +54,7 @@ Plug 'sheerun/vim-polyglot'
 " Colorschemes.
 Plug 'stonefeld/nordokai'
 Plug 'sainnhe/sonokai'
+Plug 'sainnhe/everforest'
 Plug 'flazz/vim-colorschemes'
 
 call plug#end()

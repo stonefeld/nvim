@@ -7,6 +7,8 @@ set nospell
 " Avoid swap and undo files.
 set noswapfile
 set noundofile
+set nobackup
+set exrc
 
 " Set default shell.
 set shell=/bin/zsh
@@ -55,5 +57,6 @@ set clipboard=unnamedplus
 set incsearch
 set nohlsearch
 
+" Set listchars for end-of-line, trailing and tab characters.
 set list
 set listchars=tab:>\ ,trail:.,eol:⇐

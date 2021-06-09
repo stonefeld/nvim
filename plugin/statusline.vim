@@ -4,9 +4,9 @@ set statusline=
 set statusline+=\ %{toupper(g:currentmode[mode()])}
 set statusline+=\ %m\ %r
 set statusline+=%=%{expand('%:~:.')}
-set statusline+=%=%l,%c
+set statusline+=%=%-6.(%l,%c%)\ %Y
 set statusline+=\  
-set noshowmode
+
 let g:currentmode={
   \ "n": "NORMAL",
   \ "v": "VISUAL",
@@ -18,3 +18,5 @@ let g:currentmode={
   \ "c": "COMMAND",
   \ "t": "TERMINAL"
   \ }
+
+set noshowmode
