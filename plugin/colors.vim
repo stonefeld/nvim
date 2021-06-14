@@ -1,7 +1,7 @@
 " ---------- Colors ---------- "
 " Set default sonokai style.
 let g:sonokai_style='andromeda'
-let g:nordokai_transparent_background=1
+let g:nordokai_transparent_background=0
 
 " Enable termguicolors and set colorscheme to nordokai.
 set termguicolors
