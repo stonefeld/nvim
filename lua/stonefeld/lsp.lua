@@ -29,22 +29,32 @@ lspconfig.clangd.setup { }
 -- Run 'npm i -g typescript typescript-language-server'.
 lspconfig.tsserver.setup { }
 
--- Run 'npm i -g vscode-html-languague-server'.
+-- Run 'npm i -g vscode-html-languagueserver-bin'.
+local html_root_path = '/usr/bin/html-languageserver'
 lspconfig.html.setup {
     capabilities = capabilities,
+    cmd = {html_root_path, '--stdio'},
 }
 
--- Run 'npm i -g vscode-css-languague-server'.
-lspconfig.cssls.setup { }
+-- Run 'npm i -g vscode-css-languagueserver-bin'.
+local css_root_path = '/usr/bin/css-languageserver'
+lspconfig.cssls.setup {
+    capabilities = capabilities,
+    cmd = {css_root_path, '--stdio'},
+}
 
--- Run 'npm i -g vscode-json-languague-server'.
-lspconfig.jsonls.setup { }
+-- Run 'npm i -g vscode-json-languagueserver-bin'.
+local json_root_path = '/usr/bin/json-languageserver'
+lspconfig.jsonls.setup {
+    capabilities = capabilities,
+    cmd = {json_root_path, '--stdio'},
+}
 
--- Run 'pip3 install cmake-language-server'.
+-- Run 'pip install cmake-language-server'.
 lspconfig.cmake.setup { }
 
--- Install 'texlab' with your package manager.
+-- Install 'texlab' in your system.
 lspconfig.texlab.setup { }
 
--- Install 'rust' with your package manager.
+-- Install 'rust' in yout system.
 lspconfig.rls.setup { }

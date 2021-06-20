@@ -78,9 +78,12 @@ nnoremap <silent> <M-w> :Bclose<CR>
 nnoremap <silent> <leader>o :call JumpToBuffer()<CR>
 
 " Fold code blocks.
-vnoremap <silent> <leader>f :fold<CR>
+vnoremap <silent> <leader>fo :fold<CR>
 nnoremap <silent> <leader>fi :foldopen<CR>
 nnoremap <silent> <leader>fc :foldclose<CR>
+
+" Run figlet on the selected content.
+vnoremap <silent> <leader>ff :!figlet<CR>
 
 " ---------- Lua ---------- "
 " Require lua config files.
