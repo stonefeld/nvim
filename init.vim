@@ -11,9 +11,8 @@ filetype indent plugin on
 " Install plugins via vim-plug.
 call plug#begin("~/.local/share/nvim/site/plugged")
 
-" FZF.
-Plug 'junegunn/fzf.vim'
-Plug 'gfanto/fzf-lsp.nvim'
+" Ctrl-P.
+Plug 'ctrlpvim/ctrlp.vim'
 
 " LSP.
 Plug 'neovim/nvim-lspconfig'
