@@ -24,22 +24,15 @@ Plug 'tpope/vim-commentary'
 " Show color preview.
 Plug 'lilydjwg/colorizer'
 
-" Git integration.
-Plug 'tpope/vim-fugitive'
-
-" LaTeX compiler.
-Plug 'lervag/vimtex'
-
-" Markdown preview.
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-
 " Syntax highlighting.
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'sheerun/vim-polyglot'
 
 " Colorschemes.
 Plug 'stonefeld/nordokai'
+Plug 'stonefeld/nordiy'
 Plug 'flazz/vim-colorschemes'
+Plug 'sainnhe/sonokai'
 
 call plug#end()
 
@@ -57,8 +50,9 @@ nnoremap <A-C-k> :resize +1<CR>
 nnoremap <A-C-j> :resize -1<CR>
 
 " Jump to next or previous entry on quickfix list.
-nnoremap <A-n> :cnext<CR>
-nnoremap <A-p> :cprevious<CR>
+nnoremap <A-n> :lnext<CR>
+nnoremap <A-p> :lprevious<CR>
+nnoremap <A-q> :lclose<CR>
 
 " Move between window panes.
 nnoremap <silent> <C-l> :wincmd l<CR>

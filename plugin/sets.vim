@@ -8,7 +8,6 @@ set nospell
 set noswapfile
 set noundofile
 set nobackup
-set exrc
 
 " Set default shell.
 set shell=/bin/zsh
