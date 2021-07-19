@@ -6,6 +6,7 @@ augroup AUTOCOMMANDS
   autocmd FileType css,html,javascript,javascriptreact,json,jsonc,markdown,tex,typescript,typescriptreact,vim,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
   autocmd FileType html nnoremap <silent> <F5> :execute 'silent !xdg-open %'<CR>
   autocmd FileType tex,markdown setlocal wrap nonu norelativenumber showmode scrolloff=0 laststatus=0 signcolumn=no colorcolumn=0
+  autocmd FileType tex,markdown call compe#setup({'enabled': v:false})
   autocmd FileType tex,markdown nnoremap j gj
   autocmd FileType tex,markdown nnoremap k gk
   autocmd FileType tex,markdown nnoremap 0 g0

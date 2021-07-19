@@ -48,9 +48,6 @@ lspconfig.pylsp.setup {
 -- Install 'rust' in yout system.
 lspconfig.rls.setup { }
 
--- Install 'texlab' in your system.
-lspconfig.texlab.setup { }
-
 -- Run 'npm i -g typescript typescript-language-server'.
 lspconfig.tsserver.setup { }
 

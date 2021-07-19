@@ -5,11 +5,11 @@ inoremap <silent><expr> <CR> compe#confirm('<CR>')
 
 " General setup.
 let g:compe = {}
-let g:compe.enabled = v:true
-let g:compe.autocomplete = v:true
-let g:compe.throttle_time = 80
-let g:compe.source_timeout = 200
-let g:compe.documentation = v:true
+let g:compe.enabled=v:true
+let g:compe.autocomplete=v:true
+let g:compe.throttle_time=80
+let g:compe.source_timeout=200
+let g:compe.documentation=v:true
 
 " Sources setup.
 let g:compe.source = {}
