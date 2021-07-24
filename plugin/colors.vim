@@ -5,7 +5,7 @@ let g:nordokai_transparent_background=0
 
 " Enable termguicolors and set colorscheme to nordokai.
 set termguicolors
-colorscheme nordiy
+colorscheme nordokai
 set background=dark
 
 " Override some highlights.
