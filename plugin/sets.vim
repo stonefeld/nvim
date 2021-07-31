@@ -26,7 +26,7 @@ set hidden
 " Configure appropiate indentation.
 set tabstop=4 softtabstop=4
 set shiftwidth=4
-set expandtab
+set noexpandtab
 set smarttab
 set smartindent
 
@@ -48,8 +48,7 @@ set updatetime=250
 " Hide menu message.
 set shortmess+=c
 
-" Enable mouse and clipboard interaction.
-set mouse=a
+" Enable clipboard interaction.
 set clipboard=unnamedplus
 
 " Enable incremental search.
@@ -58,4 +57,4 @@ set nohlsearch
 
 " Set listchars for end-of-line, trailing and tab characters.
 set list
-set listchars=tab:>\ ,trail:.,eol:⇐
+set listchars=tab:>\ ,trail:.,eol:<
