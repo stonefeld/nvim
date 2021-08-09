@@ -50,9 +50,9 @@ nnoremap <A-C-Up> :resize +1<CR>
 nnoremap <A-C-Down> :resize -1<CR>
 
 " Jump to next or previous entry on quickfix list.
-nnoremap <A-n> :lnext<CR>
-nnoremap <A-p> :lprevious<CR>
-nnoremap <A-q> :lclose<CR>
+nnoremap <silent> <A-n> :lnext<CR>
+nnoremap <silent> <A-p> :lprevious<CR>
+nnoremap <silent> <A-q> :lclose<CR>
 
 " Move between window panes.
 nnoremap <silent> <C-l> :wincmd l<CR>
@@ -70,11 +70,14 @@ nnoremap <silent> <M-h> :bprevious<CR>
 nnoremap <silent> <M-w> :Bclose<CR>
 nnoremap <silent> <leader>o :call JumpToBuffer()<CR>
 
+" Yank the rest of the line instead of the whole line.
+nnoremap <silent> Y y$
+
 " Run figlet on the selected content.
 vnoremap <silent> <leader>ff :!figlet<CR>
 
 " Resource the neovim config.
-nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>:echomsg 'Configuration updated'<CR>
 
 " ---------- Lua ---------- "
 " Require lua config files.

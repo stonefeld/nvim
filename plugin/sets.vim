@@ -24,11 +24,12 @@ set colorcolumn=80
 set hidden
 
 " Configure appropiate indentation.
-set tabstop=4 softtabstop=4
+set tabstop=4
 set shiftwidth=4
 set noexpandtab
 set smarttab
 set smartindent
+set autoindent
 
 " Avoid line wraping.
 set nowrap
@@ -57,4 +58,4 @@ set nohlsearch
 
 " Set listchars for end-of-line, trailing and tab characters.
 set list
-set listchars=tab:>\ ,trail:.,eol:<
+set listchars=tab:>\ ,trail:.,eol:$
