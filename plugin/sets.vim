@@ -19,6 +19,9 @@ set sidescrolloff=8
 set signcolumn=yes
 set foldcolumn=auto:9
 
+" Disable the status message on the command prompt space.
+set noshowmode
+
 " Show line limit on 80 characters.
 set colorcolumn=80
 set hidden

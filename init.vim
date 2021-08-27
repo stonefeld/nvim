@@ -30,8 +30,8 @@ Plug 'sheerun/vim-polyglot'
 
 " Colorschemes.
 Plug 'stonefeld/nordokai'
-Plug 'stonefeld/nordiy'
-Plug 'flazz/vim-colorschemes'
+Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
 Plug 'sainnhe/sonokai'
 
 call plug#end()
@@ -44,21 +44,15 @@ let mapleader=" "
 nnoremap <silent> <leader>e :Vex!<CR>
 
 " Resizing panes.
-nnoremap <A-C-Left> :vertical resize +5<CR>
-nnoremap <A-C-Right> :vertical resize -5<CR>
-nnoremap <A-C-Up> :resize +1<CR>
-nnoremap <A-C-Down> :resize -1<CR>
+nnoremap <silent> <M-C-Left> :vertical resize +5<CR>
+nnoremap <silent> <M-C-Right> :vertical resize -5<CR>
+nnoremap <silent> <M-C-Up> :resize +1<CR>
+nnoremap <silent> <M-C-Down> :resize -1<CR>
 
 " Jump to next or previous entry on quickfix list.
 nnoremap <silent> <A-n> :lnext<CR>
 nnoremap <silent> <A-p> :lprevious<CR>
 nnoremap <silent> <A-q> :lclose<CR>
-
-" Move between window panes.
-nnoremap <silent> <C-l> :wincmd l<CR>
-nnoremap <silent> <C-h> :wincmd h<CR>
-nnoremap <silent> <C-k> :wincmd k<CR>
-nnoremap <silent> <C-j> :wincmd j<CR>
 
 " Move lines up and down while selected.
 vnoremap <silent> J :m '>+1<CR>gv=gv
@@ -72,6 +66,22 @@ nnoremap <silent> <leader>o :call JumpToBuffer()<CR>
 
 " Yank the rest of the line instead of the whole line.
 nnoremap <silent> Y y$
+
+" Keep the cursor centered in the screen.
+nnoremap <silent> n nzzzv
+nnoremap <silent> N Nzzzv
+nnoremap <silent> J mzJ`z
+
+" Undo break points.
+inoremap <Space> <Space><C-g>u
+inoremap , ,<C-g>u
+inoremap . .<C-g>u
+inoremap ! !<C-g>u
+inoremap ? ?<C-g>u
+
+" Jumplist mutations.
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 
 " Run figlet on the selected content.
 vnoremap <silent> <leader>ff :!figlet<CR>

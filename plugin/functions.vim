@@ -1,10 +1,25 @@
 " ---------- Scripts ---------- "
-" A simple function to print active buffers and display a prompt to type the
-" corresponding nummber of the buffer the user wants to jump to.
+" List open buffers and jump to one of them by typing the buffer number.
 function! JumpToBuffer()
   :buffers
   let b:num = input('Enter buffer number: ')
   :execute 'b' . b:num
+endfunction
+
+" Get git branch name (if available).
+function! GetGitBranch()
+  let l:is_git_dir = system('echo -n $(git rev-parse --is-inside-work-tree)')
+  let g:git_branch = l:is_git_dir == 'true' ?
+        \ system('bash -c "echo -n $(git rev-parse --abbrev-ref HEAD)"') : ''
+endfunction
+
+" Return git branch name (if available) for the statusline.
+function! StatuslineGitBranch()
+  if len(g:git_branch) == 0
+    return ''
+  else
+    return '[' . g:git_branch . ']'
+  endif
 endfunction
 
 " Delete buffer while keeping window layout (don't close buffer's windows).
@@ -23,11 +38,7 @@ function! s:Warn(msg)
   echohl NONE
 endfunction
 
-" Command ':Bclose' executes ':bd' to delete buffer in current window.
-" The window will show the alternate buffer (Ctrl-^) if it exists,
-" or the previous buffer (:bp), or a blank buffer if no previous.
-" Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
-" An optional argument can specify which buffer to close (name or number).
+" Better function to delete buffers.
 function! s:Bclose(bang, buffer)
   if empty(a:buffer)
     let btarget = bufnr('%')
@@ -44,7 +55,6 @@ function! s:Bclose(bang, buffer)
     call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
     return
   endif
-  " Numbers of windows that view target buffer which we will delete.
   let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
   if !g:bclose_multiple && len(wnums) > 1
     call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
@@ -60,11 +70,8 @@ function! s:Bclose(bang, buffer)
       bprevious
     endif
     if btarget == bufnr('%')
-      " Numbers of listed buffers which are not the target to be deleted.
       let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
-      " Listed, not target, and not displayed.
       let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
-      " Take the first buffer, if any (could be more intelligent).
       let bjump = (bhidden + blisted + [-1])[0]
       if bjump > 0
         execute 'buffer '.bjump

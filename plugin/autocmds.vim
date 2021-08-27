@@ -27,4 +27,6 @@ augroup AUTOCOMMANDS
 
   " Avoid 'plaintex' filetype.
   autocmd BufNewFile,BufRead *.tex :set filetype=tex
+
+  autocmd BufEnter * call GetGitBranch()
 augroup END
