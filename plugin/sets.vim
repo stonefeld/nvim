@@ -61,4 +61,4 @@ set nohlsearch
 
 " Set listchars for end-of-line, trailing and tab characters.
 set list
-set listchars=tab:>\ ,trail:.,eol:$
+set listchars=tab:\|\ ,trail:.,eol:$

@@ -30,9 +30,7 @@ Plug 'sheerun/vim-polyglot'
 
 " Colorschemes.
 Plug 'stonefeld/nordokai'
-Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
-Plug 'sainnhe/sonokai'
 
 call plug#end()
 
