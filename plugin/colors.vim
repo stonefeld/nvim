@@ -1,6 +1,6 @@
 " ---------- Colors ---------- "
 " Nordokai Colorscheme configuration.
-let g:nordokai_transparent_background=0
+let g:nordokai_transparent_background=1
 let g:nordokai_menu_selection_background='gray'
 let g:nordokai_sign_column_background='default'
 let g:nordokai_current_word='gray background'

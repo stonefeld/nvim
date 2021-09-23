@@ -23,10 +23,15 @@ augroup AUTOCOMMANDS
 
   " Disable scrolloff on terminal to avoid glitch.
   autocmd TermEnter * set scrolloff=0 sidescrolloff=0 nonu norelativenumber scrollback=500
-  autocmd TermLeave * set scrolloff=8 sidescrolloff=8 cursorline nu relativenumber
+  autocmd TermLeave * set scrolloff=8 sidescrolloff=8 nu relativenumber
 
   " Avoid 'plaintex' filetype.
   autocmd BufNewFile,BufRead *.tex :set filetype=tex
 
+  " Set filetype for assembler.
+  autocmd BufNew,BufRead,BufEnter *.asm set ft=nasm
+  autocmd BufNew,BufRead,BufEnter *.asm setlocal tabstop=8 shiftwidth=8 listchars=tab:\ \ ,trail:.,eol:$
+
+  " Get git branch name on statusline.
   autocmd BufEnter * call GetGitBranch()
 augroup END

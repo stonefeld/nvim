@@ -22,8 +22,8 @@ set foldcolumn=auto:9
 " Disable the status message on the command prompt space.
 set noshowmode
 
-" Show line limit on 80 characters.
-set colorcolumn=80
+" Disable line limit.
+set colorcolumn=0
 set hidden
 
 " Configure appropiate indentation.
@@ -44,7 +44,7 @@ set splitbelow
 " Set relative number.
 set nu
 set relativenumber
-set cursorline
+set nocursorline
 
 " Increase updatetime.
 set updatetime=250

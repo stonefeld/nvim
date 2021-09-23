@@ -21,7 +21,7 @@ Plug 'hrsh7th/nvim-compe'
 " Quick commentaries.
 Plug 'tpope/vim-commentary'
 
-" Show color preview.
+" Color preview.
 Plug 'lilydjwg/colorizer'
 
 " Syntax highlighting.
@@ -30,7 +30,6 @@ Plug 'sheerun/vim-polyglot'
 
 " Colorschemes.
 Plug 'stonefeld/nordokai'
-Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -53,8 +52,8 @@ nnoremap <silent> <A-p> :lprevious<CR>
 nnoremap <silent> <A-q> :lclose<CR>
 
 " Move lines up and down while selected.
-vnoremap <silent> J :m '>+1<CR>gv=gv
-vnoremap <silent> K :m '<-2<CR>gv=gv
+vnoremap <silent> J :m '>+1<CR>gv
+vnoremap <silent> K :m '<-2<CR>gv
 
 " Navigate through buffers.
 nnoremap <silent> <M-l> :bnext<CR>
