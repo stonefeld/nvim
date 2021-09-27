@@ -38,7 +38,7 @@ call plug#end()
 let mapleader=" "
 
 " Open file explorer.
-nnoremap <silent> <leader>e :Vex!<CR>
+nnoremap <silent> <leader>e :Lexplore<CR>
 
 " Resizing panes.
 nnoremap <silent> <M-C-Left> :vertical resize +5<CR>

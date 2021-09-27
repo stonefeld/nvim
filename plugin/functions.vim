@@ -18,7 +18,7 @@ function! StatuslineGitBranch()
   if len(g:git_branch) == 0
     return ''
   else
-    return '[' . g:git_branch . ']'
+    return ' ' . g:git_branch . ' '
   endif
 endfunction
 
