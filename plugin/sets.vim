@@ -9,9 +9,6 @@ set noswapfile
 set noundofile
 set nobackup
 
-" Set default shell.
-set shell=/bin/zsh
-
 " Improve some visual effects.
 set cmdheight=1
 set scrolloff=8
@@ -31,8 +28,9 @@ set tabstop=4
 set shiftwidth=4
 set noexpandtab
 set smarttab
-set smartindent
 set autoindent
+set smartindent
+set cinoptions=l1,g0
 
 " Avoid line wraping.
 set nowrap

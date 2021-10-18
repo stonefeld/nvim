@@ -3,7 +3,7 @@ augroup AUTOCOMMANDS
   autocmd!
 
   " Set different tab width for the following filetypes.
-  autocmd FileType css,html,javascript,javascriptreact,json,jsonc,markdown,tex,typescript,typescriptreact,vim,yaml setlocal tabstop=2 shiftwidth=2
+  autocmd FileType css,html,htmldjango,javascript,javascriptreact,json,jsonc,markdown,tex,typescript,typescriptreact,vim,yaml setlocal tabstop=2 shiftwidth=2
   autocmd FileType html nnoremap <silent> <F5> :execute 'silent !xdg-open %'<CR>
   autocmd FileType tex,markdown,mail setlocal wrap nonu norelativenumber showmode scrolloff=0 laststatus=0 signcolumn=no colorcolumn=0
   autocmd FileType tex,markdown,mail call compe#setup({'enabled': v:false})
