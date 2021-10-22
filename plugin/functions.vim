@@ -22,6 +22,22 @@ function! StatuslineGitBranch()
   endif
 endfunction
 
+" Start live-server on current working directory.
+command! StartLiveServer call StartLiveServer()
+function! StartLiveServer()
+  call StopLiveServer()
+  silent exe '!(live-server "' . expand('%:p:h') . '" &) >/dev/null'
+  silent exe '!echo $(ps -eaf | grep "live-server ' . expand('%:p:h') . '" | sed "/grep/d;s/\s\+/ /g" | cut -d " " -f 2) > /tmp/live-serverpid'
+  " redraw!
+endfunction
+
+" Stop currently running live-server.
+command! StopLiveServer call StopLiveServer()
+function! StopLiveServer()
+  silent exe '!kill -9 $(cat /tmp/live-serverpid)'
+  silent exe '!rm -f /tmp/live-serverpid'
+endfunction
+
 " Delete buffer while keeping window layout (don't close buffer's windows).
 if v:version < 700 || exists('loaded_bclose') || &cp
   finish
