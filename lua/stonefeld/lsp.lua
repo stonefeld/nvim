@@ -15,8 +15,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -- Run 'npm i -g bash-language-server'
 lspconfig.bashls.setup({})
 
--- Install 'ccls' with your package manager.
-lspconfig.ccls.setup({})
+-- Install 'clang' with your package manager.
+lspconfig.clangd.setup({})
 
 -- Run 'pip install cmake-language-server'.
 lspconfig.cmake.setup({})

@@ -1,36 +1,50 @@
 " ---------- Autocommands ---------- "
-augroup MyAutocommands
-  autocmd!
+" Specify settings to the corresponding filetypes.
+aug FiletypeSpecific
+  au!
 
   " Set different tab width for the following filetypes.
-  autocmd FileType css,html,htmldjango,javascript,javascriptreact,json,jsonc,markdown,tex,typescript,typescriptreact,vim,yaml setlocal tabstop=2 shiftwidth=2 expandtab
-  autocmd FileType html nnoremap <silent> <F5> :execute 'silent !xdg-open %'<CR>
-  autocmd FileType tex,markdown,mail setlocal wrap nonu norelativenumber scrolloff=0 signcolumn=no colorcolumn=0
-  autocmd FileType tex,markdown nnoremap j gj
-  autocmd FileType tex,markdown nnoremap k gk
-  autocmd FileType tex,markdown nnoremap 0 g0
-  autocmd FileType tex,markdown nnoremap $ g$
-  autocmd FileType tex nnoremap <leader>st :w! \| execute '!compiler ' . expand('%:p')<CR>
-  autocmd FileType markdown nnoremap <leader>st :w! \| silent execute '!compiler ' . expand('%:p') \| redraw!<CR>
-  autocmd FileType tex,markdown nnoremap <silent> <leader>so :silent execute '!${PDF_READER:-zathura} ' . expand('%:r') . '.pdf &' \| redraw!<CR>
-
-  " Higlight the line for a short period of time to indicate yanked line.
-  autocmd TextYankPost * silent! lua require('vim.highlight').on_yank({timeout = 100})
-
-  " Clean every whitespace before writing.
-  autocmd BufWritePre * %s/\s\+$//e
+  au FileType css,html,htmldjango,javascript,javascriptreact,json,jsonc,markdown,tex,typescript,typescriptreact,vim,yaml au WinEnter,BufEnter <buffer> setlocal tabstop=2 shiftwidth=2 expandtab
+  au FileType tex nnoremap <M-m> :w! \| execute '!compiler ' . expand('%:p')<CR>
+  au FileType markdown nnoremap <M-m> :w! \| silent execute '!compiler ' . expand('%:p') \| redraw!<CR>
+  au FileType tex,markdown nnoremap <silent> <M-o> :silent execute '!xdg-open ' . expand('%:r') . '.pdf &' \| redraw!<CR>
 
   " Disable scrolloff on terminal to avoid glitch.
-  autocmd TermEnter * set scrolloff=0 sidescrolloff=0 nonu norelativenumber scrollback=500
-  autocmd TermLeave * set scrolloff=8 sidescrolloff=8 nu relativenumber
+  au TermOpen term://* setlocal ft=term
+  au Filetype term setlocal scrolloff=0 sidescrolloff=0 nonu norelativenumber wrap scrollback=5000 signcolumn=no colorcolumn=0
 
   " Avoid 'plaintex' filetype.
-  autocmd BufNewFile,BufRead *.tex :set filetype=tex
+  au BufNewFile,BufRead *.tex setlocal filetype=tex
 
   " Set filetype for assembler.
-  autocmd BufNew,BufRead,BufEnter *.asm set ft=nasm
-  autocmd BufNew,BufRead,BufEnter *.asm setlocal tabstop=8 shiftwidth=8 listchars=tab:\ \ ,trail:.,eol:$
+  au BufNew,BufRead,BufEnter *.asm setlocal ft=nasm
+aug END
 
-  " Get git branch name on statusline.
-  autocmd BufEnter * call GetGitBranch()
-augroup END
+" Format c/cpp code to get a consistent style.
+fu! FormatCode()
+  exe '%s/if(/if (/e'
+  exe '%s/for(/for (/e'
+  exe '%s/while(/while (/e'
+  exe '%s/switch(/switch (/e'
+  exe '%s/}break;/} break;/e'
+  exe '%s/){/) {/e'
+endfu
+
+" Clean and format the current buffer.
+aug CleanBuffer
+  au!
+
+  " Delete all whitespace in buffer.
+  au BufWritePre * %s/\s\+$//e
+
+  " Format c/cpp code to get a consistent style.
+  au FileType c,cpp au BufWritePre <buffer> call FormatCode()
+aug END
+
+" Get visual feedback when a line or region was yanked.
+aug VisualYank
+  au!
+
+  " Higlight the line for a short period of time to indicate yanked line.
+  au TextYankPost * silent! lua require('vim.highlight').on_yank({timeout = 100})
+aug END

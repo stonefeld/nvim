@@ -1,6 +1,7 @@
 " ---------- Global Preferences ---------- "
 " Enable syntax highlighting.
 syntax on
+
 " Disable spell check.
 set nospell
 
@@ -11,26 +12,28 @@ set nobackup
 
 " Improve some visual effects.
 set cmdheight=1
-set scrolloff=8
-set sidescrolloff=8
+set scrolloff=3
+set sidescrolloff=3
 set signcolumn=yes
 set foldcolumn=auto:9
 
 " Disable the status message on the command prompt space.
-set noshowmode
+set showmode
 
 " Disable line limit.
 set colorcolumn=0
 set hidden
 
-" Configure appropiate indentation.
-set tabstop=4
+" Configure tab settings.
+set tabstop=4 softtabstop=4
 set shiftwidth=4
 set noexpandtab
 set smarttab
+
+" Configure indentation.
 set autoindent
-set smartindent
-set cinoptions=l1,g0
+set cindent
+set cinoptions=(0,l1,t0,=0
 
 " Avoid line wraping.
 set nowrap
@@ -44,14 +47,12 @@ set nu
 set relativenumber
 set nocursorline
 
-" Increase updatetime.
+" Increase updatetime and enable mouse interaction.
 set updatetime=250
+set mouse=a
 
 " Hide menu message.
 set shortmess+=c
-
-" Enable clipboard interaction.
-set clipboard=unnamedplus
 
 " Enable incremental search.
 set incsearch
@@ -59,4 +60,4 @@ set nohlsearch
 
 " Set listchars for end-of-line, trailing and tab characters.
 set list
-set listchars=tab:\|\ ,trail:.,eol:$
+set listchars=tab:\|\ ,trail:.

@@ -1,4 +1,4 @@
 " ---------- Terminal ---------- "
 " Open different instances of neovim terminal.
-nnoremap <leader>tt :terminal<CR>
-nnoremap <leader>tg :terminal lazygit<CR>
+nnoremap <silent> <leader>tt :terminal<CR>i
+nnoremap <silent> <leader>tg :terminal lazygit<CR>i

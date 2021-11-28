@@ -11,21 +11,13 @@ filetype indent plugin on
 " Install plugins via vim-plug.
 call plug#begin("~/.local/share/nvim/site/plugged")
 
-" Ctrl-P.
-Plug 'ctrlpvim/ctrlp.vim'
-
 " LSP.
 Plug 'neovim/nvim-lspconfig'
+
+" Completion.
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-
-" Quick commentaries.
-Plug 'tpope/vim-commentary'
-
-" Color preview.
-Plug 'lilydjwg/colorizer'
 
 " Syntax highlighting.
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -49,20 +41,14 @@ nnoremap <silent> <M-C-Right> :vertical resize -5<CR>
 nnoremap <silent> <M-C-Up> :resize +1<CR>
 nnoremap <silent> <M-C-Down> :resize -1<CR>
 
-" Jump to next or previous entry on quickfix list.
-nnoremap <silent> <A-n> :lnext<CR>
-nnoremap <silent> <A-p> :lprevious<CR>
-nnoremap <silent> <A-q> :lclose<CR>
-
 " Move lines up and down while selected.
 vnoremap <silent> J :m '>+1<CR>gv
 vnoremap <silent> K :m '<-2<CR>gv
 
 " Navigate through buffers.
-nnoremap <silent> <M-l> :bnext<CR>
-nnoremap <silent> <M-h> :bprevious<CR>
-nnoremap <silent> <M-w> :Bclose<CR>
-nnoremap <silent> <leader>o :call JumpToBuffer()<CR>
+nnoremap <silent> <C-l> :bn<CR>
+nnoremap <silent> <C-h> :bp<CR>
+nnoremap <silent> <C-k> :bp<CR>:bd #<CR>
 
 " Yank the rest of the line instead of the whole line.
 nnoremap <silent> Y y$
@@ -70,7 +56,6 @@ nnoremap <silent> Y y$
 " Keep the cursor centered in the screen.
 nnoremap <silent> n nzzzv
 nnoremap <silent> N Nzzzv
-nnoremap <silent> J mzJ`z
 
 " Undo break points.
 inoremap <Space> <Space><C-g>u
@@ -85,9 +70,6 @@ nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 
 " Run figlet on the selected content.
 vnoremap <silent> <leader>ff :!figlet<CR>
-
-" Resource the neovim config.
-nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>:echomsg 'Configuration updated'<CR>
 
 " ---------- Lua ---------- "
 " Require lua config files.
