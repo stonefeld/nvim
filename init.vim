@@ -9,7 +9,11 @@ filetype indent plugin on
 
 " ---------- Plugins ---------- "
 " Install plugins via vim-plug.
-call plug#begin("~/.local/share/nvim/site/plugged")
+if has("nvim")
+  let g:plug_home=stdpath('data') . "/site/plugged"
+endif
+
+call plug#begin()
 
 " LSP.
 Plug 'neovim/nvim-lspconfig'
@@ -70,7 +74,3 @@ nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 
 " Run figlet on the selected content.
 vnoremap <silent> <leader>ff :!figlet<CR>
-
-" ---------- Lua ---------- "
-" Require lua config files.
-lua require('stonefeld')

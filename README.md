@@ -45,28 +45,15 @@ iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim-data/site/autoload/plug.vim" -Force
 ```
 
-### 2. Set the corresponding plugin location according to your operating system
-If you are on Linux or MacOS the plugin location folder is already the right one.
-
-If you are on Windows you have to change the following line in `init.vim`
-```vim
-call plug#begin("~/.local/share/nvim/site/plugged")
-```
-
-to
-```vim
-call plug#begin("~/AppData/Local/nvim-data/site/plugged")
-```
-
-### 3. Install all plugins
+### 2. Install all plugins
 Open `init.vim` and run the following commands
 
 1. Source the file: `:so %`
 2. Install the plugins: `:PlugInstall`
 3. Since one of the plugins is treesitter, you will want to install the parsers you are going to use by running `:TSInstall {language}`, or install every parser by running `:TSInstall all maintained`
 
-### 4. Install all required language servers
-Since we are using nvim 0.5 or above, you will have the lsp feture builtin. You only have to install the corresponding language servers.
+### 3. Install all required language servers
+Since we are using nvim 0.5 or above, you will have the lsp feature builtin. You only have to install the corresponding language servers.
 
 `lua/stonefeld/lsp.lua` has all the configuration for the language servers I use. You can freely add any configuration you want, for more information head towards [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)'s README or run `:h lspconfig`.
 
@@ -76,9 +63,7 @@ Now I will list all the language servers you will need to get this current setup
 * `cmake` by running `pip install cmake-language-server`
 * `cssls` by running `npm i -g vscode-css-languageserver-bin`
 * `html` by running `npm i -g vscode-html-languageserver-bin`
-* `jsonls` by running `npm i -g vscode-json-lanugageserver-bin`
 * `pylsp` by running `pip install python-language-server[all]`
-* `rust_analyzer` by installing `rust-analyzer` with your package manager
 * `tsserver` by running `npm i -g typescript-language-server`
 * `vimls` by running `npm i -g vim-language-server`
 
