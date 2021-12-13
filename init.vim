@@ -9,22 +9,27 @@ filetype indent plugin on
 
 " ---------- Plugins ---------- "
 " Install plugins via vim-plug.
-if has("nvim")
+if has('nvim')
   let g:plug_home=stdpath('data') . "/site/plugged"
 endif
 
 call plug#begin()
 
-" LSP.
-Plug 'neovim/nvim-lspconfig'
+" nvim-only plugins.
+if has('nvim')
+  " LSP.
+  Plug 'neovim/nvim-lspconfig'
 
-" Completion.
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-path'
+  " Completion.
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-path'
+
+  " Syntax highlighting.
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+endif
 
 " Syntax highlighting.
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'sheerun/vim-polyglot'
 
 " Colorschemes.
@@ -34,28 +39,30 @@ call plug#end()
 
 " ---------- Keybindings ---------- "
 " Map the leader key.
-let mapleader=" "
+let mapleader=' '
 
 " Open file explorer.
-nnoremap <silent> <leader>e :Lexplore<CR>
+nnoremap <silent> <leader>e <cmd>Lexplore<CR>
 
 " Resizing panes.
-nnoremap <silent> <M-C-Left> :vertical resize +5<CR>
-nnoremap <silent> <M-C-Right> :vertical resize -5<CR>
-nnoremap <silent> <M-C-Up> :resize +1<CR>
-nnoremap <silent> <M-C-Down> :resize -1<CR>
+nnoremap <silent> <M-C-Left> <cmd>vertical resize +5<CR>
+nnoremap <silent> <M-C-Right> <cmd>vertical resize -5<CR>
+nnoremap <silent> <M-C-Up> <cmd>resize +1<CR>
+nnoremap <silent> <M-C-Down> <cmd>resize -1<CR>
 
 " Move lines up and down while selected.
 vnoremap <silent> J :m '>+1<CR>gv
 vnoremap <silent> K :m '<-2<CR>gv
 
-" Navigate through buffers.
-nnoremap <silent> <C-l> :bn<CR>
-nnoremap <silent> <C-h> :bp<CR>
-nnoremap <silent> <C-k> :bp<CR>:bd #<CR>
+" Open, close and navigate quickfixlist faster.
+nnoremap <silent> <leader>q <cmd>call QFixToggle(0)<CR>
+nnoremap <silent> <leader>n <cmd>try<bar>cnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>cfirst<bar>endtry<CR>
+nnoremap <silent> <leader>p <cmd>try<bar>cprevious<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>clast<bar>endtry<CR>
 
-" Yank the rest of the line instead of the whole line.
-nnoremap <silent> Y y$
+" Navigate through buffers.
+nnoremap <silent> <C-l> <cmd>bn<CR>
+nnoremap <silent> <C-h> <cmd>bp<CR>
+nnoremap <silent> <C-k> <cmd>bp<CR>:bd #<CR>
 
 " Keep the cursor centered in the screen.
 nnoremap <silent> n nzzzv
@@ -73,4 +80,4 @@ nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 
 " Run figlet on the selected content.
-vnoremap <silent> <leader>ff :!figlet<CR>
+vnoremap <silent> <leader>ff <cmd>!figlet<CR>

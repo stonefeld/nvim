@@ -18,7 +18,7 @@ set signcolumn=yes
 set foldcolumn=auto:9
 
 " Disable the status message on the command prompt space.
-set showmode
+set noshowmode
 
 " Disable line limit.
 set colorcolumn=0
@@ -45,7 +45,8 @@ set splitbelow
 " Set relative number.
 set nu
 set relativenumber
-set nocursorline
+set cursorline
+set cursorlineopt=number
 
 " Increase updatetime and enable mouse interaction.
 set updatetime=250
@@ -57,6 +58,10 @@ set shortmess+=c
 " Enable incremental search.
 set incsearch
 set nohlsearch
+
+" Configure wildmenu.
+set wildoptions=tagfile
+set wildignore=*.o,*.obj,*.exe,*.bin
 
 " Set listchars for end-of-line, trailing and tab characters.
 set list
