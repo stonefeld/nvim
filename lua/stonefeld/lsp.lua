@@ -75,9 +75,10 @@ lspconfig.pylsp.setup {
 	cmd = { 'pyls' }
 }
 
--- Innstall 'rust-analyzer' with your package manager.
+-- Install 'rust-analyzer' with your package manager.
 lspconfig.rust_analyzer.setup {
 	on_attach = on_attach,
+	filetypes = { 'rust' },
 	settings = {
 		["rust-analyzer"] = {
 			assist = {
@@ -100,10 +101,16 @@ lspconfig.rust_analyzer.setup {
 	}
 }
 
+-- Install 'lua-language-server' with your package manager.
+lspconfig.sumneko_lua.setup {
+	on_attach = on_attach,
+	filetypes = { 'lua' }
+}
+
 -- Run 'npm i -g typescript typescript-language-server'.
 lspconfig.tsserver.setup {
 	on_attach = on_attach,
-	filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' }
+	filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' }
 }
 
 -- Run 'npm i -g vim-language-server'.

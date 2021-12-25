@@ -45,8 +45,8 @@ set splitbelow
 " Set relative number.
 set nu
 set relativenumber
-set cursorline
-set cursorlineopt=number
+set nocursorline
+" set cursorlineopt=number
 
 " Increase updatetime and enable mouse interaction.
 set updatetime=250

@@ -8,11 +8,12 @@
 filetype indent plugin on
 
 " ---------- Plugins ---------- "
-" Install plugins via vim-plug.
+" Set the plugin installation folder.
 if has('nvim')
-  let g:plug_home=stdpath('data') . "/site/plugged"
+  let g:plug_home=stdpath('data') . '/site/plugged'
 endif
 
+" Install plugins via vim-plug.
 call plug#begin()
 
 " nvim-only plugins.
@@ -28,6 +29,12 @@ if has('nvim')
   " Syntax highlighting.
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 endif
+
+" Smart Tabs
+Plug 'dpc/vim-smarttabs'
+
+" Ctrl-P
+Plug 'kien/ctrlp.vim'
 
 " Syntax highlighting.
 Plug 'sheerun/vim-polyglot'

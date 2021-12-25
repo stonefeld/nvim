@@ -24,16 +24,16 @@ endfu
 
 " Set custom statusline.
 fu! SetStatusline(focused)
-  setlocal stl=
+  setl stl=
   if a:focused == 'true'
-    setlocal stl=%#Debug#\ %-10.(%{g:currentmode[mode()]}%#ToolbarButton#%)
+    setl stl=%#Debug#\ %-10.(%{g:currentmode[mode()]}%#ToolbarButton#%)
   else
-    setlocal stl=%*\ %-10.(%{g:currentmode[mode()]}%)
+    setl stl=%*\ %-10.(%{g:currentmode[mode()]}%)
   endif
-  setlocal stl+=%<\ %-30.(%{get(g:,'git_branch','')}%)
-  setlocal stl+=%=%10.50{expand('%:~:.')}
-  setlocal stl+=\ %m%r
-  setlocal stl+=%=%42.([%5l:%5c]\ %y%)
+  setl stl+=\ %-20.(%{get(g:,'git_branch','')}%)
+  setl stl+=%=%10.50{expand('%:~:.')}
+  setl stl+=\ %m%r
+  setl stl+=%=%32.([%5l:%5c]\ %y%)
 endfu
 
 " set stl=%<%{expand('%:~:.')}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
