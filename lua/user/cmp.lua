@@ -5,6 +5,8 @@ if not status_ok then
     return
 end
 
+local status_ok_ls, ls = pcall(require, "luasnip")
+
 --   פּ ﯟ   some other good icons
 local kind_icons = {
     Text = " ",
@@ -36,9 +38,16 @@ local kind_icons = {
 
 -- Basic nvim-cmp configuration
 cmp.setup {
+    snippet = {
+        expand = function(args)
+            if status_ok_ls then
+                ls.lsp_expand(args.body)
+            end
+        end,
+    },
     mapping = {
-        ["<c-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),  -- scroll documentation downwards
-        ["<c-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),   -- scroll documentation upwards
+        ["<c-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),   -- scroll documentation downwards
+        ["<c-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),  -- scroll documentation upwards
         ["<c-o>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),       -- restart completion
         ["<c-e>"] = cmp.mapping({                                            -- cancel completion
             i = cmp.mapping.abort(),
@@ -59,6 +68,7 @@ cmp.setup {
     },
     sources = {
         { name = "nvim_lsp" },
+        { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
     },

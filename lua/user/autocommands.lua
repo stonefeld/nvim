@@ -24,7 +24,6 @@ vim.cmd [[
         exe '%s/while(/while (/e'
         exe '%s/switch(/switch (/e'
         exe '%s/}break;/} break;/e'
-        exe '%s/){/) {/e'
     endfu
 
     aug clean_buffer

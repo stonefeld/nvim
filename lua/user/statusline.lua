@@ -30,6 +30,7 @@ M.colors = {
 M.modes = setmetatable({
     ["n"] = { "Normal", "N" };
     ["i"] = { "Insert", "I" };
+    ["ic"] = { "Insert", "I" };
     ["v"] = { "Visual", "V" };
     ["V"] = { "V-line", "VL" };
     ["<C-V>"] = { "V-block", "VB" };
@@ -106,7 +107,7 @@ end
 
 -- Set the inactive statusline style
 M.set_inactive = function(self)
-    return self.colors.inactive .. "%=%F%="
+    return self.colors.inactive .. "%=%F %m%r%="
 end
 
 -- Get the git branch name
@@ -128,10 +129,13 @@ Statusline = setmetatable(M, {
 
 -- Autocmd to set statusline dynamically
 vim.cmd [[
-    augroup set_statusline
-        autocmd!
-        autocmd WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline('active')
-        autocmd WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline('inactive')
-        autocmd BufEnter * lua GetGitBranch()
-    augroup end
+    aug set_statusline
+        au!
+        au WinEnter,BufEnter * setl stl=%!v:lua.Statusline('active')
+        au WinLeave,BufLeave * setl stl=%!v:lua.Statusline('inactive')
+        au BufEnter * lua GetGitBranch()
+        au FileType term setl stl=%*\ terminal
+        au FileType term au WinEnter,BufEnter <buffer> setl stl=%*\ terminal
+        au FileType term au WinLeave,BufLeave <buffer> setl stl=%*\ terminal
+    aug end
 ]]

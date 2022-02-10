@@ -16,10 +16,10 @@ end
 
 -- Autocmd that reloads Neovim when the plugins.lua file is written
 vim.cmd [[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost plugins.lua source <afile> | PackerSync
-    augroup end
+    aug packer_user_config
+        au!
+        au BufWritePost plugins.lua source <afile> | PackerSync
+    aug end
 ]]
 
 -- Use a protected call to not error out on the first use
@@ -48,7 +48,7 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-nvim-lsp"             -- lsp completions
     use "hrsh7th/cmp-buffer"               -- buffer completions
     use "hrsh7th/cmp-path"                 -- path completions
-    use "hrsh7th/cmp-cmdline"              -- cmdline completions
+    use "L3MON4D3/LuaSnip"                 -- snippet support
     use "nvim-telescope/telescope.nvim"    -- telescope fuzzy finder
     use {                                  -- syntax highlighting with treesitter
         "nvim-treesitter/nvim-treesitter",
