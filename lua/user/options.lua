@@ -45,4 +45,5 @@ vim.opt.shortmess:append("c")                                        -- don't di
 vim.opt.iskeyword:append("-")                                        -- add '-' as a keyword
 
 vim.cmd [[syntax on]]                                                -- enable syntax highlighting
-vim.cmd [[set listchars=tab:\|\ ,trail:.]]                           -- display tabs as '|' and trailing spaces as '.'
+-- vim.cmd [[set listchars=tab:\|\ ,trail:.]]                           -- display tabs as '|' and trailing spaces as '.'
+vim.cmd [[set listchars=tab:¦\ ,trail:.]]                           -- display tabs as '|' and trailing spaces as '.'

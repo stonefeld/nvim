@@ -48,7 +48,9 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-nvim-lsp"             -- lsp completions
     use "hrsh7th/cmp-buffer"               -- buffer completions
     use "hrsh7th/cmp-path"                 -- path completions
+    use "saadparwaiz1/cmp_luasnip"         -- snippet completions
     use "L3MON4D3/LuaSnip"                 -- snippet support
+    use "rafamadriz/friendly-snippets"     -- snippets list
     use "nvim-telescope/telescope.nvim"    -- telescope fuzzy finder
     use {                                  -- syntax highlighting with treesitter
         "nvim-treesitter/nvim-treesitter",

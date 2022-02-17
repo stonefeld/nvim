@@ -13,6 +13,7 @@ vim.cmd [[
         au Filetype term setl scrolloff=0 sidescrolloff=0 nonu norelativenumber wrap scrollback=5000 signcolumn=no colorcolumn=0
         au BufNewFile,BufRead *.tex setl ft=tex
         au BufNew,BufRead,BufEnter *.asm setl ft=nasm
+        au BufNew,BufRead,BufEnter *.rasi setl ft=rasi
     aug end
 ]]
 

@@ -10,6 +10,7 @@ vim.g.nordokai_current_word = "gray background"
 vim.g.nordokai_diagnostic_line_highlight = 0
 vim.g.nordokai_better_performance = 0
 vim.g.nordokai_transparent_float = 1
+vim.g.nordokai_italic_comments = 1
 
 -- Make a protected call in case the colorscheme is not installed
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
