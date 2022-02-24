@@ -10,10 +10,10 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>e", "<cmd>Lexplore<cr>", opts)
 
 -- Resize panes
-vim.keymap.set("n", "<c-Left>", "<cmd>vertical resize +5<cr>", opts)
-vim.keymap.set("n", "<c-Right>", "<cmd>vertical resize -5<cr>", opts)
-vim.keymap.set("n", "<c-Up>", "<cmd>resize +1<cr>", opts)
-vim.keymap.set("n", "<c-Down>", "<cmd>resize -1<cr>", opts)
+vim.keymap.set("n", "<c-left>", "<cmd>vertical resize +5<cr>", opts)
+vim.keymap.set("n", "<c-right>", "<cmd>vertical resize -5<cr>", opts)
+vim.keymap.set("n", "<c-up>", "<cmd>resize +1<cr>", opts)
+vim.keymap.set("n", "<c-down>", "<cmd>resize -1<cr>", opts)
 
 -- Navigating buffers
 vim.keymap.set("n", "<c-l>", "<cmd>bn<cr>", opts)
@@ -24,9 +24,14 @@ vim.keymap.set("n", "<c-k>", "<cmd>bp<cr><cmd>bd #<cr>", opts)
 vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
 
+-- Telescope
+vim.keymap.set("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
+vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
+vim.keymap.set("n", "<leader>fa", "<cmd>Telescope buffers<cr>", opts)
+vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", opts)
+
 -- ----- Insert ----- --
 -- Undo break points
-vim.keymap.set("i", "<space>", "<space><c-g>u", opts)
 vim.keymap.set("i", ",", ",<c-g>u", opts)
 vim.keymap.set("i", ".", ".<c-g>u", opts)
 vim.keymap.set("i", "!", "!<c-g>u", opts)
@@ -43,9 +48,3 @@ vim.keymap.set("v", ">", ">gv", opts)
 
 -- Run figlet on the selected content
 vim.keymap.set("v", "<leader>ff", ":!figlet<cr>", opts)
-
--- Telescope
-vim.keymap.set("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
-vim.keymap.set("n", "<leader>fa", "<cmd>Telescope buffers<cr>", opts)
-vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", opts)
