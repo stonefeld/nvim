@@ -9,6 +9,7 @@ local options = {
   signcolumn = "yes",                                              -- always show left side column for side-messages
   foldcolumn = "auto:9",                                           -- foldcolumn can take from 0 to 9 columns space
   showmode = false,                                                -- disable -- INSERT -- and -- VISUAL -- like messages
+  laststatus = 3,                                                  -- show only one big statusline
   tabstop = 4,                                                     -- insert 4 spaces for a tab
   softtabstop = 4,                                                 -- insert 4 spaces for a tab
   shiftwidth = 4,                                                  -- number of spaces inserted for each indentation
@@ -25,6 +26,7 @@ local options = {
   cursorline = false,                                              -- don't display a line where the cursor is currently at
   updatetime = 250,                                                -- increase update speed
   mouse = "a",                                                     -- enable mouse interaction
+  title = true,                                                    -- allow vim to change window title
   incsearch = true,                                                -- search while typing
   hlsearch = false,                                                -- don't display matches on the previous search pattern
   wildmenu = true,                                                 -- enable wildmenu
@@ -34,7 +36,6 @@ local options = {
   termguicolors = true,                                            -- enable 24-bit RGB color in the terminal
   background = "dark",                                             -- set background style to dark
   completeopt = { "menuone", "noinsert", "noselect", "preview" },  -- completion options
-  path = "**",                                                     -- search recursively
 }
 
 -- Setting the options
@@ -44,6 +45,7 @@ end
 
 vim.opt.shortmess:append("c")                                      -- don't display ins-completion-menu messages
 vim.opt.iskeyword:append("-")                                      -- add '-' as a keyword
+vim.opt.formatoptions:remove("cro")                                -- don't auto comment new line
 
 vim.cmd [[syntax on]]                                              -- enable syntax highlighting
 vim.cmd [[filetype plugin on]]                                     -- enable filetype specific options

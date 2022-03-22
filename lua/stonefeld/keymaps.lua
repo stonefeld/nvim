@@ -29,6 +29,7 @@ vim.keymap.set("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
 vim.keymap.set("n", "<leader>fa", "<cmd>Telescope buffers<cr>", opts)
 vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", opts)
+vim.keymap.set("n", "<leader>fs", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
 
 -- ----- Insert ----- --
 -- Undo break points

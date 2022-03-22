@@ -14,9 +14,15 @@ M.trunc_width = setmetatable({
 })
 
 -- Check if region should be truncated
-M.is_truncated = function(_, width)
-  local current_width = vim.api.nvim_win_get_width(0)
-  return current_width < width
+if vim.opt.laststatus:get() == 3 then
+  M.is_truncated = function(_, _)
+    return false
+  end
+else
+  M.is_truncated = function(_, width)
+    local current_width = vim.api.nvim_win_get_width(0)
+    return current_width < width
+  end
 end
 
 -- Colors
@@ -68,7 +74,7 @@ M.get_filetype = function()
   if filetype == "" then
     return ""
   end
-  return string.format("[%s]", filetype):lower()
+  return string.format(" [%s]", filetype):lower()
 end
 
 -- Get line and column number
@@ -94,14 +100,14 @@ M.set_active = function(self)
 
   local filetype = self:get_filetype()
   local line_col = self:get_line_col()
-  local right_hand_size = table.concat({
-    "%=%", math.ceil(width * 32 / 210), ".(", line_col, " ", filetype, "%)"
+  local right_hand_side = table.concat({
+    "%=%", math.ceil(width * 32 / 210), ".(", line_col, filetype, "%)"
   })
 
   return table.concat({
     left_hand_side,
     filename,
-    right_hand_size
+    right_hand_side
   })
 end
 
@@ -128,14 +134,58 @@ Statusline = setmetatable(M, {
 })
 
 -- Autocmd to set statusline dynamically
-vim.cmd [[
-  aug set_statusline
-    au!
-    au WinEnter,BufEnter * setl stl=%!v:lua.Statusline('active')
-    au WinLeave,BufLeave * setl stl=%!v:lua.Statusline('inactive')
-    au BufEnter * lua GetGitBranch()
-    au FileType term setl stl=%*\ terminal
-    au FileType term au WinEnter,BufEnter <buffer> setl stl=%*\ terminal
-    au FileType term au WinLeave,BufLeave <buffer> setl stl=%*\ terminal
-  aug end
-]]
+local aug = vim.api.nvim_create_augroup
+local au = vim.api.nvim_create_autocmd
+
+-- Create the autogroup
+local set_statusline = aug("set_statusline", { clear = true })
+
+-- When focusing set the 'active' statusline
+au({ "WinEnter", "BufEnter" }, {
+  pattern = "*",
+  command = [[ setl stl=%!v:lua.Statusline('active') ]],
+  group = set_statusline
+})
+
+-- When unfocusing set the 'inactive' statusline
+if vim.opt.laststatus:get() ~= 3 then
+  au({ "WinLeave", "BufLeave" }, {
+    pattern = "*",
+    command = [[ setl stl=%!v:lua.Statusline('inactive') ]],
+    group = set_statusline
+  })
+end
+
+-- When entering a new buffer get current git branch
+au("BufEnter", {
+  pattern = "*",
+  command = [[ lua GetGitBranch() ]],
+  group = set_statusline
+})
+
+-- On terminal display nothing but the word 'terminal'
+au("FileType", {
+  pattern = "term",
+  command = [[ setl stl=%#ToolbarButton#%=terminal%= ]],
+  group = set_statusline
+})
+au("FileType", {
+  pattern = "term",
+  callback = function()
+    au({ "WinEnter", "BufEnter" }, {
+      buffer = 0,
+      command = [[ setl stl=%#ToolbarButton#%=terminal%= ]],
+    })
+  end,
+  group = set_statusline
+})
+au("FileType", {
+  pattern = "term",
+  callback = function()
+    au({ "WinLeave", "BufLeave" }, {
+      buffer = 0,
+      command = [[ setl stl=%*%=terminal%= ]],
+    })
+  end,
+  group = set_statusline
+})

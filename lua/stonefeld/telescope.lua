@@ -32,5 +32,8 @@ telescope.setup {
       theme = "ivy",
       previewer = false,
     },
+    lsp_dynamic_workspace_symbols = {
+      theme = "ivy"
+    },
   },
 }
