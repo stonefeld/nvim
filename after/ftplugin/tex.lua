@@ -5,6 +5,9 @@ local options = {
   softtabstop = 2,
   shiftwidth = 2,
   textwidth = 80,
+  number = false,
+  relativenumber = false,
+  laststatus = 0,
 }
 
 -- Setting the options
