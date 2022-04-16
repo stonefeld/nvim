@@ -60,6 +60,7 @@ cmp.setup {
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])   -- enable icons
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
+        luasnip = "[Snip]",
         buffer = "[Buffer]",
         path = "[Path]",
       })[entry.source.name]
@@ -72,7 +73,9 @@ cmp.setup {
     { name = "buffer" },
     { name = "path" },
   },
-  documentation = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  window = {
+    documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
   },
 }

@@ -31,9 +31,13 @@ telescope.setup {
     diagnostics = {
       theme = "ivy",
       previewer = false,
+      mappings = {
+        i = {
+          ["j"] = actions.move_selection_next,
+          ["k"] = actions.move_selection_previous,
+        },
+      },
     },
-    lsp_dynamic_workspace_symbols = {
-      theme = "ivy"
-    },
+    lsp_dynamic_workspace_symbols = { theme = "ivy" },
   },
 }

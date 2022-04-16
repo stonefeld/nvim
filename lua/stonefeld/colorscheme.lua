@@ -3,6 +3,7 @@
 local colorscheme = "nordokai"
 
 -- Nordokai colorscheme configuration
+vim.g.nordokai_style = "base16"
 vim.g.nordokai_transparent_background = 1
 vim.g.nordokai_menu_selection_background = "gray"
 vim.g.nordokai_sign_column_background = "default"
