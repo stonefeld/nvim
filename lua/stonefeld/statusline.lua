@@ -1,191 +1,198 @@
 -- ---------- Statusline ---------- --
-local M = {}
-
--- List of length limit
-M.trunc_width = setmetatable({
-  mode = 80,
-  git_status = 90,
-  filename = 140,
-  line_col = 90,
-}, {
-  __index = function()
-    return 90
-  end
-})
-
--- Check if region should be truncated
-if vim.opt.laststatus:get() == 3 then
-  M.is_truncated = function(_, _)
-    return false
-  end
-else
-  M.is_truncated = function(_, width)
-    local current_width = vim.api.nvim_win_get_width(0)
-    return current_width < width
-  end
-end
-
--- Colors
-M.colors = {
-  active = "%#ToolbarButton#",
-  inactive = "%#StatusLineNC#",
-  mode = "%#Debug#",
-}
+-- Create some function aliases
+local fn = vim.fn
+local api = vim.api
 
 -- Table of available modes
-M.modes = setmetatable({
-  ["n"] = { "Normal", "N" };
-  ["i"] = { "Insert", "I" };
-  ["ic"] = { "Insert", "I" };
-  ["v"] = { "Visual", "V" };
-  ["V"] = { "V-line", "VL" };
-  [""] = { "V-block", "VB" };
-  ["t"] = { "Terminal", "T" };
-  ["R"] = { "Replace", "R" };
-  ["Rv"] = { "V-replace", "VR" };
-  ["c"] = { "Command", "C" };
+local modes = setmetatable({
+  ["n"]  = "Normal",
+  ["no"] = "Normal",
+  ["v"]  = "Visual",
+  ["V"]  = "V-Line",
+  [""] = "V-Block",
+  ["s"]  = "Select",
+  ["S"]  = "S-Line",
+  [""] = "S-Block",
+  ["i"]  = "Insert",
+  ["ic"] = "Insert",
+  ["R"]  = "Replace",
+  ["Rv"] = "V-Replace",
+  ["c"]  = "Command",
+  ["cv"] = "Vim Ex",
+  ["ce"] = "Ex",
+  ["r"]  = "Prompt",
+  ["rm"] = "Moar",
+  ["r?"] = "Confirm",
+  ["!"]  = "Shell",
+  ["t"]  = "Terminal",
 }, {
   __index = function()
-    return { "Unknown", "U" }
+    return "Unknown"
   end
 })
 
--- Get the current mode
-M.get_current_mode = function(self)
-  local current_mode = vim.api.nvim_get_mode().mode
-  if self:is_truncated(self.trunc_width.mode) then
-    return string.format("5.( %s ", self.modes[current_mode][2])
+-- Display mode with specific color depending on current mode
+local function get_mode_color()
+  local current_mode = api.nvim_get_mode().mode
+  local mode_color = "%#StatusLineAccent#"
+  if current_mode == "i" or current_mode == "ic" then
+    mode_color = "%#StatusLineAccentInsert#"
+  elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
+    mode_color = "%#StatusLineAccentVisual#"
+  elseif current_mode == "R" then
+    mode_color = "%#StatusLineAccentReplace#"
+  elseif current_mode == "c" then
+    mode_color = "%#StatusLineAccentCmd#"
   end
-  return string.format("10.( %s ", self.modes[current_mode][1])
+  return mode_color
 end
 
--- Get the filename
-M.get_filename = function(self)
-  local filename = vim.fn.expand("%:~:.")
-  if self:is_truncated(self.trunc_width.filename) then
-    return "%t"
-  end
-  return string.format("%s", filename)
+-- Return the current mode with a human-readable description
+local function get_mode()
+  local current_mode = api.nvim_get_mode().mode
+  return string.format(" %s ", modes[current_mode])
 end
 
--- Get the filetype
-M.get_filetype = function()
-  local filetype = vim.bo.filetype
-  if filetype == "" then
+-- Get the current file's path
+local function get_filepath()
+  local fpath = fn.fnamemodify(fn.expand "%", ":~:.:h")
+  if fpath == "" or fpath == "." then
+    return " "
+  end
+  return string.format("%%<%s/", fpath)
+end
+
+-- Get the current file's name
+local function get_filename()
+  local fname = fn.expand "%:t"
+  if fname == "" then
     return ""
   end
-  return string.format(" [%s]", filetype):lower()
+  return fname
 end
 
--- Get line and column number
-M.get_line_col = function(self)
-  if self:is_truncated(self.trunc_width.line_col) then
-    return "[%l:%c]"
+-- Concatenate filepath and filename
+local function get_file()
+  return get_filepath() .. get_filename()
+end
+
+-- Get lsp diagnostic count
+local function get_lsp()
+  local count = {}
+  local levels = {
+    errors = "Error",
+    warnings = "Warn",
+    hints = "Hint",
+    info = "Info",
+  }
+
+  for k, level in pairs(levels) do
+    count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
+  end
+
+  local errors = ""
+  local warnings = ""
+  local hints = ""
+  local info = ""
+
+  if count["errors"] ~= 0 then
+    -- errors = " %#StatusLineAccentDiagnosticError# " .. count["errors"]
+    errors = "  " .. count["errors"]
+  end
+  if count["warnings"] ~= 0 then
+    -- errors = " %#StatusLineAccentDiagnosticWarn# " .. count["warnings"]
+    errors = "  " .. count["warnings"]
+  end
+  if count["hints"] ~= 0 then
+    -- errors = " %#StatusLineAccentDiagnosticHint# " .. count["hints"]
+    errors = "  " .. count["hints"]
+  end
+  if count["info"] ~= 0 then
+    -- errors = " %#StatusLineAccentDiagnosticInfo# " .. count["info"]
+    errors = "  " .. count["info"]
+  end
+
+  if count["errors"] > 0 or count["warnings"] > 0 or count["hints"] > 0 or count["info"] > 0 then
+    return "[" .. errors .. warnings .. hints .. info .. " ]"
+  else
+    return ""
+  end
+end
+
+-- Get the current file's filetype
+local function get_filetype()
+  local ftype = vim.bo.filetype
+  if ftype == "" then
+    return ""
+  end
+  return string.format("[%s]", ftype):lower()
+end
+
+-- Get the cursor coordinates
+local function get_lineinfo()
+  if vim.bo.filetype == "alpha" then
+    return ""
   end
   return "[%5l:%5c]"
 end
 
--- Set the active statysline style
-M.set_active = function(self)
-  local width = vim.api.nvim_win_get_width(0)
-
-  local mode = self:get_current_mode() .. self.colors.active
-  local git_branch = GitBranch
-  local left_hand_side = table.concat({
-    self.colors.mode, "%-", mode, "%)",
-    "%-", math.ceil(width * 22 / 210), ".(", git_branch, "%) "
-  })
-
-  local filename = "%=" .. self:get_filename() .. " %m%r"
-
-  local filetype = self:get_filetype()
-  local line_col = self:get_line_col()
-  local right_hand_side = table.concat({
-    "%=%", math.ceil(width * 32 / 210), ".(", line_col, filetype, "%)"
-  })
-
-  return table.concat({
-    left_hand_side,
-    filename,
-    right_hand_side
-  })
-end
-
--- Set the inactive statusline style
-M.set_inactive = function(self)
-  return self.colors.inactive .. "%=%F %m%r%="
-end
-
--- Get the git branch name
+-- Update current git repository's branch name
 function GetGitBranch()
-  local is_git_dir = vim.fn.trim(vim.fn.system('git rev-parse --is-inside-work-tree'))
+  local is_git_dir = fn.trim(fn.system("git rev-parse --is-inside-work-tree"))
   if is_git_dir == "true" then
-    GitBranch = string.format("󰘬 %s", vim.fn.trim(vim.fn.system("git -C " .. vim.fn.getcwd() .. " branch --show-current")))
+    GitBranch = string.format("󰘬 %s", fn.trim(fn.system("git -C " .. fn.getcwd() .. " branch --show-current")))
   else
     GitBranch = ""
   end
 end
 
--- Set the statusline
-Statusline = setmetatable(M, {
-  __call = function(self, mode)
-    return self["set_" .. mode](self)
-  end
-})
+-- Get the git branch for the first time
+GetGitBranch()
 
--- Autocmd to set statusline dynamically
-local aug = vim.api.nvim_create_augroup
-local au = vim.api.nvim_create_autocmd
+Statusline = {}
 
--- Create the autogroup
+-- Set the active statusline
+Statusline.active = function()
+  local width = math.ceil(api.nvim_win_get_width(0) * 50 / 212)
+  return table.concat {
+    "%-", width, ".(%-10.(", get_mode_color(), get_mode(), "%*%) ",
+    GitBranch, " %)",
+    "%=", get_file(), " %m%r%=",
+    "%", width, ".(", get_lsp(), get_lineinfo(), get_filetype(), "%)",
+  }
+end
+
+-- Set the unactive statusline
+Statusline.inactive = function()
+  return "%=%F%="
+end
+
+-- Create some aliases for autogroup and autocommands
+local aug = api.nvim_create_augroup
+local au = api.nvim_create_autocmd
+
+-- Create the statusline autogroup
 local set_statusline = aug("set_statusline", { clear = true })
 
--- When focusing set the 'active' statusline
+-- When switching window or entering buffer update statusline
 au({ "WinEnter", "BufEnter" }, {
   pattern = "*",
-  command = [[ setl stl=%!v:lua.Statusline('active') ]],
+  command = [[ setl stl=%!v:lua.Statusline.active() ]],
   group = set_statusline
 })
 
--- When unfocusing set the 'inactive' statusline
+-- Only set the inactive statusline when laststatus is not set to 3
 if vim.opt.laststatus:get() ~= 3 then
   au({ "WinLeave", "BufLeave" }, {
     pattern = "*",
-    command = [[ setl stl=%!v:lua.Statusline('inactive') ]],
+    command = [[ setl stl=%!v:lua.Statusline.inactive() ]],
     group = set_statusline
   })
 end
 
--- When entering a new buffer get current git branch
+-- Update the git branch name on every buffer read
 au("BufEnter", {
   pattern = "*",
-  command = [[ lua GetGitBranch() ]],
-  group = set_statusline
-})
-
--- On terminal display nothing but the word 'terminal'
-au("FileType", {
-  pattern = "term",
-  command = [[ setl stl=%#ToolbarButton#%=terminal%= ]],
-  group = set_statusline
-})
-au("FileType", {
-  pattern = "term",
-  callback = function()
-    au({ "WinEnter", "BufEnter" }, {
-      buffer = 0,
-      command = [[ setl stl=%#ToolbarButton#%=terminal%= ]],
-    })
-  end,
-  group = set_statusline
-})
-au("FileType", {
-  pattern = "term",
-  callback = function()
-    au({ "WinLeave", "BufLeave" }, {
-      buffer = 0,
-      command = [[ setl stl=%*%=terminal%= ]],
-    })
-  end,
+  callback = GetGitBranch,
   group = set_statusline
 })

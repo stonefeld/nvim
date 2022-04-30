@@ -46,10 +46,12 @@ cmp.setup {
     end,
   },
   mapping = {
-    ["<c-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),   -- scroll documentation downwards
-    ["<c-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),  -- scroll documentation upwards
-    ["<c-o>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),       -- restart completion
-    ["<c-e>"] = cmp.mapping({                                            -- cancel completion
+    ["<c-n>"] = cmp.mapping.select_next_item(),
+    ["<c-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+    ["<c-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),     -- scroll documentation downwards
+    ["<c-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),    -- scroll documentation upwards
+    ["<c-o>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),         -- restart completion
+    ["<c-e>"] = cmp.mapping({                                              -- cancel completion
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
@@ -57,7 +59,7 @@ cmp.setup {
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])   -- enable icons
+      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])     -- enable icons
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
         luasnip = "[Snip]",
@@ -74,8 +76,7 @@ cmp.setup {
     { name = "path" },
   },
   window = {
-    documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    },
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
 }

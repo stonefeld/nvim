@@ -7,7 +7,7 @@ end
 treesitter.setup {
   ensure_installed = "all",
   sync_install = false,
-  ignore_install = { "css", "html", "vim" },
+  ignore_install = { "css", "html", "vim", "latex" },
   highlight = {
     enable = true,
     disable = function(lang, bufnr)
