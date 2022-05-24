@@ -1,4 +1,7 @@
 -- ---------- Global Preferences ---------- --
+vim.cmd [[ syntax on ]]                                            -- enable syntax highlighting
+vim.cmd [[ filetype indent plugin on ]]                            -- enable filetype specific options
+
 local options = {
   spell = false,                                                   -- disable spell checking
   swapfile = false,                                                -- don't create swapfile
@@ -17,7 +20,7 @@ local options = {
   smarttab = true,                                                 -- make tabs smart
   autoindent = true,                                               -- copy indent from current line when starting a new line
   cindent = true,                                                  -- automatic C program indenting
-  cinoptions = "(0,l1,t0,=0",                                      -- set the C-style indentation rules (see 'cinoptions-values' for more info)
+  cinoptions = "(0,W4,w1,m1,l1,t0,g0",                             -- set the C-style indentation rules (see 'cinoptions-values' for more info)
   wrap = false,                                                    -- display lines as one long line
   splitright = true,                                               -- by default split horizontally to the right
   splitbelow = true,                                               -- by default split vertically at the bottom
@@ -34,9 +37,11 @@ local options = {
   wildoptions = "tagfile",                                         -- display matching tags in one line
   wildignore = "*.o,*.obj,*.exe,*.bin",                            -- ingore this pattern for the wildmenu
   list = true,                                                     -- enable listchars
+  listchars = "tab:¦ ,trail:.",                                    -- display tabs and trailing whitespace
   termguicolors = true,                                            -- enable 24-bit RGB color in the terminal
   background = "dark",                                             -- set background style to dark
   completeopt = { "menuone", "noinsert", "noselect", "preview" },  -- completion options
+  winbar = "%=%m %f",                                              -- set the winbar style
 }
 
 -- Setting the options
@@ -47,7 +52,3 @@ end
 vim.opt.shortmess:append("c")                                      -- don't display ins-completion-menu messages
 vim.opt.iskeyword:append("-")                                      -- add '-' as a keyword
 vim.opt.formatoptions:remove("cro")                                -- don't auto comment new line
-
-vim.cmd [[syntax on]]                                              -- enable syntax highlighting
-vim.cmd [[filetype plugin on]]                                     -- enable filetype specific options
-vim.cmd [[set listchars=tab:¦\ ,trail:.]]                          -- display tabs as '|' and trailing spaces as '.'

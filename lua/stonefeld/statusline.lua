@@ -3,6 +3,8 @@
 local fn = vim.fn
 local api = vim.api
 
+local icons_ok, icons = pcall(require, "nvim-web-devicons")
+
 -- Table of available modes
 local modes = setmetatable({
   ["n"]  = "Normal",
@@ -32,48 +34,28 @@ local modes = setmetatable({
 })
 
 -- Display mode with specific color depending on current mode
-local function get_mode_color()
-  local current_mode = api.nvim_get_mode().mode
+local function get_mode_color(mode)
   local mode_color = "%#StatusLineAccent#"
-  if current_mode == "i" or current_mode == "ic" then
+  if mode == "i" or mode == "ic" then
     mode_color = "%#StatusLineAccentInsert#"
-  elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
+  elseif mode == "v" or mode == "V" or mode == "" then
     mode_color = "%#StatusLineAccentVisual#"
-  elseif current_mode == "R" then
+  elseif mode == "R" then
     mode_color = "%#StatusLineAccentReplace#"
-  elseif current_mode == "c" then
+  elseif mode == "c" then
     mode_color = "%#StatusLineAccentCmd#"
   end
   return mode_color
 end
 
 -- Return the current mode with a human-readable description
-local function get_mode()
-  local current_mode = api.nvim_get_mode().mode
-  return string.format(" %s ", modes[current_mode])
-end
-
--- Get the current file's path
-local function get_filepath()
-  local fpath = fn.fnamemodify(fn.expand "%", ":~:.:h")
-  if fpath == "" or fpath == "." then
-    return " "
-  end
-  return string.format("%%<%s/", fpath)
-end
-
--- Get the current file's name
-local function get_filename()
-  local fname = fn.expand "%:t"
-  if fname == "" then
-    return ""
-  end
-  return fname
+local function get_mode(mode)
+  return string.format(" %s ", modes[mode])
 end
 
 -- Concatenate filepath and filename
-local function get_file()
-  return get_filepath() .. get_filename()
+local function get_file(fname, icon)
+  return string.format("%s%s", icon, fname)
 end
 
 -- Get lsp diagnostic count
@@ -96,19 +78,15 @@ local function get_lsp()
   local info = ""
 
   if count["errors"] ~= 0 then
-    -- errors = " %#StatusLineAccentDiagnosticError# " .. count["errors"]
     errors = "  " .. count["errors"]
   end
   if count["warnings"] ~= 0 then
-    -- errors = " %#StatusLineAccentDiagnosticWarn# " .. count["warnings"]
     errors = "  " .. count["warnings"]
   end
   if count["hints"] ~= 0 then
-    -- errors = " %#StatusLineAccentDiagnosticHint# " .. count["hints"]
     errors = "  " .. count["hints"]
   end
   if count["info"] ~= 0 then
-    -- errors = " %#StatusLineAccentDiagnosticInfo# " .. count["info"]
     errors = "  " .. count["info"]
   end
 
@@ -120,12 +98,12 @@ local function get_lsp()
 end
 
 -- Get the current file's filetype
-local function get_filetype()
+local function get_filetype(icon)
   local ftype = vim.bo.filetype
   if ftype == "" then
     return ""
   end
-  return string.format("[%s]", ftype):lower()
+  return string.format("[%s%s]", icon, ftype):lower()
 end
 
 -- Get the cursor coordinates
@@ -149,16 +127,24 @@ end
 -- Get the git branch for the first time
 GetGitBranch()
 
+-- Define statusline table
 Statusline = {}
 
 -- Set the active statusline
 Statusline.active = function()
   local width = math.ceil(api.nvim_win_get_width(0) * 50 / 212)
+  local mode = api.nvim_get_mode().mode
+  local fname, fext = fn.expand("%:t"), fn.expand("%:e")
+  local icon = ""
+  if icons_ok and fname ~= "" then
+    icon = string.format("%s ", icons.get_icon(fname, fext, { default = true }))
+  end
+
   return table.concat {
-    "%-", width, ".(%-10.(", get_mode_color(), get_mode(), "%*%) ",
+    "%-", width, ".(%-10.(", get_mode_color(mode), get_mode(mode), "%*%) ",
     GitBranch, " %)",
-    "%=", get_file(), " %m%r%=",
-    "%", width, ".(", get_lsp(), get_lineinfo(), get_filetype(), "%)",
+    "%=", get_file(fname, icon), " %m%r%=",
+    "%", width, ".(", get_lsp(), get_lineinfo(), get_filetype(icon), "%)",
   }
 end
 
@@ -194,5 +180,12 @@ end
 au("BufEnter", {
   pattern = "*",
   callback = GetGitBranch,
+  group = set_statusline
+})
+
+-- When opening telescope, avoid changing the statusline
+au("FileType", {
+  pattern = "TelescopePrompt",
+  command = [[ setl stl=%* ]],
   group = set_statusline
 })

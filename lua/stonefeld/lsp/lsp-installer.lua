@@ -15,10 +15,12 @@ lsp_installer.settings({
   },
 })
 
+local handlers = require("stonefeld.lsp.handlers")
+
 lsp_installer.on_server_ready(function(server)
   local opts = {
-    on_attach = require("stonefeld.lsp.handlers").on_attach,
-    capabilities = require("stonefeld.lsp.handlers").capabilities,
+    on_attach = handlers.on_attach,
+    capabilities = handlers.capabilities,
   }
 
   if server.name == "sumneko_lua" then

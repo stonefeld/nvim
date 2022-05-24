@@ -37,27 +37,27 @@ au("BufWritePre", {
   buffer = 0,
   group = clean_buffer,
   callback = function()
-    vim.cmd [[ exe '%s/\s\+$//e' ]]
+    vim.cmd [[
+      let curr_pos=getpos('.')
+      exe '%s/\s\+$//e'
+      call cursor(curr_pos[1], curr_pos[2])
+    ]]
   end
 })
 au("BufWritePre", {
   pattern = { "*.c", "*.cpp" },
   group = clean_buffer,
   callback = function()
-    vim.cmd [[ exe '%s/if(/if (/e' ]]
-    vim.cmd [[ exe '%s/for(/for (/e' ]]
-    vim.cmd [[ exe '%s/while(/while (/e' ]]
-    vim.cmd [[ exe '%s/switch(/switch (/e' ]]
-    vim.cmd [[ exe '%s/}break;/} break;/e' ]]
+    vim.cmd [[
+      let curr_pos=getpos('.')
+      exe '%s/if(/if (/e'
+      exe '%s/for(/for (/e'
+      exe '%s/while(/while (/e'
+      exe '%s/switch(/switch (/e'
+      exe '%s/}break;/} break;/e'
+      call cursor(curr_pos[1], curr_pos[2])
+    ]]
   end
-})
-
--- Windows to close with 'q'
-local close_win = aug("close_win", { clear = true })
-au("FileType", {
-  pattern = { "help", "qf", "lspinfo" },
-  command = [[ nnoremap <buffer><silent> q :close<CR> ]],
-  group = close_win
 })
 
 -- Get visual feedback when a line or region was yanked.
