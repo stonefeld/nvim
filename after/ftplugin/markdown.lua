@@ -7,7 +7,9 @@ local options = {
   textwidth = 80,
   number = false,
   relativenumber = false,
-  laststatus = 0,
+  foldenable = true,
+  foldmethod = "marker",
+  foldmarker = "<!-- {{{ -->,<!-- }}} -->",
 }
 
 -- Setting the options
@@ -21,3 +23,10 @@ local opts = { noremap = true, silent = true, buffer = 0 }
 -- Set markdown specific keybindings
 vim.keymap.set("n", "<m-m>", "<cmd>w! | silent execute '!md-to-pdf ' . expand('%:p') | redraw!<cr>", opts)
 vim.keymap.set("n", "<m-o>", "<cmd> execute '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>", opts)
+vim.keymap.set("i", ";co<tab>", "<!-- {{{ --><cr><!-- }}} --><esc>O", opts)
+
+-- Disable autocomplete for this filetype
+local status_ok, cmp = pcall(require, "cmp")
+if status_ok then
+  cmp.setup.buffer { enabled = false }
+end

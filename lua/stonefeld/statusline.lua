@@ -185,7 +185,7 @@ au("BufEnter", {
 
 -- When opening telescope, avoid changing the statusline
 au("FileType", {
-  pattern = "TelescopePrompt",
+  pattern = { "TelescopePrompt", "packer", "lspinfo", "lsp-installer" },
   command = [[ setl stl=%* ]],
   group = set_statusline
 })

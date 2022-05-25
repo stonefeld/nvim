@@ -7,7 +7,6 @@ local options = {
   textwidth = 80,
   number = false,
   relativenumber = false,
-  laststatus = 0,
 }
 
 -- Setting the options
