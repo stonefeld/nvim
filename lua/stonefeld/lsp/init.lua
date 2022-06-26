@@ -5,5 +5,5 @@ if not status_ok then
   return
 end
 
-require "stonefeld.lsp.lsp-installer"
+require("stonefeld.lsp.lsp-installer")
 require("stonefeld.lsp.handlers").setup()

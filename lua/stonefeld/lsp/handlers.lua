@@ -24,7 +24,6 @@ M.setup = function()
     float = {
       focusable = false,
       style = "minimal",
-      border = "rounded",
       source = "always",
       header = "",
       prefix = "",
@@ -34,11 +33,13 @@ M.setup = function()
   vim.diagnostic.config(config)
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     focusable = false,
-    border = "rounded",
+    max_width = 60,
+    min_width = 8,
+    max_height = math.floor(vim.o.lines * 0.4),
+    min_height = 3,
   })
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     focusable = false,
-    border = "rounded",
   })
 end
 
@@ -61,7 +62,7 @@ end
 
 M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = false
   end
   lsp_keymaps(bufnr)
 end
@@ -69,10 +70,8 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-  return
+if status_ok then
+  M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 end
-
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 return M

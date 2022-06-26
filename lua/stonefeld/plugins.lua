@@ -32,7 +32,7 @@ end
 packer.init {
   display = {
     open_fn = function()
-      return require("packer.util").float { border = "rounded" }
+      return require("packer.util").float { border = "single" }
     end,
   },
 }
@@ -43,10 +43,11 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig"            -- enable lsp
   use "williamboman/nvim-lsp-installer"  -- simple to use language server installer
   use "hrsh7th/nvim-cmp"                 -- completion plugin
-  use "hrsh7th/cmp-nvim-lsp"             -- lsp completions
-  use "hrsh7th/cmp-buffer"               -- buffer completions
-  use "hrsh7th/cmp-path"                 -- path completions
+  use "hrsh7th/cmp-nvim-lsp"             -- lsp source for nvim-cmp
+  use "hrsh7th/cmp-buffer"               -- buffer source for nvim-cmp
+  use "hrsh7th/cmp-path"                 -- path source for nvim-cmp
   use "L3MON4D3/LuaSnip"                 -- snippet support
+  use "saadparwaiz1/cmp_luasnip"         -- snippet source for nvim-cmp
   use {                                  -- telescope fuzzy finder
     "nvim-telescope/telescope.nvim",
     requires = {
@@ -58,8 +59,11 @@ return packer.startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
-  use "stonefeld/nordokai"               -- my own colorscheme
+  use "stonefeld/masita"                 -- my own colorscheme written in lua
+  use "catppuccin/nvim"                  -- catppuccin colorscheme
   use "kyazdani42/nvim-web-devicons"     -- devicons for telescope
+  use "mfussenegger/nvim-dap"            -- debug adapter protocol
+  use "rcarriga/nvim-dap-ui"             -- add nice ui to dap
 
   -- Automatically set up the configuration after cloning packer.nvim
   if PACKER_BOOTSTRAP then

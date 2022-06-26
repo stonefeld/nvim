@@ -134,7 +134,7 @@ Statusline = {}
 Statusline.active = function()
   local width = math.ceil(api.nvim_win_get_width(0) * 50 / 212)
   local mode = api.nvim_get_mode().mode
-  local fname, fext = fn.expand("%:t"), fn.expand("%:e")
+  local fname, fext = fn.pathshorten(fn.expand("%:.")), fn.expand("%:e")
   local icon = ""
   if icons_ok and fname ~= "" then
     icon = string.format("%s ", icons.get_icon(fname, fext, { default = true }))
@@ -143,7 +143,7 @@ Statusline.active = function()
   return table.concat {
     "%-", width, ".(%-10.(", get_mode_color(mode), get_mode(mode), "%*%) ",
     GitBranch, " %)",
-    "%=", get_file(fname, icon), " %m%r%=",
+    "%=", get_file(fname, icon), " %m%r%=%<",
     "%", width, ".(", get_lsp(), get_lineinfo(), get_filetype(icon), "%)",
   }
 end
@@ -183,9 +183,18 @@ au("BufEnter", {
   group = set_statusline
 })
 
--- When opening telescope, avoid changing the statusline
+-- When opening some windows, avoid changing the statusline
 au("FileType", {
-  pattern = { "TelescopePrompt", "packer", "lspinfo", "lsp-installer" },
-  command = [[ setl stl=%* ]],
+  pattern = { "qf", "TelescopePrompt", "packer", "lspinfo", "lsp-installer" },
+  callback = function()
+    local set_stl = function()
+      vim.cmd [[ setl stl=%* ]]
+    end
+    set_stl()
+    au({ "WinEnter", "BufEnter", "WinLeave", "BufLeave" }, {
+      buffer = 0,
+      callback = set_stl,
+    })
+  end,
   group = set_statusline
 })

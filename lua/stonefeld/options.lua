@@ -27,7 +27,6 @@ local options = {
   number = true,                                                   -- get line numbers
   relativenumber = false,                                          -- display the line numbers relative to the current position for quick jumps
   cursorline = true,                                               -- don't display a line where the cursor is currently at
-  cursorlineopt = "number",                                        -- set how to highlight the current line
   updatetime = 250,                                                -- increase update speed
   mouse = "a",                                                     -- enable mouse interaction
   title = true,                                                    -- allow vim to change window title
@@ -37,11 +36,11 @@ local options = {
   wildoptions = "tagfile",                                         -- display matching tags in one line
   wildignore = "*.o,*.obj,*.exe,*.bin",                            -- ingore this pattern for the wildmenu
   list = true,                                                     -- enable listchars
-  listchars = "tab:¦ ,trail:.",                                    -- display tabs and trailing whitespace
+  listchars = "tab:  ,trail:.",                                    -- display tabs and trailing whitespace
   termguicolors = true,                                            -- enable 24-bit RGB color in the terminal
   background = "dark",                                             -- set background style to dark
   completeopt = { "menuone", "noinsert", "noselect", "preview" },  -- completion options
-  winbar = "%=%m %f",                                              -- set the winbar style
+  -- winbar = "%=%m %f",                                              -- set the winbar style
 }
 
 -- Setting the options

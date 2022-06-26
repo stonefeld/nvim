@@ -31,6 +31,22 @@ vim.keymap.set("n", "<leader>fa", "<cmd>Telescope buffers<cr>", opts)
 vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", opts)
 vim.keymap.set("n", "<leader>fs", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
 
+-- Dap
+local status_dap, dap = pcall(require, "dap")
+if status_dap then
+  vim.keymap.set("n", "<f5>", dap.continue, opts)
+  vim.keymap.set("n", "<f6>", dap.terminate, opts)
+  vim.keymap.set("n", "<f10>", dap.step_over, opts)
+  vim.keymap.set("n", "<f11>", dap.step_into, opts)
+  vim.keymap.set("n", "<f12>", dap.step_out, opts)
+  vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, opts)
+
+  local status_dapui, dapui = pcall(require, "dapui")
+  if status_dapui then
+    vim.keymap.set("n", "<leader>de", dapui.eval, opts)
+  end
+end
+
 -- ----- Insert ----- --
 -- Undo break points
 vim.keymap.set("i", ",", ",<c-g>u", opts)

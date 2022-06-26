@@ -4,7 +4,6 @@ local options = {
   tabstop = 4,
   softtabstop = 4,
   shiftwidth = 4,
-  expandtab = false,
 }
 
 -- Setting the options
