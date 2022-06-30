@@ -20,7 +20,6 @@ local options = {
   smarttab = true,                                                 -- make tabs smart
   autoindent = true,                                               -- copy indent from current line when starting a new line
   cindent = true,                                                  -- automatic C program indenting
-  cinoptions = "(0,W4,w1,m1,l1,t0,g0",                             -- set the C-style indentation rules (see 'cinoptions-values' for more info)
   wrap = false,                                                    -- display lines as one long line
   splitright = true,                                               -- by default split horizontally to the right
   splitbelow = true,                                               -- by default split vertically at the bottom
