@@ -73,7 +73,7 @@ Statusline.active = function()
   local mode = api.nvim_get_mode().mode;
   return table.concat {
     get_mode_color(mode), get_filepath(), "%m%r%*%=",
-    get_lsp()
+    get_lsp(), "%#StatusLineAccentExtra# %5l:%-5c "
   }
 end
 
