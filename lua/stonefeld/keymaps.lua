@@ -5,63 +5,66 @@ local opts = { noremap = true, silent = true }
 -- Set the leader key to space
 vim.g.mapleader = " "
 
+-- Create keymap alias
+local key = vim.keymap
+
 -- ----- Normal ----- --
 -- Open file explorer
-vim.keymap.set("n", "<leader>e", "<cmd>Lexplore<cr>", opts)
+key.set("n", "<leader>e", "<cmd>Explore<cr>", opts)
 
 -- Resize panes
-vim.keymap.set("n", "<c-left>", "<cmd>vertical resize +5<cr>", opts)
-vim.keymap.set("n", "<c-right>", "<cmd>vertical resize -5<cr>", opts)
-vim.keymap.set("n", "<c-up>", "<cmd>resize +1<cr>", opts)
-vim.keymap.set("n", "<c-down>", "<cmd>resize -1<cr>", opts)
+key.set("n", "<c-left>", "<cmd>vertical resize +5<cr>", opts)
+key.set("n", "<c-right>", "<cmd>vertical resize -5<cr>", opts)
+key.set("n", "<c-up>", "<cmd>resize +1<cr>", opts)
+key.set("n", "<c-down>", "<cmd>resize -1<cr>", opts)
 
 -- Navigating buffers
-vim.keymap.set("n", "<c-l>", "<cmd>bn<cr>", opts)
-vim.keymap.set("n", "<c-h>", "<cmd>bp<cr>", opts)
-vim.keymap.set("n", "<c-k>", "<cmd>bp<cr><cmd>bd #<cr>", opts)
+key.set("n", "<c-l>", "<cmd>bn<cr>", opts)
+key.set("n", "<c-h>", "<cmd>bp<cr>", opts)
+key.set("n", "<c-k>", "<cmd>bp<cr><cmd>bd #<cr>", opts)
 
 -- Keep the cursor centered on the screen
-vim.keymap.set("n", "n", "nzzzv", opts)
-vim.keymap.set("n", "N", "Nzzzv", opts)
+key.set("n", "n", "nzzzv", opts)
+key.set("n", "N", "Nzzzv", opts)
 
 -- Telescope
-vim.keymap.set("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
-vim.keymap.set("n", "<leader>fa", "<cmd>Telescope buffers<cr>", opts)
-vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", opts)
-vim.keymap.set("n", "<leader>fs", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
+key.set("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
+key.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
+key.set("n", "<leader>fa", "<cmd>Telescope buffers<cr>", opts)
+key.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", opts)
+key.set("n", "<leader>fs", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
 
 -- Dap
 local status_dap, dap = pcall(require, "dap")
 if status_dap then
-  vim.keymap.set("n", "<f5>", dap.continue, opts)
-  vim.keymap.set("n", "<f6>", dap.terminate, opts)
-  vim.keymap.set("n", "<f10>", dap.step_over, opts)
-  vim.keymap.set("n", "<f11>", dap.step_into, opts)
-  vim.keymap.set("n", "<f12>", dap.step_out, opts)
-  vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, opts)
+  key.set("n", "<f5>", dap.continue, opts)
+  key.set("n", "<f6>", dap.terminate, opts)
+  key.set("n", "<f10>", dap.step_over, opts)
+  key.set("n", "<f11>", dap.step_into, opts)
+  key.set("n", "<f12>", dap.step_out, opts)
+  key.set("n", "<leader>b", dap.toggle_breakpoint, opts)
 
   local status_dapui, dapui = pcall(require, "dapui")
   if status_dapui then
-    vim.keymap.set("n", "<leader>de", dapui.eval, opts)
+    key.set("n", "<leader>de", dapui.eval, opts)
   end
 end
 
 -- ----- Insert ----- --
 -- Undo break points
-vim.keymap.set("i", ",", ",<c-g>u", opts)
-vim.keymap.set("i", ".", ".<c-g>u", opts)
-vim.keymap.set("i", "!", "!<c-g>u", opts)
-vim.keymap.set("i", "?", "?<c-g>u", opts)
+key.set("i", ",", ",<c-g>u", opts)
+key.set("i", ".", ".<c-g>u", opts)
+key.set("i", "!", "!<c-g>u", opts)
+key.set("i", "?", "?<c-g>u", opts)
 
 -- ----- Visual ----- --
 -- Move lines up and down while selected
-vim.keymap.set("v", "J", ":m '>+1<cr>gv", opts)
-vim.keymap.set("v", "K", ":m '<-2<cr>gv", opts)
+key.set("v", "J", ":m '>+1<cr>gv", opts)
+key.set("v", "K", ":m '<-2<cr>gv", opts)
 
 -- Stay in indent mode
-vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts)
+key.set("v", "<", "<gv", opts)
+key.set("v", ">", ">gv", opts)
 
 -- Run figlet on the selected content
-vim.keymap.set("v", "<leader>ff", ":!figlet<cr>", opts)
+key.set("v", "<leader>ff", ":!figlet<cr>", opts)

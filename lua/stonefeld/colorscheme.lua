@@ -1,6 +1,6 @@
 -- ---------- Colorscheme ---------- --
 -- Specify the wanted colorscheme
-local colorscheme = "masita"
+local colorscheme = "catppuccin"
 
 -- Nordokai colorscheme configuration
 vim.g.nordokai_style = "nord"
@@ -15,6 +15,8 @@ vim.g.nordokai_highlight_completion = 1
 vim.g.gruvbox_transparent_bg = 1
 vim.g.gruvbox_contrast_dark = "hard"
 vim.g.gruvbox_invert_selection = 0
+
+vim.g.catppuccin_flavour = "mocha"
 
 -- Make a protected call in case the colorscheme is not installed
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)

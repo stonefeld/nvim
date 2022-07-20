@@ -1,40 +1,14 @@
 -- ---------- Statusline ---------- --
 -- Create some function aliases
-local fn = vim.fn
 local api = vim.api
+local fn = vim.fn
 
+-- Check if devicons are installed
 local icons_ok, icons = pcall(require, "nvim-web-devicons")
 
--- Table of available modes
-local modes = setmetatable({
-  ["n"]  = "Normal",
-  ["no"] = "Normal",
-  ["v"]  = "Visual",
-  ["V"]  = "V-Line",
-  [""] = "V-Block",
-  ["s"]  = "Select",
-  ["S"]  = "S-Line",
-  [""] = "S-Block",
-  ["i"]  = "Insert",
-  ["ic"] = "Insert",
-  ["R"]  = "Replace",
-  ["Rv"] = "V-Replace",
-  ["c"]  = "Command",
-  ["cv"] = "Vim Ex",
-  ["ce"] = "Ex",
-  ["r"]  = "Prompt",
-  ["rm"] = "Moar",
-  ["r?"] = "Confirm",
-  ["!"]  = "Shell",
-  ["t"]  = "Terminal",
-}, {
-  __index = function()
-    return "Unknown"
-  end
-})
-
--- Display mode with specific color depending on current mode
-local function get_mode_color(mode)
+-- Get some accent color according to the current mode
+local function get_mode_color()
+  local mode = api.nvim_get_mode().mode
   local mode_color = "%#StatusLineAccent#"
   if mode == "i" or mode == "ic" then
     mode_color = "%#StatusLineAccentInsert#"
@@ -48,17 +22,20 @@ local function get_mode_color(mode)
   return mode_color
 end
 
--- Return the current mode with a human-readable description
-local function get_mode(mode)
-  return string.format(" %s ", modes[mode])
+-- Get current filepath, with shorten directory names
+local function get_filepath()
+  local filep, filee = fn.expand("%:p:~"), fn.expand("%:e")
+  if filep == "" then
+    return "%f"
+  end
+  local icon = ""
+  if icons_ok then
+    icon = string.format("%s ", icons.get_icon(filep, filee, { default = true }))
+  end
+  return string.format(" %s %s", fn.pathshorten(filep), icon)
 end
 
--- Concatenate filepath and filename
-local function get_file(fname, icon)
-  return string.format("%s%s", icon, fname)
-end
-
--- Get lsp diagnostic count
+-- Get lsp diagnostic counts
 local function get_lsp()
   local count = {}
   local levels = {
@@ -78,79 +55,46 @@ local function get_lsp()
   local info = ""
 
   if count["errors"] ~= 0 then
-    errors = "  " .. count["errors"]
+    errors = "%#DiffDelete#  " .. count["errors"] .. " "
   end
   if count["warnings"] ~= 0 then
-    errors = "  " .. count["warnings"]
+    warnings = "%#DiffText#  " .. count["warnings"] .. " "
   end
   if count["hints"] ~= 0 then
-    errors = "  " .. count["hints"]
+    hints = "%#DiffAdd#  " .. count["hints"] .. " "
   end
   if count["info"] ~= 0 then
-    errors = "  " .. count["info"]
+    info = "%#DiffChange#  " .. count["info"] .. " "
   end
 
   if count["errors"] > 0 or count["warnings"] > 0 or count["hints"] > 0 or count["info"] > 0 then
-    return "[" .. errors .. warnings .. hints .. info .. " ]"
+    return errors .. warnings .. hints .. info .. "%*"
   else
     return ""
   end
 end
 
--- Get the current file's filetype
-local function get_filetype(icon)
-  local ftype = vim.bo.filetype
-  if ftype == "" then
-    return ""
-  end
-  return string.format("[%s%s]", icon, ftype):lower()
+-- Get cursor coordinates
+local function get_coords()
+  return "%#StatusLineAccentExtra# %5l:%-5c "
 end
 
--- Get the cursor coordinates
-local function get_lineinfo()
-  if vim.bo.filetype == "alpha" then
-    return ""
-  end
-  return "[%5l:%5c]"
-end
-
--- Update current git repository's branch name
-function GetGitBranch()
-  local is_git_dir = fn.trim(fn.system("git rev-parse --is-inside-work-tree"))
-  if is_git_dir == "true" then
-    GitBranch = string.format("󰘬 %s", fn.trim(fn.system("git -C " .. fn.getcwd() .. " branch --show-current")))
-  else
-    GitBranch = ""
-  end
-end
-
--- Get the git branch for the first time
-GetGitBranch()
-
--- Define statusline table
+-- Create the statusline table
 Statusline = {}
 
--- Set the active statusline
+-- Set statusline appereance when active
 Statusline.active = function()
-  local width = math.ceil(api.nvim_win_get_width(0) * 50 / 212)
-  local mode = api.nvim_get_mode().mode
-  local fname, fext = fn.pathshorten(fn.expand("%:.")), fn.expand("%:e")
-  local icon = ""
-  if icons_ok and fname ~= "" then
-    icon = string.format("%s ", icons.get_icon(fname, fext, { default = true }))
-  end
-
   return table.concat {
-    "%-", width, ".(%-10.(", get_mode_color(mode), get_mode(mode), "%*%) ",
-    GitBranch, " %)",
-    "%=", get_file(fname, icon), " %m%r%=%<",
-    "%", width, ".(", get_lsp(), get_lineinfo(), get_filetype(icon), "%)",
+    get_mode_color(), get_filepath(), "%h%m%r%*%=",
+    get_lsp(), get_coords()
   }
 end
 
--- Set the unactive statusline
+-- Set statusline appereance when inactive
 Statusline.inactive = function()
-  return "%=%F%="
+  return table.concat {
+    "%*", get_filepath()
+  }
 end
 
 -- Create some aliases for autogroup and autocommands
@@ -176,16 +120,9 @@ if vim.opt.laststatus:get() ~= 3 then
   })
 end
 
--- Update the git branch name on every buffer read
-au("BufEnter", {
-  pattern = "*",
-  callback = GetGitBranch,
-  group = set_statusline
-})
-
 -- When opening some windows, avoid changing the statusline
 au("FileType", {
-  pattern = { "qf", "TelescopePrompt", "packer", "lspinfo", "lsp-installer" },
+  pattern = { "qf", "netrw", "TelescopePrompt", "packer", "lspinfo", "lsp-installer" },
   callback = function()
     local set_stl = function()
       vim.cmd [[ setl stl=%* ]]

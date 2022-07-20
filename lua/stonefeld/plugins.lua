@@ -1,15 +1,15 @@
 -- ---------- Plugins ---------- --
 -- Automatically install packer
-local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = vim.fn.system {
+  PACKER_BOOTSTRAP = vim.fn.system({
     "git",
     "clone",
     "--depth",
     "1",
     "https://github.com/wbthomason/packer.nvim",
     install_path,
-  }
+  })
   print "Installing packer. Close and reopen Neovim..."
   vim.cmd [[packadd packer.nvim]]
 end
@@ -29,13 +29,13 @@ if not status_ok then
 end
 
 -- Use a floating window for packer
-packer.init {
+packer.init({
   display = {
     open_fn = function()
-      return require("packer.util").float { border = "single" }
+      return require("packer.util").float({ border = "single" })
     end,
   },
-}
+})
 
 -- Install plugins here
 return packer.startup(function(use)
@@ -60,7 +60,7 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
   use "stonefeld/masita"                 -- my own colorscheme written in lua
-  use "catppuccin/nvim"                  -- catppuccin colorscheme
+  use "catppuccin/nvim"
   use "kyazdani42/nvim-web-devicons"     -- devicons for telescope
   use "mfussenegger/nvim-dap"            -- debug adapter protocol
   use "rcarriga/nvim-dap-ui"             -- add nice ui to dap
