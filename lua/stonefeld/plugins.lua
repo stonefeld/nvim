@@ -55,12 +55,16 @@ return packer.startup(function(use)
       use "nvim-lua/plenary.nvim",       -- useful lua function required by many packages
     },
   }
+  use {                                  -- improve sorting performance
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make'
+  }
   use {                                  -- syntax highlighting with treesitter
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
   use "stonefeld/masita"                 -- my own colorscheme written in lua
-  use "catppuccin/nvim"
+  use "catppuccin/nvim"                  -- catppuccin theme
   use "kyazdani42/nvim-web-devicons"     -- devicons for telescope
   use "mfussenegger/nvim-dap"            -- debug adapter protocol
   use "rcarriga/nvim-dap-ui"             -- add nice ui to dap

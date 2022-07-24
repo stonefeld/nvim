@@ -14,7 +14,6 @@ telescope.setup {
         ["<c-p>"] = actions.cycle_history_prev,
         ["<c-j>"] = actions.move_selection_next,
         ["<c-k>"] = actions.move_selection_previous,
-        ["<c-d>"] = actions.delete_buffer,
         ["<esc>"] = actions.close,
       },
     },
@@ -28,17 +27,22 @@ telescope.setup {
     buffers = {
       theme = "dropdown",
       previewer = false,
-    },
-    diagnostics = {
-      theme = "ivy",
-      previewer = false,
       mappings = {
         i = {
-          ["j"] = actions.move_selection_next,
-          ["k"] = actions.move_selection_previous,
+          ["<c-d>"] = actions.delete_buffer,
         },
       },
     },
     lsp_dynamic_workspace_symbols = { theme = "ivy" },
   },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    },
+  },
 }
+
+pcall(telescope.load_extension, "fzf")
