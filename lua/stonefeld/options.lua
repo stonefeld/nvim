@@ -24,7 +24,7 @@ local options = {
   splitright = true,                                               -- by default split horizontally to the right
   splitbelow = true,                                               -- by default split vertically at the bottom
   number = true,                                                   -- get line numbers
-  relativenumber = false,                                          -- display the line numbers relative to the current position for quick jumps
+  relativenumber = true,                                           -- display the line numbers relative to the current position for quick jumps
   cursorline = true,                                               -- don't display a line where the cursor is currently at
   updatetime = 250,                                                -- increase update speed
   mouse = "a",                                                     -- enable mouse interaction
@@ -32,14 +32,12 @@ local options = {
   incsearch = true,                                                -- search while typing
   hlsearch = false,                                                -- don't display matches on the previous search pattern
   wildmenu = true,                                                 -- enable wildmenu
-  wildoptions = "tagfile",                                         -- display matching tags in one line
   wildignore = "*.o,*.obj,*.exe,*.bin",                            -- ingore this pattern for the wildmenu
   list = true,                                                     -- enable listchars
   listchars = "tab:  ,trail:.",                                    -- display tabs and trailing whitespace
   termguicolors = true,                                            -- enable 24-bit RGB color in the terminal
   background = "dark",                                             -- set background style to dark
   completeopt = { "menuone", "noinsert", "noselect", "preview" },  -- completion options
-  -- winbar = "%=%m %f",                                              -- set the winbar style
 }
 
 -- Setting the options

@@ -64,7 +64,8 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
   use "stonefeld/masita"                 -- my own colorscheme written in lua
-  use "catppuccin/nvim"                  -- catppuccin theme
+  use "catppuccin/nvim"                  -- catppuccin colorscheme
+  use "ellisonleao/gruvbox.nvim"         -- gruvbox colorscheme
   use "kyazdani42/nvim-web-devicons"     -- devicons for telescope
   use "mfussenegger/nvim-dap"            -- debug adapter protocol
   use "rcarriga/nvim-dap-ui"             -- add nice ui to dap

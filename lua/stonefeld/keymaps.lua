@@ -28,11 +28,12 @@ key.set("n", "n", "nzzzv", opts)
 key.set("n", "N", "Nzzzv", opts)
 
 -- Telescope
-key.set("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
-key.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
-key.set("n", "<leader>fa", "<cmd>Telescope buffers<cr>", opts)
-key.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", opts)
-key.set("n", "<leader>fs", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
+local status_tele, tele = pcall(require, "telescope.builtin")
+if status_tele then
+  key.set("n", "<c-p>", tele.find_files, opts)
+  key.set("n", "<leader>fg", tele.live_grep, opts)
+  key.set("n", "<leader>fa", tele.buffers, opts)
+end
 
 -- Dap
 local status_dap, dap = pcall(require, "dap")
@@ -42,7 +43,7 @@ if status_dap then
   key.set("n", "<f10>", dap.step_over, opts)
   key.set("n", "<f11>", dap.step_into, opts)
   key.set("n", "<f12>", dap.step_out, opts)
-  key.set("n", "<leader>b", dap.toggle_breakpoint, opts)
+  key.set("n", "<f9>", dap.toggle_breakpoint, opts)
 
   local status_dapui, dapui = pcall(require, "dapui")
   if status_dapui then
