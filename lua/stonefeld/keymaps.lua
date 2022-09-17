@@ -35,6 +35,21 @@ if status_tele then
   key.set("n", "<leader>fa", tele.buffers, opts)
 end
 
+-- LuaSnip
+local status_ls, ls = pcall(require, "luasnip")
+if status_ls then
+  key.set({ "i", "s" }, "<c-l>", function()
+    if ls.expand_or_jumpable() then
+      ls.expand_or_jump()
+    end
+  end, opts)
+  key.set({ "i", "s" }, "<c-j>", function()
+    if ls.jumpable(-1) then
+      ls.jump(-1)
+    end
+  end, opts)
+end
+
 -- Dap
 local status_dap, dap = pcall(require, "dap")
 if status_dap then

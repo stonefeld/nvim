@@ -1,6 +1,6 @@
 -- ---------- Colorscheme ---------- --
 -- Specify the wanted colorscheme
-local colorscheme = "gruvbox"
+local colorscheme = "catppuccin"
 
 -- Catppuccin flavour setup
 vim.g.catppuccin_flavour = "mocha"
