@@ -106,6 +106,7 @@ augroups.filetype_options = {
     pattern = { "c", "cpp", "arduino" },
     callback = function()
       vim.opt_local.expandtab = false
+      vim.opt_local.cindent = true
       vim.opt_local.cinoptions = "(0,W4,w1,m1,l1,t0,g0"
     end,
   },
