@@ -3,8 +3,8 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = WORKSPACE_PATH .. project_name
 
 return {
-  vmargs = {
-    "-data",
-    workspace_dir,
-  },
+	vmargs = {
+		"-data",
+		workspace_dir,
+	},
 }

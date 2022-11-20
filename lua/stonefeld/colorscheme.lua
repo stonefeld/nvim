@@ -10,6 +10,6 @@ vim.g.everforest_transparent_background = true
 pcall(require, "stonefeld.colors." .. colorscheme)
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then
-  vim.notify("Colorscheme " .. colorscheme .. " not found!")
-  return
+	vim.notify("Colorscheme " .. colorscheme .. " not found!")
+	return
 end
