@@ -23,7 +23,6 @@ telescope.setup {
       theme = "dropdown",
       previewer = false,
     },
-    live_grep = { theme = "ivy" },
     buffers = {
       theme = "dropdown",
       previewer = false,
@@ -33,7 +32,7 @@ telescope.setup {
         },
       },
     },
-    lsp_dynamic_workspace_symbols = { theme = "ivy" },
+    live_grep = { theme = "ivy" },
   },
   extensions = {
     fzf = {

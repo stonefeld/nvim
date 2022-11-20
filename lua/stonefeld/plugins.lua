@@ -41,7 +41,8 @@ packer.init({
 return packer.startup(function(use)
   use "wbthomason/packer.nvim"             -- make packer handle itself
   use "neovim/nvim-lspconfig"              -- enable lsp
-  use "williamboman/nvim-lsp-installer"    -- simple to use language server installer
+  use "williamboman/mason.nvim"            -- easily install and manage lsp, formatters and more
+  use "williamboman/mason-lspconfig.nvim"  -- make even easier the integration between lspconfig and mason
   use "hrsh7th/nvim-cmp"                   -- completion plugin
   use "hrsh7th/cmp-nvim-lsp"               -- lsp source for nvim-cmp
   use "hrsh7th/cmp-buffer"                 -- buffer source for nvim-cmp
@@ -72,6 +73,7 @@ return packer.startup(function(use)
     run = ":CatppuccinCompile"
   }
   use "ellisonleao/gruvbox.nvim"           -- gruvbox colorscheme
+  use "sainnhe/everforest"                 -- everforest colorscheme
   use "mfussenegger/nvim-dap"              -- debug adapter protocol
   use "rcarriga/nvim-dap-ui"               -- add nice ui to dap
 

@@ -6,7 +6,7 @@ end
 
 local col = require("catppuccin.palettes").get_palette()
 cp.setup({
-  transparent_background = true,
+  flavour = "mocha",
   integrations = {
     dap = {
       enabled = true,
@@ -18,12 +18,12 @@ cp.setup({
     path = vim.fn.stdpath("cache") .. "/catppuccin"
   },
   custom_highlights = {
-    StlAcc = { fg = col.base, bg = col.blue },
-    StlAccInsert = { fg = col.base, bg = col.green },
-    StlAccVisual = { fg = col.base, bg = col.mauve },
-    StlAccReplace = { fg = col.base, bg = col.red },
-    StlAccCmd = { fg = col.base, bg = col.yellow },
-    StlAccExtra = { fg = col.base, bg = col.sky },
+    StlAcc = { fg = "NONE", bg = col.blue },
+    StlAccInsert = { fg = "NONE", bg = col.green },
+    StlAccVisual = { fg = "NONE", bg = col.mauve },
+    StlAccReplace = { fg = "NONE", bg = col.red },
+    StlAccCmd = { fg = "NONE", bg = col.yellow },
+    StlAccExtra = { fg = "NONE", bg = col.sky },
     StlWhite = { fg = col.white, bg = col.mantle, style = { "bold" } },
     StlRed = { fg = col.red, bg = col.mantle, style = { "bold" } },
     StlYellow = { fg = col.yellow, bg = col.mantle, style = { "bold" } },

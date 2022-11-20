@@ -58,7 +58,8 @@ local function get_filepath()
   if icons_ok then
     icon = string.format("%s ", icons.get_icon(filep, filee, { default = true }))
   end
-  return string.format(" %%#StlPurple#%s/%%#StlBlue#%%t  %%#StlWhite#%s", filep, icon)
+  return string.format(" %%#StlPurple#%s%s%%#StlBlue#%%t  %%#StlWhite#%s",
+    filep, fn.has("win32") == 1 and "\\" or "/", icon)
 end
 
 -- Get filetype
@@ -152,7 +153,7 @@ end
 function GetGitBranch()
   local is_git_dir = fn.trim(fn.system("git rev-parse --is-inside-work-tree"))
   if is_git_dir == "true" then
-    GitBranch = string.format(" %%#StlGreen#󰘬 %s  ", fn.trim(fn.system("git -C " .. fn.getcwd() .. " branch --show-current")))
+    GitBranch = string.format(" %%#StlGreen# %s  ", fn.trim(fn.system("git -C " .. fn.getcwd() .. " branch --show-current")))
   else
     GitBranch = ""
   end
@@ -177,7 +178,7 @@ end
 
 -- Set statusline appereance when inactive
 Statusline.inactive = function()
-  return "%f"
+  return "%=%f%="
 end
 
 -- Create some aliases for autogroup and autocommands
