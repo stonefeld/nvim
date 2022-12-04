@@ -1,13 +1,10 @@
 -- ---------- Cmp ---------- --
--- Make a protected call in case nvim-cmp is not installed
 local status_ok, cmp = pcall(require, "cmp")
 if not status_ok then
 	return
 end
 
-local status_ok_ls, ls = pcall(require, "luasnip")
-
---   פּ ﯟ   some other good icons
+-- using some nice icons for autocompletion window
 local kind_icons = {
 	Text = " ",
 	Method = "m ",
@@ -36,26 +33,25 @@ local kind_icons = {
 	TypeParameter = " ",
 }
 
--- Basic nvim-cmp configuration
+local select = { behavior = cmp.SelectBehavior.Select }
+
+-- basic nvim-cmp configuration
 cmp.setup({
 	preselect = false,
 	snippet = {
 		expand = function(args)
-			if status_ok_ls then
+			local ls_ok, ls = pcall(require, "luasnip")
+			if ls_ok then
 				ls.lsp_expand(args.body)
 			end
 		end,
 	},
 	mapping = {
-		["<c-n>"] = cmp.mapping.select_next_item(),
-		["<c-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-		["<c-f>"] = cmp.mapping(cmp.mapping.scroll_docs(3), { "i", "c" }), -- scroll documentation downwards
-		["<c-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-3), { "i", "c" }), -- scroll documentation upwards
-		["<c-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }), -- restart completion
-		["<c-e>"] = cmp.mapping({ -- cancel completion
-			i = cmp.mapping.abort(),
-			c = cmp.mapping.close(),
-		}),
+		["<c-n>"] = cmp.mapping.select_next_item(select),
+		["<c-p>"] = cmp.mapping.select_prev_item(select),
+		["<c-y>"] = cmp.mapping.confirm({ select = true }),
+		["<c-space>"] = cmp.mapping.complete(),
+		["<c-e>"] = cmp.mapping.abort(),
 	},
 	formatting = {
 		fields = { "kind", "abbr", "menu" },

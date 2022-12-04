@@ -1,5 +1,5 @@
 -- ---------- Plugins ---------- --
--- Automatically install packer
+-- automatically install packer
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	PACKER_BOOTSTRAP = vim.fn.system({
@@ -14,7 +14,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.cmd([[packadd packer.nvim]])
 end
 
--- Autocmd that reloads Neovim when the plugins.lua file is written
+-- sync and update the plugins when this file gets written to disk
 vim.cmd([[
   aug packer_user_config
     au!
@@ -22,13 +22,13 @@ vim.cmd([[
   aug end
 ]])
 
--- Use a protected call to not error out on the first use
+-- use a protected call to not error out on the first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
 	return
 end
 
--- Use a floating window for packer
+-- use a floating window for packer
 packer.init({
 	display = {
 		open_fn = function()
@@ -39,44 +39,58 @@ packer.init({
 
 -- Install plugins here
 return packer.startup(function(use)
-	use("wbthomason/packer.nvim") -- make packer handle itself
-	use("neovim/nvim-lspconfig") -- enable lsp
-	use("williamboman/mason.nvim") -- easily install and manage lsp, formatters and more
-	use("williamboman/mason-lspconfig.nvim") -- make even easier the integration between lspconfig and mason
+	-- let packer handle itself
+	use("wbthomason/packer.nvim")
+
+	-- easy to use and configure lsp and formatting
+	use("neovim/nvim-lspconfig")
+	use("williamboman/mason.nvim")
+	use("williamboman/mason-lspconfig.nvim")
 	use("jose-elias-alvarez/null-ls.nvim")
-	use("hrsh7th/nvim-cmp") -- completion plugin
-	use("hrsh7th/cmp-nvim-lsp") -- lsp source for nvim-cmp
-	use("hrsh7th/cmp-buffer") -- buffer source for nvim-cmp
-	use("hrsh7th/cmp-path") -- path source for nvim-cmp
-	use("saadparwaiz1/cmp_luasnip") -- snippet source for nvim-cmp
-	use("L3MON4D3/LuaSnip") -- snippets engine
-	use("rafamadriz/friendly-snippets") -- snippets collection
-	use({ -- telescope fuzzy finder
+
+	-- integrating an autocompletion engine with lsp
+	use("hrsh7th/nvim-cmp")
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-buffer")
+	use("hrsh7th/cmp-path")
+	use("saadparwaiz1/cmp_luasnip")
+
+	-- adding a snippets engine and a big collection of them
+	use("L3MON4D3/LuaSnip")
+	use("rafamadriz/friendly-snippets")
+
+	-- fuzzy finder to move quickly across files
+	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
-			use("nvim-lua/popup.nvim"), -- popup api
-			use("nvim-lua/plenary.nvim"), -- useful lua function required by many packages
-			use({ -- improve sorting performance
+			use("nvim-lua/popup.nvim"),
+			use("nvim-lua/plenary.nvim"),
+			use({
 				"nvim-telescope/telescope-fzf-native.nvim",
 				run = "make",
 			}),
-			use("kyazdani42/nvim-web-devicons"), -- devicons for telescope
 		},
 	})
-	use({ -- syntax highlighting with treesitter
+
+	-- adding icons to telescope
+	use("kyazdani42/nvim-web-devicons")
+	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
-	use("stonefeld/masita") -- my own colorscheme written in lua
+
+	-- adding a really nice colorscheme
 	use({
-		"catppuccin/nvim", -- catppuccin colorscheme
+		"catppuccin/nvim",
 		as = "catppuccin",
 		run = ":CatppuccinCompile",
 	})
-	use("mfussenegger/nvim-dap") -- debug adapter protocol
-	use("rcarriga/nvim-dap-ui") -- add nice ui to dap
 
-	-- Automatically set up the configuration after cloning packer.nvim
+	-- using the dap protocol to debug projects
+	use("mfussenegger/nvim-dap")
+	use("rcarriga/nvim-dap-ui")
+
+	-- automatically set up the configuration after cloning packer.nvim
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end

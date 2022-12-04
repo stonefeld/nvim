@@ -1,4 +1,5 @@
 -- ---------- LSP Sumneko Lua ---------- --
+-- some default options for the sumneko lua server
 return {
 	settings = {
 		Lua = {

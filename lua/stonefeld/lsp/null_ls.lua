@@ -5,9 +5,11 @@ end
 
 local formatting = null_ls.builtins.formatting
 
+-- using some builtin formatting options
 null_ls.setup({
 	sources = {
 		formatting.black,
+		formatting.isort,
 		formatting.prettier,
 		formatting.stylua,
 	},

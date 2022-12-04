@@ -1,12 +1,11 @@
 -- ---------- Autocommands ---------- --
--- Autogroups table
+-- autogroups table and basic options
 local augroups = {}
 local keys_opts = { noremap = true, silent = true }
+local key = vim.keymap.set
+local optl = vim.opt_local
 
--- Create a keymap alias
-local key = vim.keymap
-
--- Clean and format the current buffer
+-- clean and format the current buffer
 augroups.buf_write_pre = {
 	clean_whitespace = {
 		event = "BufWritePre",
@@ -34,12 +33,12 @@ augroups.buf_write_pre = {
 
 	lsp_formatting = {
 		event = "BufWritePre",
-		pattern = { "*.js", "*.jsx", "*.lua", "*.py", "*.ts", "*.tsx" },
+		pattern = { "*.js", "*.jsx", "*.lua", "*.py", "*.rs", "*.ts", "*.tsx" },
 		command = [[ lua vim.lsp.buf.format() ]],
 	},
 }
 
--- Set correct filetype for some extensions
+-- set correct filetype for some extensions
 augroups.set_filetypes = {
 	set_term_ft = {
 		event = "TermOpen",
@@ -60,7 +59,7 @@ augroups.set_filetypes = {
 	},
 }
 
--- Change options for filetypes
+-- change options for filetypes
 augroups.filetype_options = {
 	two_space_indent = {
 		event = "FileType",
@@ -86,10 +85,10 @@ augroups.filetype_options = {
 			"yaml",
 		},
 		callback = function()
-			vim.opt_local.tabstop = 2
-			vim.opt_local.softtabstop = 2
-			vim.opt_local.shiftwidth = 2
-			vim.opt_local.expandtab = true
+			optl.tabstop = 2
+			optl.softtabstop = 2
+			optl.shiftwidth = 2
+			optl.expandtab = true
 		end,
 	},
 
@@ -97,9 +96,9 @@ augroups.filetype_options = {
 		event = "FileType",
 		pattern = { "markdown", "rmd" },
 		callback = function()
-			vim.opt_local.foldenable = true
-			vim.opt_local.foldmethod = "marker"
-			vim.opt_local.foldmarker = "<!-- {{{ -->,<!-- }}} -->"
+			optl.foldenable = true
+			optl.foldmethod = "marker"
+			optl.foldmarker = "<!-- {{{ -->,<!-- }}} -->"
 		end,
 	},
 
@@ -118,12 +117,12 @@ augroups.filetype_options = {
 		event = "FileType",
 		pattern = { "markdown", "rmd", "tex", "text" },
 		callback = function()
-			vim.opt_local.wrap = true
-			vim.opt_local.linebreak = true
-			vim.opt_local.textwidth = 80
-			vim.opt_local.number = false
-			vim.opt_local.relativenumber = false
-			vim.opt_local.signcolumn = "no"
+			optl.wrap = true
+			optl.linebreak = true
+			optl.textwidth = 80
+			optl.number = false
+			optl.relativenumber = false
+			optl.signcolumn = "no"
 		end,
 	},
 
@@ -131,9 +130,9 @@ augroups.filetype_options = {
 		event = "FileType",
 		pattern = { "c", "cpp", "arduino" },
 		callback = function()
-			vim.opt_local.expandtab = false
-			vim.opt_local.cindent = true
-			vim.opt_local.cinoptions = "(0,W4,w1,m1,l1,t0,g0"
+			optl.expandtab = false
+			optl.cindent = true
+			optl.cinoptions = "(0,W4,w1,m1,l1,t0,g0"
 		end,
 	},
 
@@ -141,24 +140,24 @@ augroups.filetype_options = {
 		event = "FileType",
 		pattern = "qf",
 		callback = function()
-			vim.opt_local.number = false
-			vim.opt_local.relativenumber = false
+			optl.number = false
+			optl.relativenumber = false
 		end,
 	},
 }
 
--- Set specific keymaps for some filetypes
+-- set specific keymaps for some filetypes
 augroups.filetype_keymaps = {
 	markup_keys = {
 		event = "FileType",
 		pattern = { "markdown", "rmd", "tex", "text" },
 		callback = function()
-			key.set("n", "j", "gj", keys_opts)
-			key.set("n", "k", "gk", keys_opts)
-			key.set("n", "I", "gI", keys_opts)
-			key.set("n", "A", "g$a", keys_opts)
-			key.set("n", "0", "g0", keys_opts)
-			key.set("n", "$", "g$", keys_opts)
+			key("n", "j", "gj", keys_opts)
+			key("n", "k", "gk", keys_opts)
+			key("n", "I", "gI", keys_opts)
+			key("n", "A", "g$a", keys_opts)
+			key("n", "0", "g0", keys_opts)
+			key("n", "$", "g$", keys_opts)
 		end,
 	},
 
@@ -166,8 +165,8 @@ augroups.filetype_keymaps = {
 		event = "FileType",
 		pattern = { "markdown", "tex" },
 		callback = function()
-			key.set("n", "<m-m>", "<cmd>w! | execute '!compiler ' . expand('%:p')<cr>", keys_opts)
-			key.set("n", "<m-o>", "<cmd> execute '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>", keys_opts)
+			key("n", "<m-m>", "<cmd>w! | execute '!compiler ' . expand('%:p')<cr>", keys_opts)
+			key("n", "<m-o>", "<cmd> execute '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>", keys_opts)
 		end,
 	},
 
@@ -175,8 +174,8 @@ augroups.filetype_keymaps = {
 		event = "FileType",
 		pattern = "rmd",
 		callback = function()
-			key.set("n", "<m-m>", "<cmd>w! | !echo \"require(rmarkdown); render('%')\" | R --vanilla<cr>", keys_opts)
-			key.set("n", "<m-o>", "<cmd>exe '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>", keys_opts)
+			key("n", "<m-m>", "<cmd>w! | !echo \"require(rmarkdown); render('%')\" | R --vanilla<cr>", keys_opts)
+			key("n", "<m-o>", "<cmd>exe '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>", keys_opts)
 		end,
 	},
 
@@ -184,12 +183,12 @@ augroups.filetype_keymaps = {
 		event = "FileType",
 		pattern = "qf",
 		callback = function()
-			key.set("n", "q", "<cmd>q<cr>", keys_opts)
+			key("n", "q", "<cmd>q<cr>", keys_opts)
 		end,
 	},
 }
 
--- Miscellaneous
+-- miscellaneous
 augroups.misc = {
 	visual_yank = {
 		event = "TextYankPost",
@@ -200,7 +199,7 @@ augroups.misc = {
 	},
 }
 
--- Create autocommands from augroups table
+-- create autocommands from augroups table
 for group, commands in pairs(augroups) do
 	local augroup = vim.api.nvim_create_augroup(group, { clear = true })
 	for _, opts in pairs(commands) do

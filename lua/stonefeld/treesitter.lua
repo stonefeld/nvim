@@ -5,12 +5,20 @@ if not status_ok then
 end
 
 treesitter.setup({
-	ensure_installed = "all",
+	ensure_installed = {
+		"c",
+		"cpp",
+		"java",
+		"javascript",
+		"lua",
+		"python",
+		"rust",
+		"typescript",
+	},
 	sync_install = false,
-	ignore_install = { "css", "html", "vim", "latex", "markdown" },
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
 	},
-	indent = { enable = true },
+	indent = { enable = false },
 })

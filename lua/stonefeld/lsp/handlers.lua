@@ -9,10 +9,12 @@ M.setup = function()
 		{ name = "DiagnosticSignInfo", text = "" },
 	}
 
+	-- use this new signs instead of characters
 	for _, sign in ipairs(signs) do
 		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 	end
 
+	-- some default options for the lsp server
 	local config = {
 		virtual_text = false,
 		signs = {
@@ -30,7 +32,10 @@ M.setup = function()
 		},
 	}
 
+	-- use this configuration for the diagnostic module also
 	vim.diagnostic.config(config)
+
+	-- avoid focusing hover and signatureHelp windows
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		focusable = false,
 		max_width = 60,
@@ -43,14 +48,16 @@ M.setup = function()
 	})
 end
 
+-- set some keymaps when a server is attached
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 	local key = vim.keymap.set
+
 	key("i", "<c-k>", vim.lsp.buf.signature_help, opts)
 	key("n", "<c-]>", vim.lsp.buf.definition, opts)
 	key("n", "<leader>D", vim.lsp.buf.type_definition, opts)
 	key("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-	key("n", "<leader>f", vim.lsp.buf.format, opts)
+	key("n", "<leader>fo", vim.lsp.buf.format, opts)
 	key("n", "<leader>ld", vim.diagnostic.open_float, opts)
 	key("n", "<leader>q", vim.diagnostic.setqflist, opts)
 	key("n", "<leader>rn", vim.lsp.buf.rename, opts)
@@ -63,16 +70,17 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
+	-- disable native tsserver formatting to use null_ls
 	if client.name == "tsserver" then
 		client.server_capabilities.document_formatting = false
 	end
 	lsp_keymaps(bufnr)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
+-- resolve compatibilities to use with nvim_cmp
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if status_ok then
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 end
 

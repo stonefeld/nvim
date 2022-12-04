@@ -4,7 +4,10 @@ if not status_ok then
 	return
 end
 
+-- get the catppuccin colorpalette
 local col = require("catppuccin.palettes").get_palette()
+
+-- basic catppuccin configuration
 cp.setup({
 	flavour = "mocha",
 	integrations = {
@@ -18,6 +21,8 @@ cp.setup({
 		path = vim.fn.stdpath("cache") .. "/catppuccin",
 	},
 	custom_highlights = {
+		Normal = { bg = "NONE" },
+		NormalNC = { bg = "NONE" },
 		StlAcc = { fg = "NONE", bg = col.blue },
 		StlAccInsert = { fg = "NONE", bg = col.green },
 		StlAccVisual = { fg = "NONE", bg = col.mauve },
