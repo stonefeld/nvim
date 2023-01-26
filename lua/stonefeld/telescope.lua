@@ -19,6 +19,10 @@ telescope.setup({
 		},
 	},
 	pickers = {
+		git_files = {
+			theme = "dropdown",
+			previewer = false,
+		},
 		find_files = {
 			theme = "dropdown",
 			previewer = false,

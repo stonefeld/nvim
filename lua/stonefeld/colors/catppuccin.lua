@@ -21,8 +21,6 @@ cp.setup({
 		path = vim.fn.stdpath("cache") .. "/catppuccin",
 	},
 	custom_highlights = {
-		Normal = { bg = "NONE" },
-		NormalNC = { bg = "NONE" },
 		StlAcc = { fg = "NONE", bg = col.blue },
 		StlAccInsert = { fg = "NONE", bg = col.green },
 		StlAccVisual = { fg = "NONE", bg = col.mauve },

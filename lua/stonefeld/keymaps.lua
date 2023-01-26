@@ -30,7 +30,8 @@ key("n", "N", "Nzzzv", opts)
 -- telescope
 local tp_ok, tp = pcall(require, "telescope.builtin")
 if tp_ok then
-	key("n", "<c-p>", tp.find_files, opts)
+	key("n", "<c-p>", tp.git_files, opts)
+	key("n", "<leader>ff", tp.find_files, opts)
 	key("n", "<leader>fg", tp.live_grep, opts)
 	key("n", "<leader>fa", tp.buffers, opts)
 end

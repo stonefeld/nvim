@@ -8,11 +8,13 @@ treesitter.setup({
 	ensure_installed = {
 		"c",
 		"cpp",
+		"help",
 		"java",
 		"javascript",
 		"lua",
 		"python",
 		"rust",
+		"tsx",
 		"typescript",
 	},
 	sync_install = false,
