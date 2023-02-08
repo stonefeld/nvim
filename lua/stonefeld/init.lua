@@ -1,0 +1,7 @@
+require("stonefeld.opts")
+require("stonefeld.remap")
+require("stonefeld.autocmds")
+require("stonefeld.packer")
+
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
