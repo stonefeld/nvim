@@ -30,6 +30,8 @@ pk.startup(function(use)
 
   -- nice statusline
   use("nvim-lualine/lualine.nvim")
+  use("akinsho/bufferline.nvim")
+  use("SmiteshP/nvim-navic")
 
   -- better syntax highlighting
   use({

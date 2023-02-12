@@ -3,4 +3,8 @@ if not fg_ok then
   return
 end
 
-fg.setup()
+fg.setup({
+  window = {
+    blend = 0,
+  },
+})
