@@ -11,7 +11,7 @@ local lsp_servers = {
   "eslint",
   "pylsp",
   "rust_analyzer",
-  "sumneko_lua",
+  "lua_ls",
   "tsserver",
 }
 
