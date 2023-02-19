@@ -26,10 +26,10 @@ end
 
 lz.set_preferences({
   sign_icons = {
-    error = "E",
-    warn = "W",
-    hint = "H",
-    info = "I",
+    error = "",
+    warn = "",
+    hint = "",
+    info = "",
   },
 })
 
@@ -45,7 +45,7 @@ lz.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, opts)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "<leader>rf", vim.lsp.buf.references, opts)
-  vim.keymap.set("n", "<leader>q", vim.diagnostic.setqflist, opts)
+  vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
   vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, opts)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)

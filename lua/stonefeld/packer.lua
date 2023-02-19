@@ -41,6 +41,14 @@ pk.startup(function(use)
     end,
   })
 
+  -- quicker comments
+  use({
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+  })
+
   -- fuzzy finder
   use({
     "nvim-telescope/telescope.nvim",

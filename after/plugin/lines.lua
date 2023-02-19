@@ -2,8 +2,8 @@ local ll_ok, ll = pcall(require, "lualine")
 if ll_ok then
   local diagnostics = {
     "diagnostics",
-    sections = { "error", "warn" },
-    symbols = { error = " ", warn = " " },
+    sections = { "error", "warn", "hint", "info" },
+    symbols = { error = " ", warn = " ", hint = " ", info = " " },
     colored = false,
     color = { gui = "" },
     updated_in_insert = false,

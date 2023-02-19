@@ -7,7 +7,10 @@ local actions = require("telescope.actions")
 
 tl.setup({
   defaults = {
-    theme = "dropdown",
+    sorting_strategy = "ascending",
+    layout_config = {
+      prompt_position = "top",
+    },
     mappings = {
       i = {
         ["<C-n>"] = actions.cycle_history_next,
@@ -34,5 +37,7 @@ vim.keymap.set("n", "<leader>?", builtin.oldfiles)
 vim.keymap.set("n", "<leader><Space>", builtin.buffers)
 vim.keymap.set("n", "<leader>fd", builtin.diagnostics)
 vim.keymap.set("n", "<leader>fw", builtin.live_grep)
+vim.keymap.set("n", "<leader>fq", builtin.quickfix)
+vim.keymap.set("n", "<leader>fh", builtin.quickfixhistory)
 
 pcall(tl.load_extension("fzf"))
