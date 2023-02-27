@@ -94,6 +94,9 @@ pk.startup(function(use)
     },
   })
 
+  -- nice latex integration
+  use("lervag/vimtex")
+
   if is_bootstrap then
     pk.sync()
   end

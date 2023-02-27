@@ -10,7 +10,6 @@ augs.buf_write_pre = {
       call cursor(curr_pos[1], curr_pos[2])
     ]],
   },
-
   c_style_format = {
     event = "BufWritePre",
     pattern = { "*.c", "*.cpp" },
@@ -33,7 +32,6 @@ augs.set_filetypes = {
     pattern = "term://*",
     command = [[ setl ft=term ]],
   },
-
   set_tex_ft = {
     event = { "BufNewFile", "BufRead" },
     pattern = "*.tex",
@@ -74,15 +72,6 @@ augs.filetype_options = {
       vim.opt_local.expandtab = true
     end,
   },
-
-  html_no_tw = {
-    event = "FileType",
-    pattern = { "html", "htmldjango", "css" },
-    callback = function()
-      vim.opt_local.textwidth = 0
-    end,
-  },
-
   markdown_folding = {
     event = "FileType",
     pattern = { "markdown", "rmd" },
@@ -92,7 +81,6 @@ augs.filetype_options = {
       vim.opt_local.foldmarker = "<!-- {{{ -->,<!-- }}} -->"
     end,
   },
-
   latex_folding = {
     event = "FileType",
     pattern = "tex",
@@ -101,7 +89,6 @@ augs.filetype_options = {
       vim.opt_local.foldmethod = "marker"
     end,
   },
-
   c_indent_options = {
     event = "FileType",
     pattern = { "c", "cpp", "arduino" },
@@ -111,7 +98,6 @@ augs.filetype_options = {
       vim.opt_local.cinoptions = "(0,W4,w1,m1,l1,t0,g0"
     end,
   },
-
   qf_window_style = {
     event = "FileType",
     pattern = "qf",
@@ -126,13 +112,12 @@ augs.filetype_options = {
 augs.filetype_keymaps = {
   compile_markdown_and_tex = {
     event = "FileType",
-    pattern = { "markdown", "tex" },
+    pattern = { "markdown" },
     callback = function()
       vim.keymap.set("n", "<m-m>", "<cmd>w! | execute '!compiler ' . expand('%:p')<cr>")
       vim.keymap.set("n", "<m-o>", "<cmd> execute '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>")
     end,
   },
-
   compile_rmd = {
     event = "FileType",
     pattern = "rmd",
@@ -141,7 +126,6 @@ augs.filetype_keymaps = {
       vim.keymap.set("n", "<m-o>", "<cmd>exe '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>")
     end,
   },
-
   q_to_close = {
     event = "FileType",
     pattern = "qf",

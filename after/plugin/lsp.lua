@@ -25,6 +25,7 @@ for _, server in pairs(lsp_servers) do
 end
 
 lz.set_preferences({
+  suggest_lsp_servers = false,
   sign_icons = {
     error = "",
     warn = "",
@@ -64,13 +65,36 @@ if cmp_ok then
     ["<C-n>"] = cmp.mapping.select_next_item(sel_opt),
     ["<C-p>"] = cmp.mapping.select_prev_item(sel_opt),
     ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+    ["<C-e>"] = cmp.mapping.abort(),
     ["<C-Space>"] = cmp.mapping.complete(),
   }
+
+  local ls_ok, ls = pcall(require, "luasnip")
+  if ls_ok then
+    cmp_remap["<C-l>"] = cmp.mapping(function(fallback)
+      if ls.jumpable(1) then
+        ls.jump(1)
+      else
+        fallback()
+      end
+    end, { "i", "s" })
+
+    cmp_remap["<C-h>"] = cmp.mapping(function(fallback)
+      if ls.jumpable(-1) then
+        ls.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" })
+  end
 
   lz.setup_nvim_cmp({
     mapping = cmp_remap,
     sources = {
       { name = "nvim_lsp", keyword_length = 1 },
+      { name = "luasnip" },
+      { name = "buffer", keyword_length = 3 },
+      { name = "path" },
     },
   })
 end
