@@ -1,7 +1,6 @@
 vim.o.guicursor = ""
 
 vim.o.number = true
-vim.o.relativenumber = true
 vim.o.cursorline = true
 
 vim.o.tabstop = 4
@@ -38,6 +37,7 @@ vim.o.updatetime = 250
 vim.o.termguicolors = true
 
 vim.o.completeopt = "menuone,noselect"
+vim.o.winbar = "%=%f %m%="
 
 vim.o.list = true
 vim.o.listchars = "tab:¦ ,trail:."

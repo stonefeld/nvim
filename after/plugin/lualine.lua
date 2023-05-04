@@ -5,12 +5,10 @@ end
 
 local diagnostics = {
   "diagnostics",
-  sections = { "error", "warn", "hint", "info" },
   symbols = { error = " ", warn = " ", hint = " ", info = " " },
-  colored = false,
-  color = { gui = "" },
-  updated_in_insert = false,
-  always_visible = true,
+  fmt = function(str)
+    return " " .. str
+  end,
 }
 
 local mode = {
@@ -21,10 +19,11 @@ local mode = {
 }
 
 local spaces = function()
+  local size = vim.api.nvim_buf_get_option(0, "shiftwidth")
   if vim.api.nvim_buf_get_option(0, "expandtab") then
-    return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+    return "spaces: " .. size
   end
-  return "tabs: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+  return "tabs: " .. size
 end
 
 ll.setup({
@@ -35,9 +34,9 @@ ll.setup({
     disabled_filetypes = { "TelescopePrompt" },
   },
   sections = {
-    lualine_a = { "branch", diagnostics },
+    lualine_a = { "branch" },
     lualine_b = { mode },
-    lualine_c = {},
+    lualine_c = { diagnostics },
     lualine_x = { "diff", spaces, "encoding", "filetype" },
   },
 })

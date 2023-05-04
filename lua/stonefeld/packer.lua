@@ -27,11 +27,11 @@ pk.startup(function(use)
     "catppuccin/nvim",
     as = "catppuccin",
   })
+  use("folke/tokyonight.nvim")
+  use("Mofiqul/vscode.nvim")
 
   -- nice statusline
   use("nvim-lualine/lualine.nvim")
-  use("akinsho/bufferline.nvim")
-  use("SmiteshP/nvim-navic")
 
   -- better syntax highlighting
   use({
@@ -96,6 +96,9 @@ pk.startup(function(use)
 
   -- nice latex integration
   use("lervag/vimtex")
+
+  -- quick navigation with tmux
+  use("christoomey/vim-tmux-navigator")
 
   if is_bootstrap then
     pk.sync()

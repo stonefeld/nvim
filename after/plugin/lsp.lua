@@ -8,11 +8,8 @@ lz.preset("recommended")
 
 local lsp_servers = {
   "clangd",
-  "eslint",
   "pylsp",
-  "rust_analyzer",
   "lua_ls",
-  "tsserver",
 }
 
 lz.ensure_installed(lsp_servers)
@@ -88,7 +85,7 @@ if cmp_ok then
     end, { "i", "s" })
   end
 
-  lz.setup_nvim_cmp({
+  local cmp_setup = {
     mapping = cmp_remap,
     sources = {
       { name = "nvim_lsp", keyword_length = 1 },
@@ -96,7 +93,9 @@ if cmp_ok then
       { name = "buffer", keyword_length = 3 },
       { name = "path" },
     },
-  })
+  }
+
+  lz.setup_nvim_cmp(cmp_setup)
 end
 
 lz.setup()

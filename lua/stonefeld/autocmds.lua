@@ -37,6 +37,11 @@ augs.set_filetypes = {
     pattern = "*.tex",
     command = [[ setl ft=tex ]],
   },
+  set_asm_ft = {
+    event = { "BufNewFile", "BufRead" },
+    pattern = "*.asm",
+    command = [[ setl ft=nasm ]],
+  },
 }
 
 -- change options for filetypes
@@ -54,7 +59,6 @@ augs.filetype_options = {
       "jsonc",
       "lua",
       "markdown",
-      "rmd",
       "tex",
       "typescript",
       "typescriptreact",
@@ -74,7 +78,7 @@ augs.filetype_options = {
   },
   markdown_folding = {
     event = "FileType",
-    pattern = { "markdown", "rmd" },
+    pattern = "markdown",
     callback = function()
       vim.opt_local.foldenable = true
       vim.opt_local.foldmethod = "marker"
@@ -110,27 +114,19 @@ augs.filetype_options = {
 
 -- set specific keymaps for some filetypes
 augs.filetype_keymaps = {
-  compile_markdown_and_tex = {
+  compile_markdown = {
     event = "FileType",
     pattern = { "markdown" },
     callback = function()
-      vim.keymap.set("n", "<m-m>", "<cmd>w! | execute '!compiler ' . expand('%:p')<cr>")
-      vim.keymap.set("n", "<m-o>", "<cmd> execute '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>")
-    end,
-  },
-  compile_rmd = {
-    event = "FileType",
-    pattern = "rmd",
-    callback = function()
-      vim.keymap.set("n", "<m-m>", "<cmd>w! | !echo \"require(rmarkdown); render('%')\" | R --vanilla<cr>")
-      vim.keymap.set("n", "<m-o>", "<cmd>exe '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>")
+      vim.keymap.set("n", "<m-m>", ":w! | execute '!compiler ' . expand('%:p')<cr>")
+      vim.keymap.set("n", "<m-o>", ":exe '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>")
     end,
   },
   q_to_close = {
     event = "FileType",
-    pattern = "qf",
+    pattern = { "qf", "help" },
     callback = function()
-      vim.keymap.set("n", "q", "<cmd>q<cr>")
+      vim.keymap.set("n", "q", ":q<cr>", { buffer = 0 })
     end,
   },
 }
