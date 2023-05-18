@@ -13,4 +13,4 @@ function ColorMyPencils(color, transparency)
   end
 end
 
-ColorMyPencils("vscode", true)
+ColorMyPencils("gruvbox", true)

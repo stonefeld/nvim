@@ -18,89 +18,101 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   command = [[so <afile> | PackerSync]],
 })
 
-pk.startup(function(use)
-  -- let packer handle itself
-  use("wbthomason/packer.nvim")
+pk.startup({
+  function(use)
+    -- let packer handle itself
+    use("wbthomason/packer.nvim")
 
-  -- best colorscheme out there
-  use({
-    "catppuccin/nvim",
-    as = "catppuccin",
-  })
-  use("folke/tokyonight.nvim")
-  use("Mofiqul/vscode.nvim")
+    -- best colorscheme out there
+    use({
+      "catppuccin/nvim",
+      as = "catppuccin",
+    })
+    use("ellisonleao/gruvbox.nvim")
 
-  -- nice statusline
-  use("nvim-lualine/lualine.nvim")
+    -- nice statusline
+    use("nvim-lualine/lualine.nvim")
 
-  -- better syntax highlighting
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = function()
-      pcall(require("nvim-treesitter.install").update({ with_sync = true }))
-    end,
-  })
+    -- better syntax highlighting
+    use({
+      "nvim-treesitter/nvim-treesitter",
+      run = function()
+        pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+      end,
+    })
 
-  -- quicker comments
-  use({
-    "numToStr/Comment.nvim",
-    config = function()
-      require("Comment").setup()
-    end,
-  })
+    -- quicker comments
+    use({
+      "numToStr/Comment.nvim",
+      config = function()
+        require("Comment").setup()
+      end,
+    })
 
-  -- fuzzy finder
-  use({
-    "nvim-telescope/telescope.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "kyazdani42/nvim-web-devicons",
+    -- fuzzy finder
+    use({
+      "nvim-telescope/telescope.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons",
+      },
+    })
+
+    -- fuzzy finder algorithm for telescope
+    use({
+      "nvim-telescope/telescope-fzf-native.nvim",
+      run = "make",
+      cond = vim.fn.executable("make") == 1,
+    })
+
+    -- setup lsp
+    use({
+      "VonHeikemen/lsp-zero.nvim",
+      requires = {
+        -- lsp support
+        { "neovim/nvim-lspconfig" },
+        { "williamboman/mason.nvim" },
+        { "williamboman/mason-lspconfig.nvim" },
+
+        -- autocompletion
+        { "hrsh7th/nvim-cmp" },
+        { "hrsh7th/cmp-buffer" },
+        { "hrsh7th/cmp-path" },
+        { "hrsh7th/cmp-nvim-lsp" },
+        { "hrsh7th/cmp-nvim-lua" },
+        { "saadparwaiz1/cmp_luasnip" },
+
+        -- snippets
+        { "L3MON4D3/LuaSnip" },
+        { "rafamadriz/friendly-snippets" },
+
+        -- formatter
+        { "jose-elias-alvarez/null-ls.nvim" },
+
+        -- status
+        use({
+          "j-hui/fidget.nvim",
+          config = function()
+            require("fidget").setup({
+              window = {
+                blend = 0,
+              },
+            })
+          end,
+        }),
+      },
+    })
+
+    -- quick navigation with tmux
+    use("christoomey/vim-tmux-navigator")
+
+    if is_bootstrap then
+      pk.sync()
+    end
+  end,
+  config = {
+    display = {
+      open_fn = require("packer.util").float,
     },
-  })
-
-  -- fuzzy finder algorithm for telescope
-  use({
-    "nvim-telescope/telescope-fzf-native.nvim",
-    run = "make",
-    cond = vim.fn.executable("make") == 1,
-  })
-
-  -- setup lsp
-  use({
-    "VonHeikemen/lsp-zero.nvim",
-    requires = {
-      -- lsp support
-      { "neovim/nvim-lspconfig" },
-      { "williamboman/mason.nvim" },
-      { "williamboman/mason-lspconfig.nvim" },
-
-      -- autocompletion
-      { "hrsh7th/nvim-cmp" },
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-path" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-nvim-lua" },
-      { "saadparwaiz1/cmp_luasnip" },
-
-      -- snippets
-      { "L3MON4D3/LuaSnip" },
-      { "rafamadriz/friendly-snippets" },
-
-      -- formatter
-      { "jose-elias-alvarez/null-ls.nvim" },
-
-      -- status
-      { "j-hui/fidget.nvim" },
-    },
-  })
-
-  -- nice latex integration
-  use("lervag/vimtex")
-
-  -- quick navigation with tmux
-  use("christoomey/vim-tmux-navigator")
-
-  if is_bootstrap then
-    pk.sync()
-  end
-end)
+  },
+})

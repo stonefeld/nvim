@@ -11,7 +11,7 @@ vim.o.expandtab = true
 vim.o.smartindent = true
 
 vim.o.wrap = false
-vim.o.breakindent = true
+vim.o.linebreak = true
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -25,7 +25,7 @@ vim.o.incsearch = true
 
 vim.o.scrolloff = 3
 vim.o.signcolumn = "yes"
-vim.o.colorcolumn = "80"
+vim.o.colorcolumn = "120"
 
 vim.o.laststatus = 3
 vim.o.showmode = false

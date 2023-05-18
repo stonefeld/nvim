@@ -33,7 +33,8 @@ tl.setup({
 local builtin = require("telescope.builtin")
 
 vim.keymap.set("n", "<C-p>", builtin.find_files)
-vim.keymap.set("n", "<leader>?", builtin.oldfiles)
+vim.keymap.set("n", "<leader>fo", builtin.oldfiles)
+vim.keymap.set("n", "<leader>?", builtin.help_tags)
 vim.keymap.set("n", "<leader><Space>", builtin.buffers)
 vim.keymap.set("n", "<leader>fd", builtin.diagnostics)
 vim.keymap.set("n", "<leader>fw", builtin.live_grep)

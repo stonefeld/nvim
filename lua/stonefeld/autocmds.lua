@@ -76,10 +76,11 @@ augs.filetype_options = {
       vim.opt_local.expandtab = true
     end,
   },
-  markdown_folding = {
+  markdown_options = {
     event = "FileType",
     pattern = "markdown",
     callback = function()
+      vim.opt_local.wrap = true
       vim.opt_local.foldenable = true
       vim.opt_local.foldmethod = "marker"
       vim.opt_local.foldmarker = "<!-- {{{ -->,<!-- }}} -->"
