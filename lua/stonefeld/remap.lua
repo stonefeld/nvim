@@ -15,7 +15,6 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv", { silent = true })
 
 -- toggle some useful values
-vim.keymap.set("n", "/", ":set hls<CR>/")
 vim.keymap.set("n", "<leader>h", ":set hls!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>w", ":set wrap!<CR>", { silent = true })
 

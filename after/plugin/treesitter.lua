@@ -7,7 +7,6 @@ ts.setup({
   ensure_installed = {
     "c",
     "cpp",
-    "help",
     "javascript",
     "lua",
     "python",

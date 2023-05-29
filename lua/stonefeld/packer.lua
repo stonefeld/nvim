@@ -68,6 +68,7 @@ pk.startup({
     -- setup lsp
     use({
       "VonHeikemen/lsp-zero.nvim",
+      branch = "v2.x",
       requires = {
         -- lsp support
         { "neovim/nvim-lspconfig" },

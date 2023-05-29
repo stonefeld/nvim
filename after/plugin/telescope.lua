@@ -17,7 +17,7 @@ tl.setup({
         ["<C-p>"] = actions.cycle_history_prev,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
-        ["<Esc>"] = actions.close,
+        ["<ESC>"] = actions.close,
       },
     },
   },

@@ -13,4 +13,4 @@ function ColorMyPencils(color, transparency)
   end
 end
 
-ColorMyPencils("gruvbox", true)
+ColorMyPencils("gruvbox", false)
