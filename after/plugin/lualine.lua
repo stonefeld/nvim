@@ -30,7 +30,10 @@ ll.setup({
   options = {
     icons_enabled = true,
     component_separators = "",
-    section_separators = "",
+    section_separators = {
+      left = "",
+      right = "",
+    },
     disabled_filetypes = { "TelescopePrompt" },
   },
   sections = {

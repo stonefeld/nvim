@@ -8,7 +8,7 @@ vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.keymap.set("n", "<Tab>", vim.cmd.bn)
 vim.keymap.set("n", "<S-Tab>", vim.cmd.bp)
 vim.keymap.set("n", "<BS>", ":b#<CR>", { silent = true })
-vim.keymap.set("n", "<M-w>", ":bp | bd #<CR>", { silent = true })
+vim.keymap.set("n", "<leader>x", ":bp | bd #<CR>", { silent = true })
 
 -- move lines without cutting
 vim.keymap.set("v", "J", ":m '>+1<CR>gv", { silent = true })
@@ -17,6 +17,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv", { silent = true })
 -- toggle some useful values
 vim.keymap.set("n", "<leader>h", ":set hls!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>w", ":set wrap!<CR>", { silent = true })
+vim.keymap.set("n", "<leader>r", ":set relativenumber!<CR>", { silent = true })
 
 -- using the clipboard
 vim.keymap.set({ "n", "v" }, "<leader>p", '"_+p')

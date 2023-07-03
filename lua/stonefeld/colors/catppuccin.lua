@@ -4,11 +4,9 @@ if not cp_ok then
 end
 
 cp.setup({
+  term_colors = false,
   integrations = {
     fidget = true,
-    navic = {
-      enabled = true,
-      custom_bg = "NONE",
-    },
+    mason = true,
   },
 })

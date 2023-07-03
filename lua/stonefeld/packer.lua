@@ -27,6 +27,7 @@ pk.startup({
     use({
       "catppuccin/nvim",
       as = "catppuccin",
+      tag = "*",
     })
     use("ellisonleao/gruvbox.nvim")
 
@@ -39,6 +40,10 @@ pk.startup({
       run = function()
         pcall(require("nvim-treesitter.install").update({ with_sync = true }))
       end,
+      requires = {
+        -- color parenthesis
+        use("HiPhish/nvim-ts-rainbow2"),
+      },
     })
 
     -- quicker comments
@@ -93,6 +98,7 @@ pk.startup({
         -- status
         use({
           "j-hui/fidget.nvim",
+          tag = "legacy",
           config = function()
             require("fidget").setup({
               window = {
