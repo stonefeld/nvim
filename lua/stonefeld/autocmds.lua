@@ -84,6 +84,11 @@ augs.filetype_options = {
       vim.opt_local.foldenable = true
       vim.opt_local.foldmethod = "marker"
       vim.opt_local.foldmarker = "<!-- {{{ -->,<!-- }}} -->"
+
+      vim.keymap.set({ "n", "v" }, "j", "gj", { silent = true })
+      vim.keymap.set({ "n", "v" }, "k", "gk", { silent = true })
+      vim.keymap.set({ "n", "v" }, "0", "g0", { silent = true })
+      vim.keymap.set({ "n", "v" }, "$", "g$", { silent = true })
     end,
   },
   latex_folding = {
@@ -103,14 +108,6 @@ augs.filetype_options = {
       vim.opt_local.cinoptions = "(0,W4,w1,m1,l1,t0,g0"
     end,
   },
-  qf_window_style = {
-    event = "FileType",
-    pattern = "qf",
-    callback = function()
-      vim.opt_local.number = false
-      vim.opt_local.relativenumber = false
-    end,
-  },
 }
 
 -- set specific keymaps for some filetypes
@@ -127,7 +124,7 @@ augs.filetype_keymaps = {
     event = "FileType",
     pattern = { "qf", "help" },
     callback = function()
-      vim.keymap.set("n", "q", ":q<cr>", { buffer = 0 })
+      vim.keymap.set("n", "q", ":q<cr>", { buffer = 0, silent = true })
     end,
   },
 }

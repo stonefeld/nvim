@@ -3,7 +3,7 @@ if not ts_ok then
   return
 end
 
-local opts = {
+ts.setup({
   ensure_installed = {
     "c",
     "cpp",
@@ -21,15 +21,4 @@ local opts = {
     additional_vim_regex_highlighting = false,
   },
   indent = { enable = false },
-}
-
-local rb_ok, rb = pcall(require, "ts-rainbow")
-if rb_ok then
-  opts["rainbow"] = {
-    enable = true,
-    query = "rainbow-parens",
-    strategy = rb.strategy.global,
-  }
-end
-
-ts.setup(opts)
+})

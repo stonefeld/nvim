@@ -24,11 +24,7 @@ pk.startup({
     use("wbthomason/packer.nvim")
 
     -- best colorscheme out there
-    use({
-      "catppuccin/nvim",
-      as = "catppuccin",
-      tag = "*",
-    })
+    use({ "catppuccin/nvim", as = "catppuccin", tag = "*" })
     use("ellisonleao/gruvbox.nvim")
 
     -- nice statusline
@@ -40,10 +36,6 @@ pk.startup({
       run = function()
         pcall(require("nvim-treesitter.install").update({ with_sync = true }))
       end,
-      requires = {
-        -- color parenthesis
-        use("HiPhish/nvim-ts-rainbow2"),
-      },
     })
 
     -- quicker comments
@@ -54,20 +46,29 @@ pk.startup({
       end,
     })
 
+    -- quick surrounding
+    use({
+      "kylechui/nvim-surround",
+      tag = "*",
+      config = function()
+        require("nvim-surround").setup()
+      end,
+    })
+
     -- fuzzy finder
     use({
       "nvim-telescope/telescope.nvim",
       requires = {
-        "nvim-lua/plenary.nvim",
-        "kyazdani42/nvim-web-devicons",
-      },
-    })
+        { "nvim-lua/plenary.nvim" },
+        { "kyazdani42/nvim-web-devicons" },
 
-    -- fuzzy finder algorithm for telescope
-    use({
-      "nvim-telescope/telescope-fzf-native.nvim",
-      run = "make",
-      cond = vim.fn.executable("make") == 1,
+        -- fuzzy finder algorithm for telescope
+        {
+          "nvim-telescope/telescope-fzf-native.nvim",
+          run = "make",
+          cond = vim.fn.executable("make") == 1,
+        },
+      },
     })
 
     -- setup lsp
@@ -96,7 +97,7 @@ pk.startup({
         { "jose-elias-alvarez/null-ls.nvim" },
 
         -- status
-        use({
+        {
           "j-hui/fidget.nvim",
           tag = "legacy",
           config = function()
@@ -106,9 +107,22 @@ pk.startup({
               },
             })
           end,
-        }),
+        },
       },
     })
+
+    -- show indentation lines
+    use({
+      "lukas-reineke/indent-blankline.nvim",
+      config = function()
+        require("ibl").setup({
+          scope = { enabled = false }
+        })
+      end
+    })
+
+    -- better quickfix
+    use({ "kevinhwang91/nvim-bqf", ft = "qf" })
 
     -- quick navigation with tmux
     use("christoomey/vim-tmux-navigator")

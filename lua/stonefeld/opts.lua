@@ -39,7 +39,4 @@ vim.o.termguicolors = true
 vim.o.completeopt = "menuone,noselect"
 vim.o.winbar = "%=%f %m%="
 
-vim.o.list = true
-vim.o.listchars = "tab:¦ ,trail:."
-
 vim.g.mapleader = " "
