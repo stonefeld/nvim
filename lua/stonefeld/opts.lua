@@ -1,4 +1,5 @@
-vim.o.guicursor = ""
+vim.o.guicursor = "a:block"
+vim.o.guifont = "CaskaydiaCove Nerd Font:h12"
 
 vim.o.number = true
 vim.o.cursorline = true
