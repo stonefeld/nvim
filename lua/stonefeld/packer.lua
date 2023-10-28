@@ -116,9 +116,12 @@ pk.startup({
       "lukas-reineke/indent-blankline.nvim",
       config = function()
         require("ibl").setup({
-          scope = { enabled = false }
+          scope = { enabled = false },
+          indent = {
+            char = "▏",
+          },
         })
-      end
+      end,
     })
 
     -- better quickfix

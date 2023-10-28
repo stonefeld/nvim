@@ -12,4 +12,4 @@ function ColorMyPencils(color, transparency)
   end
 end
 
-ColorMyPencils("catppuccin-frappe", false)
+ColorMyPencils("gruvbox", false)
