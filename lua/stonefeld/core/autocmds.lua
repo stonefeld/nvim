@@ -10,19 +10,6 @@ augs.buf_write_pre = {
       call cursor(curr_pos[1], curr_pos[2])
     ]],
   },
-  c_style_format = {
-    event = "BufWritePre",
-    pattern = { "*.c", "*.cpp" },
-    command = [[
-      let curr_pos=getpos('.')
-      exe '%s/\<if(/if (/e'
-      exe '%s/\<for(/for (/e'
-      exe '%s/\<while(/while (/e'
-      exe '%s/\<switch(/switch (/e'
-      exe '%s/}break;/} break;/e'
-      call cursor(curr_pos[1], curr_pos[2])
-    ]],
-  },
 }
 
 -- set correct filetype for some extensions
@@ -63,6 +50,7 @@ augs.filetype_options = {
       "typescript",
       "typescriptreact",
       "vim",
+      "vue",
       "xml",
       "xquery",
       "xsd",
