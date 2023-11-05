@@ -46,7 +46,6 @@ vim.o.termguicolors = true
 
 -- some completion options and winbar
 vim.o.completeopt = "menuone,noselect"
-vim.o.winbar = "%=%f %m%="
 
 -- swapfiles are not for me
 vim.o.swapfile = false

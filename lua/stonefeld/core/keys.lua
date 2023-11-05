@@ -4,9 +4,6 @@ vim.g.mapleader = " "
 -- space by default shouldn't do nothing
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
--- open a file explorer
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
-
 -- navigating through buffers
 vim.keymap.set("n", "<Tab>", vim.cmd.bn)
 vim.keymap.set("n", "<S-Tab>", vim.cmd.bp)

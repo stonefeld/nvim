@@ -43,13 +43,22 @@ return {
           left = "",
           right = "",
         },
-        disabled_filetypes = { "TelescopePrompt" },
+        disabled_filetypes = {
+          "TelescopePrompt",
+          winbar = { "NvimTree" },
+        },
       },
       sections = {
         lualine_a = { "branch" },
         lualine_b = { mode },
         lualine_c = { "diff", diagnostics },
-        lualine_x = { packages, spaces, "encoding", "filetype" },
+        lualine_x = { packages, spaces, "encoding", "fileformat", "filetype" },
+      },
+      winbar = {
+        lualine_c = { "buffers" },
+      },
+      inactive_winbar = {
+        lualine_c = { "filename" },
       },
     })
   end,
