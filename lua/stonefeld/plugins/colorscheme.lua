@@ -24,6 +24,7 @@ return {
       integrations = {
         fidget = true,
         mason = true,
+        ts_rainbow2 = true,
       },
     })
 

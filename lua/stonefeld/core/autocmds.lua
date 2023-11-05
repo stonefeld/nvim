@@ -1,6 +1,7 @@
 local augs = {}
 
-augs.buf_write_pre = {
+-- format the file
+augs.formatting = {
   clean_whitespace = {
     event = "BufWritePre",
     pattern = "*",
@@ -14,10 +15,10 @@ augs.buf_write_pre = {
 
 -- set correct filetype for some extensions
 augs.set_filetypes = {
-  set_term_ft = {
-    event = "TermOpen",
-    pattern = "term://*",
-    command = [[ setl ft=term ]],
+  set_h_ft = {
+    event = { "BufNewfile", "BufRead" },
+    pattern = "*.h",
+    command = [[ setl ft=c ]],
   },
   set_tex_ft = {
     event = { "BufNewFile", "BufRead" },
@@ -64,27 +65,16 @@ augs.filetype_options = {
       vim.opt_local.expandtab = true
     end,
   },
-  markdown_options = {
+  markdup_options = {
     event = "FileType",
-    pattern = "markdown",
+    pattern = { "tex", "markdown" },
     callback = function()
       vim.opt_local.wrap = true
-      vim.opt_local.foldenable = true
-      vim.opt_local.foldmethod = "marker"
-      vim.opt_local.foldmarker = "<!-- {{{ -->,<!-- }}} -->"
 
       vim.keymap.set({ "n", "v" }, "j", "gj", { silent = true })
       vim.keymap.set({ "n", "v" }, "k", "gk", { silent = true })
       vim.keymap.set({ "n", "v" }, "0", "g0", { silent = true })
       vim.keymap.set({ "n", "v" }, "$", "g$", { silent = true })
-    end,
-  },
-  latex_folding = {
-    event = "FileType",
-    pattern = "tex",
-    callback = function()
-      vim.opt_local.foldenable = true
-      vim.opt_local.foldmethod = "marker"
     end,
   },
   c_indent_options = {

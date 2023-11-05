@@ -5,6 +5,7 @@ return {
     build = ":TSUpdate",
     dependencies = {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
+      { "HiPhish/nvim-ts-rainbow2" },
     },
     config = function()
       local treesitter = require("nvim-treesitter.configs")
@@ -21,7 +22,14 @@ return {
           "typescript",
         },
         highlight = { enable = true },
-        indent = { enable = true },
+        indent = {
+          enable = true,
+          disable = { "htmldjango" },
+        },
+        rainbow = {
+          enable = true,
+          strategy = require("ts-rainbow").strategy.global,
+        },
       })
     end,
   },
