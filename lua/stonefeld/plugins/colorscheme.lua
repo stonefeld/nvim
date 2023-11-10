@@ -20,7 +20,8 @@ return {
     local catppuccin = require("catppuccin")
 
     catppuccin.setup({
-      transparent_background = true,
+      flavour = "mocha",
+      transparent_background = false,
       integrations = {
         fidget = true,
         mason = true,
