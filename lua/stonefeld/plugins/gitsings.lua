@@ -28,6 +28,7 @@ return {
         gs.blame_line({ full = true })
       end)
       vim.keymap.set("n", "<leader>hd", gs.diffthis)
+      vim.keymap.set("n", "<leader>hp", gs.preview_hunk)
     end,
   },
 }

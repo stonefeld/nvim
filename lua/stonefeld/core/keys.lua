@@ -4,12 +4,6 @@ vim.g.mapleader = " "
 -- space by default shouldn't do nothing
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
--- navigating through buffers
-vim.keymap.set("n", "<Tab>", vim.cmd.bn)
-vim.keymap.set("n", "<S-Tab>", vim.cmd.bp)
-vim.keymap.set("n", "<BS>", ":b#<CR>", { silent = true })
-vim.keymap.set("n", "<leader>x", ":bp | bd #<CR>", { silent = true })
-
 -- move lines without cutting
 vim.keymap.set("v", "J", ":m '>+1<CR>gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv", { silent = true })
@@ -25,5 +19,8 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+y$')
 
 -- don't modify the registers
-vim.keymap.set({ "n", "v" }, "<leader>P", '"_dP')
+vim.keymap.set("v", "<leader>p", '"_dP')
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+
+-- close buffer without closing window
+vim.keymap.set("n", "<leader>x", ":bp | sp | bn | bd<CR>", { silent = true })

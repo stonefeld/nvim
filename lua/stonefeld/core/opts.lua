@@ -37,6 +37,9 @@ vim.o.colorcolumn = "120"
 vim.o.laststatus = 3
 vim.o.showmode = false
 
+-- increase updatetime
+vim.o.updatetime = 250
+
 -- make splits like a normal person
 vim.o.splitright = true
 vim.o.splitbelow = true

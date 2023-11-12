@@ -39,6 +39,7 @@ augs.filetype_options = {
     pattern = {
       "arduino",
       "css",
+      "dart",
       "html",
       "htmldjango",
       "javascript",

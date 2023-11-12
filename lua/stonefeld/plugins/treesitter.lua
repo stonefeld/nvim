@@ -24,7 +24,7 @@ return {
         highlight = { enable = true },
         indent = {
           enable = true,
-          disable = { "htmldjango" },
+          disable = { "htmldjango", "dart" },
         },
         rainbow = {
           enable = true,
