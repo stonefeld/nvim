@@ -6,6 +6,7 @@ return {
     { "hrsh7th/cmp-nvim-lsp" },
   },
   config = function()
+    local lspconfig = require("lspconfig")
     local mason = require("mason")
     local mason_lspconfig = require("mason-lspconfig")
     local mason_tool_installer = require("mason-tool-installer")
@@ -76,8 +77,10 @@ return {
         if ok then
           config = vim.tbl_deep_extend("force", config, settings)
         end
-        require("lspconfig")[server].setup(config)
+        lspconfig[server].setup(config)
       end,
     })
+
+    lspconfig["dartls"].setup(config)
   end,
 }
