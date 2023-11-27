@@ -20,10 +20,25 @@ return {
     local catppuccin = require("catppuccin")
 
     catppuccin.setup({
-      flavour = "mocha",
+      flavour = "macchiato",
       integrations = {
         mason = true,
         ts_rainbow2 = true,
+      },
+      highlight_overrides = {
+        all = function(colors)
+          return {
+            htmlTagName = { fg = colors.blue },
+            htmlSpecialTagName = { fg = colors.blue },
+            htmlTag = { fg = colors.teal },
+            htmlEndTag = { fg = colors.teal },
+            javaScript = { fg = colors.text },
+            djangoTagBlock = { fg = colors.maroon },
+            djangoVarBlock = { fg = colors.mauve },
+            ["@tag"] = { fg = colors.blue },
+            ["@tag.attribute"] = { fg = colors.yellow },
+          }
+        end,
       },
     })
 

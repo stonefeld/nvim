@@ -21,7 +21,10 @@ return {
           "tsx",
           "typescript",
         },
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
         indent = {
           enable = true,
           disable = { "htmldjango", "dart" },
@@ -29,6 +32,7 @@ return {
         rainbow = {
           enable = true,
           strategy = require("ts-rainbow").strategy.global,
+          disable = { "vue" },
         },
       })
     end,
