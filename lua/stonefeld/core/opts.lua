@@ -52,3 +52,6 @@ vim.o.completeopt = "menuone,noselect"
 
 -- swapfiles are not for me
 vim.o.swapfile = false
+
+-- enable editorconfig by default
+vim.g.editorconfig = true

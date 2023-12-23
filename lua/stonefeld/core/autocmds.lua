@@ -34,42 +34,14 @@ augs.set_filetypes = {
 
 -- change options for filetypes
 augs.filetype_options = {
-  two_space_indent = {
+  markup_options = {
     event = "FileType",
-    pattern = {
-      "arduino",
-      "css",
-      "dart",
-      "html",
-      "htmldjango",
-      "javascript",
-      "javascriptreact",
-      "json",
-      "jsonc",
-      "lua",
-      "markdown",
-      "tex",
-      "typescript",
-      "typescriptreact",
-      "vim",
-      "vue",
-      "xml",
-      "xquery",
-      "xsd",
-      "xslt",
-      "yaml",
-    },
+    pattern = { "tex", "markdown" },
     callback = function()
       vim.opt_local.tabstop = 2
       vim.opt_local.softtabstop = 2
       vim.opt_local.shiftwidth = 2
       vim.opt_local.expandtab = true
-    end,
-  },
-  markdup_options = {
-    event = "FileType",
-    pattern = { "tex", "markdown" },
-    callback = function()
       vim.opt_local.wrap = true
 
       vim.keymap.set({ "n", "v" }, "j", "gj", { silent = true })
@@ -95,7 +67,7 @@ augs.filetype_keymaps = {
     event = "FileType",
     pattern = { "markdown" },
     callback = function()
-      vim.keymap.set("n", "<m-m>", ":w! | execute '!compiler ' . expand('%:p')<cr>")
+      vim.keymap.set("n", "<m-m>", ":w! | exe '!compiler ' . expand('%:p')<cr>")
       vim.keymap.set("n", "<m-o>", ":exe '!xdg-open ' . expand('%:r') . '.pdf &' | redraw!<cr>")
     end,
   },

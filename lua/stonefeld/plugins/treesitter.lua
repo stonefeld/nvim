@@ -5,10 +5,11 @@ return {
     build = ":TSUpdate",
     dependencies = {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
-      { "HiPhish/nvim-ts-rainbow2" },
+      { "HiPhish/rainbow-delimiters.nvim" },
     },
     config = function()
       local treesitter = require("nvim-treesitter.configs")
+      local rainbow = require("rainbow-delimiters.setup")
 
       treesitter.setup({
         ensure_installed = {
@@ -29,10 +30,12 @@ return {
           enable = true,
           disable = { "htmldjango", "dart" },
         },
-        rainbow = {
-          enable = true,
-          strategy = require("ts-rainbow").strategy.global,
-          disable = { "vue" },
+      })
+
+      rainbow.setup({
+        query = {
+          [""] = "rainbow-delimiters",
+          vue = "rainbow-parens",
         },
       })
     end,
