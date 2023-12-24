@@ -2,7 +2,11 @@ return {
   "lewis6991/gitsigns.nvim",
   opts = {
     on_attach = function()
-      local gs = package.loaded.gitsigns
+      local gs = require("gitsigns")
+
+      gs.setup({
+        preview_config = { border = "rounded" },
+      })
 
       vim.keymap.set("n", "]c", function()
         if vim.wo.diff then
