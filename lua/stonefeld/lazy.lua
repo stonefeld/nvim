@@ -9,9 +9,11 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
-vim.opt.rtp:append(lazypath)
 
-require("lazy").setup({
+vim.opt.rtp:append(lazypath)
+local lazy = require("lazy")
+
+lazy.setup({
   { import = "stonefeld.plugins" },
   { import = "stonefeld.plugins.lsp" },
 }, {

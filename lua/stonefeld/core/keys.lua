@@ -25,6 +25,7 @@ vim.keymap.set("n", "<leader>w", function()
   end
 end, { silent = true })
 vim.keymap.set("n", "<leader>r", ":set relativenumber!<CR>", { silent = true })
+vim.keymap.set("n", "<leader>t", ":set shiftwidth=")
 
 -- using the clipboard
 vim.keymap.set({ "n", "v" }, "<leader>p", '"_+p')

@@ -5,8 +5,10 @@ return {
   },
   after = "catppuccin",
   config = function()
+    local bufferline = require("bufferline")
     local catppuccin_theme = require("catppuccin.groups.integrations.bufferline")
-    require("bufferline").setup({
+
+    bufferline.setup({
       highlights = catppuccin_theme.get(),
     })
 

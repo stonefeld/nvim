@@ -9,6 +9,7 @@ return {
       flavour = "macchiato",
       integrations = {
         mason = true,
+        fidget = true,
       },
       highlight_overrides = {
         all = function(colors)
