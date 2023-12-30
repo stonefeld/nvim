@@ -27,6 +27,11 @@ end, { silent = true })
 vim.keymap.set("n", "<leader>r", ":set relativenumber!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>t", ":set shiftwidth=")
 
+-- manipulate the quickfix
+vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
+vim.keymap.set("n", "[q", ":cprev<CR>", { silent = true })
+vim.keymap.set("n", "<leader>q", ":ccl<CR>", { silent = true })
+
 -- using the clipboard
 vim.keymap.set({ "n", "v" }, "<leader>p", '"_+p')
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')

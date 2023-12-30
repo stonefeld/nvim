@@ -81,7 +81,5 @@ return {
         lspconfig[server].setup(config)
       end,
     })
-
-    lspconfig["dartls"].setup(config)
   end,
 }

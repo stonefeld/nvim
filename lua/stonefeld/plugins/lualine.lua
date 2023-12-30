@@ -10,6 +10,17 @@ return {
       buffer_not_empty = function()
         return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
       end,
+
+      hide_in_width = function()
+        return vim.api.nvim_get_option("columns") > 80
+      end,
+    }
+
+    local spacer = {
+      function()
+        return " "
+      end,
+      cond = conditions.hide_in_width,
     }
 
     local mode = {
@@ -72,6 +83,7 @@ return {
       end,
       icon = "  LSP:",
       color = { fg = theme.normal.b.fg, gui = "bold" },
+      cond = conditions.hide_in_width,
     }
 
     local encoding = {
@@ -93,6 +105,11 @@ return {
       color = { fg = theme.command.b.fg, gui = "bold" },
     }
 
+    local diff = {
+      "diff",
+      cond = conditions.hide_in_width,
+    }
+
     lualine.setup({
       options = {
         icons_enabled = true,
@@ -105,8 +122,8 @@ return {
       sections = {
         lualine_a = { mode },
         lualine_b = {},
-        lualine_c = { filesize, filename, location, progress, packages, diagnostics },
-        lualine_x = { lsp, encoding, fileformat, branch, "diff" },
+        lualine_c = { spacer, filesize, filename, location, progress, packages, diagnostics },
+        lualine_x = { lsp, encoding, fileformat, branch, diff, spacer },
         lualine_y = {},
         lualine_z = { mode },
       },
