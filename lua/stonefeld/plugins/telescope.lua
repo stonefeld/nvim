@@ -9,27 +9,40 @@ return {
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
+    local action_layout = require("telescope.actions.layout")
 
     telescope.setup({
       defaults = {
         sorting_strategy = "ascending",
-        layout_config = {
-          prompt_position = "top",
-        },
+        layout_config = { prompt_position = "top" },
         mappings = {
           i = {
+            -- use telescope as if it was fzf
             ["<C-n>"] = actions.cycle_history_next,
             ["<C-p>"] = actions.cycle_history_prev,
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
             ["<ESC>"] = actions.close,
+
+            -- toggle the preview
+            ["<M-p>"] = action_layout.toggle_preview,
+
+            -- scrolling the preview
+            ["<M-k>"] = actions.preview_scrolling_up,
+            ["<M-j>"] = actions.preview_scrolling_down,
+
+            -- use default vim behavior
+            ["<C-u>"] = false,
+            ["<C-d>"] = false,
           },
         },
       },
       pickers = {
         buffers = {
           mappings = {
-            i = { ["<C-d>"] = actions.delete_buffer },
+            i = {
+              ["<C-d>"] = actions.delete_buffer + actions.move_to_top,
+            },
           },
         },
       },

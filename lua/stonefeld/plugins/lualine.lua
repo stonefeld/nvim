@@ -43,13 +43,12 @@ return {
     local packages = {
       lazy_status.updates,
       cond = lazy_status.has_updates,
-      color = { fg = theme.replace.b.fg },
+      color = { fg = theme.replace.b.fg, gui = "bold" },
     }
 
     local diagnostics = {
       "diagnostics",
       symbols = { error = " ", warn = " ", hint = " ", info = " " },
-      padding = { left = 3 },
     }
 
     local lsp = {
@@ -73,7 +72,6 @@ return {
       end,
       icon = "  LSP:",
       color = { fg = theme.normal.b.fg, gui = "bold" },
-      padding = { right = 3 },
     }
 
     local encoding = {

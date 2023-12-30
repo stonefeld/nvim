@@ -2,9 +2,9 @@ return {
   "lewis6991/gitsigns.nvim",
   opts = {
     on_attach = function()
-      local gs = require("gitsigns")
+      local gitsigns = require("gitsigns")
 
-      gs.setup({
+      gitsigns.setup({
         preview_config = { border = "rounded" },
       })
 
@@ -13,7 +13,7 @@ return {
           return "]c"
         end
         vim.schedule(function()
-          gs.next_hunk()
+          gitsigns.next_hunk()
         end)
         return "<Ignore>"
       end, { expr = true })
@@ -23,16 +23,16 @@ return {
           return "[c"
         end
         vim.schedule(function()
-          gs.prev_hunk()
+          gitsigns.prev_hunk()
         end)
         return "<Ignore>"
       end, { expr = true })
 
       vim.keymap.set("n", "<leader>hb", function()
-        gs.blame_line({ full = true })
+        gitsigns.blame_line({ full = true })
       end)
-      vim.keymap.set("n", "<leader>hd", gs.diffthis)
-      vim.keymap.set("n", "<leader>hp", gs.preview_hunk)
+      vim.keymap.set("n", "<leader>hd", gitsigns.diffthis)
+      vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk)
     end,
   },
 }
