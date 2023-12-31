@@ -12,7 +12,7 @@ return {
       end,
 
       hide_in_width = function()
-        return vim.api.nvim_get_option("columns") > 80
+        return vim.api.nvim_get_option("columns") > 100
       end,
     }
 
@@ -35,8 +35,18 @@ return {
       cond = conditions.buffer_not_empty,
     }
 
+    local filetype = {
+      "filetype",
+      colored = false,
+      icon_only = true,
+      cond = conditions.buffer_not_empty,
+      color = { fg = theme.visual.b.fg },
+      padding = { left = 1, right = 0 },
+    }
+
     local filename = {
       "filename",
+      newfile_status = true,
       cond = conditions.buffer_not_empty,
       color = { fg = theme.visual.b.fg, gui = "bold" },
     }
@@ -122,7 +132,7 @@ return {
       sections = {
         lualine_a = { mode },
         lualine_b = {},
-        lualine_c = { spacer, filesize, filename, location, progress, packages, diagnostics },
+        lualine_c = { spacer, filesize, filetype, filename, location, progress, packages, diagnostics },
         lualine_x = { lsp, encoding, fileformat, branch, diff, spacer },
         lualine_y = {},
         lualine_z = { mode },

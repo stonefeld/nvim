@@ -24,6 +24,7 @@ vim.keymap.set("n", "<leader>w", function()
     vim.keymap.del("n", "0")
   end
 end, { silent = true })
+vim.keymap.set("n", "<leader>s", ":set spell!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>r", ":set relativenumber!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>t", ":set shiftwidth=")
 

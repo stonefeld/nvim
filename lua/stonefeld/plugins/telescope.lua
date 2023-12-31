@@ -15,6 +15,7 @@ return {
       defaults = {
         sorting_strategy = "ascending",
         layout_config = { prompt_position = "top" },
+        results_title = false,
         mappings = {
           i = {
             -- use telescope as if it was fzf
@@ -54,5 +55,6 @@ return {
     vim.keymap.set("n", "<leader><Space>", ":Telescope buffers<CR>", { silent = true })
     vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics<CR>", { silent = true })
     vim.keymap.set("n", "<leader>fw", ":Telescope live_grep<CR>", { silent = true })
+    vim.keymap.set("n", "z=", ":Telescope spell_suggest theme=cursor<CR>", { silent = true })
   end,
 }

@@ -3,7 +3,6 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   dependencies = {
-    { "nvim-treesitter/nvim-treesitter-textobjects" },
     { "HiPhish/rainbow-delimiters.nvim" },
     { "windwp/nvim-ts-autotag" },
   },

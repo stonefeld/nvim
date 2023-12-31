@@ -62,8 +62,6 @@ return {
       vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-
-      vim.keymap.set("n", "<leader>sr", ":LspRestart<CR>", opts)
     end
 
     local capabilities = cmp_nvim_lsp.default_capabilities()

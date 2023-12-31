@@ -1,6 +1,9 @@
 -- always use the block as cursor
 vim.o.guicursor = "a:block"
 
+-- right-click mouse no paste
+vim.o.mousemodel = "extend"
+
 -- i want to know where my cursor is
 vim.o.number = true
 vim.o.cursorline = true
@@ -52,6 +55,9 @@ vim.o.completeopt = "menuone,noselect"
 
 -- swapfiles are not for me
 vim.o.swapfile = false
+
+-- set spell languages to spanish and english
+vim.o.spelllang = "es,en_us"
 
 -- enable editorconfig by default
 vim.g.editorconfig = true
