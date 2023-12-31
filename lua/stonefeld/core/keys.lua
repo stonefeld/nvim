@@ -27,6 +27,13 @@ end, { silent = true })
 vim.keymap.set("n", "<leader>s", ":set spell!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>r", ":set relativenumber!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>t", ":set shiftwidth=")
+vim.keymap.set("n", "<leader>c", function()
+  if vim.o.background == "dark" then
+    vim.o.background = "light"
+  elseif vim.o.background == "light" then
+    vim.o.background = "dark"
+  end
+end)
 
 -- manipulate the quickfix
 vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
