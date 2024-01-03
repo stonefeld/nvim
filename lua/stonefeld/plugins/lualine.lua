@@ -1,6 +1,9 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = {
+    { "nvim-tree/nvim-web-devicons" },
+    { "AndreM222/copilot-lualine" },
+  },
   config = function()
     local lualine = require("lualine")
     local theme = require("lualine.themes.auto")
@@ -72,6 +75,22 @@ return {
       symbols = { error = " ", warn = " ", hint = " ", info = " " },
     }
 
+    local copilot = {
+      "copilot",
+      symbols = {
+        status = {
+          hl = {
+            enabled = theme.insert.b.fg,
+            disabled = theme.replace.b.fg,
+            warning = theme.command.b.fg,
+            unknown = theme.visual.b.fg,
+          },
+        },
+      },
+      show_colors = true,
+      show_loading = false,
+    }
+
     local lsp = {
       function()
         local msg = "No Active LSP"
@@ -91,7 +110,7 @@ return {
 
         return msg
       end,
-      icon = "  LSP:",
+      icon = "   LSP:",
       color = { fg = theme.normal.b.fg, gui = "bold" },
       cond = conditions.hide_in_width,
     }
@@ -133,7 +152,7 @@ return {
         lualine_a = { mode },
         lualine_b = {},
         lualine_c = { spacer, filesize, filetype, filename, location, progress, packages, diagnostics },
-        lualine_x = { lsp, encoding, fileformat, branch, diff, spacer },
+        lualine_x = { copilot, lsp, encoding, fileformat, branch, diff, spacer },
         lualine_y = {},
         lualine_z = { mode },
       },

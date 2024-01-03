@@ -8,6 +8,7 @@ return {
       query = {
         [""] = "rainbow-delimiters",
         vue = "rainbow-parens",
+        tsx = "rainbow-parens",
       },
     })
   end,

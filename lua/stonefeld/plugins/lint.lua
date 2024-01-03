@@ -10,6 +10,7 @@ return {
       javascriptreact = { "eslint_d" },
       typescriptreact = { "eslint_d" },
       vue = { "eslint_d" },
+      htmldjango = { "djlint" },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

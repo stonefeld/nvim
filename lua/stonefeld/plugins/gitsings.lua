@@ -8,9 +8,9 @@ return {
         preview_config = { border = "rounded" },
       })
 
-      vim.keymap.set("n", "]c", function()
+      vim.keymap.set("n", "]g", function()
         if vim.wo.diff then
-          return "]c"
+          return "]g"
         end
         vim.schedule(function()
           gitsigns.next_hunk()
@@ -18,9 +18,9 @@ return {
         return "<Ignore>"
       end, { expr = true })
 
-      vim.keymap.set("n", "[c", function()
+      vim.keymap.set("n", "[g", function()
         if vim.wo.diff then
-          return "[c"
+          return "[g"
         end
         vim.schedule(function()
           gitsigns.prev_hunk()
@@ -28,11 +28,11 @@ return {
         return "<Ignore>"
       end, { expr = true })
 
-      vim.keymap.set("n", "<leader>hb", function()
+      vim.keymap.set("n", "<leader>gb", function()
         gitsigns.blame_line({ full = true })
       end)
-      vim.keymap.set("n", "<leader>hd", gitsigns.diffthis)
-      vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk)
+      vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk)
+      vim.keymap.set("n", "<leader>gd", gitsigns.diffthis)
     end,
   },
 }
