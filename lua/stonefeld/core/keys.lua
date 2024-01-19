@@ -25,15 +25,10 @@ vim.keymap.set("n", "<leader>w", function()
   end
 end, { silent = true })
 vim.keymap.set("n", "<leader>s", ":set spell!<CR>", { silent = true })
-vim.keymap.set("n", "<leader>r", ":set relativenumber!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>t", ":set shiftwidth=")
-vim.keymap.set("n", "<leader>c", function()
-  if vim.o.background == "dark" then
-    vim.o.background = "light"
-  elseif vim.o.background == "light" then
-    vim.o.background = "dark"
-  end
-end)
+
+-- open netrw
+vim.keymap.set("n", "<leader>e", ":Ex<CR>", { silent = true })
 
 -- manipulate the quickfix
 vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
@@ -50,4 +45,6 @@ vim.keymap.set("v", "<leader>p", '"_dP')
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 
 -- close buffer without closing window
+vim.keymap.set("n", "<Tab>", ":bn<CR>", { silent = true })
+vim.keymap.set("n", "<S-Tab>", ":bp<CR>", { silent = true })
 vim.keymap.set("n", "<leader>x", ":bp | sp | bn | bd<CR>", { silent = true })

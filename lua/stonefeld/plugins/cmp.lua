@@ -9,13 +9,18 @@ return {
     { "L3MON4D3/LuaSnip" },
     { "rafamadriz/friendly-snippets" },
     { "onsails/lspkind.nvim" },
+    {
+      "kristijanhusak/vim-dadbod-completion",
+      ft = { "sql", "mysql", "plsql" },
+      lazy = true,
+    },
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local lspkind = require("lspkind")
 
-    -- load vscode style snippets from installed plugins
+    -- load vscode like snippets
     require("luasnip.loaders.from_vscode").lazy_load()
 
     cmp.setup({
@@ -64,6 +69,7 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "vim-dadbod-completion" },
         { name = "buffer" },
         { name = "path" },
       }),

@@ -1,0 +1,86 @@
+return {
+  "nvim-lualine/lualine.nvim",
+  dependencies = {
+    { "nvim-tree/nvim-web-devicons" },
+    { "SmiteshP/nvim-navic" },
+  },
+  config = function()
+    local lualine = require("lualine")
+    local lazy_updates = require("lazy.status")
+
+    local packages = {
+      lazy_updates.updates,
+      cond = lazy_updates.has_updates,
+    }
+
+    local tabs = function()
+      local tabsize = vim.api.nvim_buf_get_option(0, "shiftwidth")
+      local expandtab = vim.api.nvim_buf_get_option(0, "expandtab")
+      return string.format("%s: %d", expandtab and "spaces" or "tabs", tabsize)
+    end
+
+    local fileformat = {
+      "fileformat",
+      symbols = {
+        unix = "LF",
+        dos = "CRLF",
+        mac = "CR",
+      },
+    }
+
+    local filetype = {
+      "filetype",
+      fmt = function(str)
+        local ft = vim.api.nvim_buf_get_option(0, "filetype")
+        local clients = vim.lsp.get_active_clients()
+        local lsps = {}
+
+        if next(clients) == nil then
+          return str
+        end
+
+        for _, client in ipairs(clients) do
+          local fts = client.config.filetypes
+          if fts and vim.fn.index(fts, ft) ~= -1 then
+            table.insert(lsps, client.name)
+          end
+        end
+
+        if lsps[1] == nil then
+          return str
+        end
+        return string.format("%s (%s)", str, table.concat(lsps, " "))
+      end,
+    }
+
+    -- local navic = {
+    --   "navic",
+    --   color_correction = "static",
+    --   navic_opts = {
+    --     highlight = true,
+    --   },
+    -- }
+
+    lualine.setup({
+      options = {
+        icons_enabled = true,
+        section_separators = "",
+        component_separators = "|",
+        disabled_filetypes = {
+          "TelescopePrompt",
+        },
+      },
+      sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_c = { packages },
+        lualine_x = { tabs, "encoding", fileformat, filetype },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+      },
+      -- winbar = {
+      --   lualine_c = { navic },
+      -- },
+    })
+  end,
+}

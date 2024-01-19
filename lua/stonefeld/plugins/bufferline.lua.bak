@@ -6,10 +6,11 @@ return {
   after = "catppuccin",
   config = function()
     local bufferline = require("bufferline")
-    local catppuccin_theme = require("catppuccin.groups.integrations.bufferline")
 
     bufferline.setup({
-      highlights = catppuccin_theme.get(),
+      options = {
+        themable = false,
+      },
     })
 
     local opts = { silent = true }

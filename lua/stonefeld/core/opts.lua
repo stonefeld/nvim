@@ -6,6 +6,7 @@ vim.o.mousemodel = "extend"
 
 -- i want to know where my cursor is
 vim.o.number = true
+vim.o.relativenumber = true
 vim.o.cursorline = true
 
 -- use 4 spaces as tab
@@ -37,8 +38,8 @@ vim.o.signcolumn = "yes"
 vim.o.colorcolumn = "120"
 
 -- share statusline and since using lualine, don't show current mode
-vim.o.laststatus = 3
-vim.o.showmode = false
+-- vim.o.laststatus = 3
+-- vim.o.showmode = false
 
 -- increase updatetime
 vim.o.updatetime = 250
@@ -61,3 +62,6 @@ vim.o.spelllang = "es,en_us"
 
 -- enable editorconfig by default
 vim.g.editorconfig = true
+
+-- set the vim statusline
+vim.o.statusline = "%<%{len(expand('%'))==0?'[No Name]':pathshorten(expand('%:~:p'))} %h%m%r%=%-14.(%l,%c%V%) %P"

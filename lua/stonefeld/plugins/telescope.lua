@@ -11,6 +11,25 @@ return {
     local actions = require("telescope.actions")
     local action_layout = require("telescope.actions.layout")
 
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "TelescopeResults",
+      callback = function(ctx)
+        vim.api.nvim_buf_call(ctx.buf, function()
+          vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+          vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+        end)
+      end,
+    })
+
+    local path_display_fmt = function(_, path)
+      local tail = vim.fs.basename(path)
+      local parent = vim.fs.dirname(path)
+      if parent == "." then
+        return tail
+      end
+      return string.format("%s\t\t-\t\t%s", tail, parent)
+    end
+
     telescope.setup({
       defaults = {
         sorting_strategy = "ascending",
@@ -39,19 +58,33 @@ return {
         },
       },
       pickers = {
+        find_files = {
+          path_display = path_display_fmt,
+        },
         buffers = {
+          theme = "dropdown",
+          previewer = false,
+          path_display = path_display_fmt,
           mappings = {
             i = {
-              ["<C-d>"] = actions.delete_buffer + actions.move_to_top,
+              ["<C-d>"] = actions.delete_buffer,
             },
           },
+        },
+        live_grep = {
+          previewer = false,
+          path_display = path_display_fmt,
+        },
+        help_tags = {
+          theme = "dropdown",
+          previewer = false,
         },
       },
     })
     telescope.load_extension("fzf")
 
     vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>fo", ":Telescope oldfiles<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { silent = true })
     vim.keymap.set("n", "<leader><Space>", ":Telescope buffers<CR>", { silent = true })
     vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics<CR>", { silent = true })
     vim.keymap.set("n", "<leader>fw", ":Telescope live_grep<CR>", { silent = true })
