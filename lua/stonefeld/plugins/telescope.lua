@@ -83,11 +83,12 @@ return {
     })
     telescope.load_extension("fzf")
 
-    vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { silent = true })
-    vim.keymap.set("n", "<leader><Space>", ":Telescope buffers<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics<CR>", { silent = true })
-    vim.keymap.set("n", "<leader>fw", ":Telescope live_grep<CR>", { silent = true })
-    vim.keymap.set("n", "z=", ":Telescope spell_suggest theme=cursor<CR>", { silent = true })
+    local opts = { silent = true }
+    vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>", opts)
+    vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
+    vim.keymap.set("n", "<leader><Space>", ":Telescope buffers<CR>", opts)
+    vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics<CR>", opts)
+    vim.keymap.set("n", "<leader>fw", ":Telescope live_grep<CR>", opts)
+    vim.keymap.set("n", "z=", ":Telescope spell_suggest theme=cursor<CR>", opts)
   end,
 }

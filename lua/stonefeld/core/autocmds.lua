@@ -5,11 +5,11 @@ augs.formatting = {
   clean_whitespace = {
     event = "BufWritePre",
     pattern = "*",
-    command = [[
-      let curr_pos=getpos('.')
-      exe '%s/\s\+$//e'
-      call cursor(curr_pos[1], curr_pos[2])
-    ]],
+    callback = function()
+      local curr_pos = vim.api.nvim_win_get_cursor(0)
+      vim.cmd([[ %s/\s\+$//e ]])
+      vim.api.nvim_win_set_cursor(0, curr_pos)
+    end,
   },
 }
 

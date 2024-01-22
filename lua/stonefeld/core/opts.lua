@@ -63,5 +63,5 @@ vim.o.spelllang = "es,en_us"
 -- enable editorconfig by default
 vim.g.editorconfig = true
 
--- set the vim statusline
+-- set a minimal and simple statusline
 vim.o.statusline = "%<%{len(expand('%'))==0?'[No Name]':pathshorten(expand('%:~:p'))} %h%m%r%=%-14.(%l,%c%V%) %P"
