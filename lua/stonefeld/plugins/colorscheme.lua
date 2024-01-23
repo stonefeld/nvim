@@ -15,6 +15,7 @@ return {
         highlight_overrides = {
           all = function(colors)
             return {
+              ModeMsg = { fg = colors.yellow },
               htmlTagName = { fg = colors.blue },
               htmlSpecialTagName = { fg = colors.blue },
               htmlTag = { fg = colors.teal },

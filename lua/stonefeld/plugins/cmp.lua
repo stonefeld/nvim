@@ -74,8 +74,12 @@ return {
         { name = "path" },
       }),
       window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered({
+          winhighlight = "Normal:NormalFloat,CursorLine:Visual",
+        }),
+        documentation = cmp.config.window.bordered({
+          winhighlight = "Normal:NormalFloat",
+        }),
       },
       formatting = {
         format = lspkind.cmp_format({
