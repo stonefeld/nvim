@@ -9,6 +9,7 @@ return {
         [""] = "rainbow-delimiters",
         vue = "rainbow-parens",
         tsx = "rainbow-parens",
+        html = "rainbow-parens",
       },
     })
   end,

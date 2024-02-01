@@ -36,12 +36,9 @@ vim.o.scrolloff = 3
 -- always show sings and set the line limit indicator at 120 characters
 vim.o.signcolumn = "yes"
 vim.o.colorcolumn = "120"
+vim.o.foldcolumn = "auto:1"
 
--- share statusline and since using lualine, don't show current mode
--- vim.o.laststatus = 3
--- vim.o.showmode = false
-
--- increase updatetime
+-- increase update interval
 vim.o.updatetime = 250
 
 -- make splits like a normal person

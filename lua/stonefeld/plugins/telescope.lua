@@ -4,30 +4,28 @@ return {
   dependencies = {
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-ui-select.nvim" },
     { "nvim-tree/nvim-web-devicons" },
   },
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
     local action_layout = require("telescope.actions.layout")
+    local themes = require("telescope.themes")
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "TelescopeResults",
       callback = function(ctx)
         vim.api.nvim_buf_call(ctx.buf, function()
-          vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+          vim.fn.matchadd("TelescopeParent", "(.*)$")
           vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
         end)
       end,
     })
 
     local path_display_fmt = function(_, path)
-      local tail = vim.fs.basename(path)
-      local parent = vim.fs.dirname(path)
-      if parent == "." then
-        return tail
-      end
-      return string.format("%s\t\t-\t\t%s", tail, parent)
+      local tail = require("telescope.utils").path_tail(path)
+      return string.format("%s (%s)", tail, path)
     end
 
     telescope.setup({
@@ -80,8 +78,15 @@ return {
           previewer = false,
         },
       },
+      extensions = {
+        ["ui-select"] = {
+          themes.get_dropdown(),
+        },
+      },
     })
+
     telescope.load_extension("fzf")
+    telescope.load_extension("ui-select")
 
     local opts = { silent = true }
     vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>", opts)
