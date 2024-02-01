@@ -17,7 +17,7 @@ return {
       pattern = "TelescopeResults",
       callback = function(ctx)
         vim.api.nvim_buf_call(ctx.buf, function()
-          vim.fn.matchadd("TelescopeParent", "(.*)$")
+          vim.fn.matchadd("TelescopeParent", "(.*)")
           vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
         end)
       end,
@@ -25,6 +25,9 @@ return {
 
     local path_display_fmt = function(_, path)
       local tail = require("telescope.utils").path_tail(path)
+      if tail == path then
+        return tail
+      end
       return string.format("%s (%s)", tail, path)
     end
 
