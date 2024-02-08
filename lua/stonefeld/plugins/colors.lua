@@ -43,6 +43,26 @@ return {
         styles = {
           italic = false,
         },
+        highlight_groups = {
+          ModeMsg = { fg = "gold", bold = true },
+        },
+      })
+    end,
+  },
+
+  {
+    "ellisonleao/gruvbox.nvim",
+    name = "gruvbox",
+    priority = 1000,
+    config = function()
+      local gruvbox = require("gruvbox")
+
+      gruvbox.setup({
+        italic = {
+          strings = false,
+          comments = false,
+          operators = false,
+        },
       })
     end,
   },

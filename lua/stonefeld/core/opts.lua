@@ -27,7 +27,6 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- don't persist highlight on search, but search while typing
-vim.o.hlsearch = false
 vim.o.incsearch = true
 
 -- start scrolling before and after the limits of the buffer

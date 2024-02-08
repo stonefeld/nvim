@@ -9,7 +9,7 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv", { silent = true })
 
 -- toggle some useful values
-vim.keymap.set("n", "<leader>h", ":set hls!<CR>", { silent = true })
+vim.keymap.set("n", "<leader>h", ":nohls<CR>", { silent = true })
 vim.keymap.set("n", "<leader>w", function()
   vim.o.wrap = not vim.o.wrap
   if vim.o.wrap then
@@ -26,6 +26,9 @@ vim.keymap.set("n", "<leader>w", function()
 end, { silent = true })
 vim.keymap.set("n", "<leader>s", ":set spell!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>t", ":set shiftwidth=")
+
+-- search the selected text
+vim.keymap.set("v", "<leader>/", 'y/<C-R>"<CR>', { silent = true })
 
 -- open netrw
 vim.keymap.set("n", "<leader>e", ":Ex<CR>", { silent = true })
