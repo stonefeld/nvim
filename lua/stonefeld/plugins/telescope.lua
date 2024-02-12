@@ -17,7 +17,7 @@ return {
       pattern = "TelescopeResults",
       callback = function(ctx)
         vim.api.nvim_buf_call(ctx.buf, function()
-          vim.fn.matchadd("TelescopeParent", "(.*)")
+          vim.fn.matchadd("TelescopeParent", "\t(.*)\t")
           vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
         end)
       end,
@@ -28,7 +28,7 @@ return {
       if tail == path then
         return tail
       end
-      return string.format("%s (%s)", tail, path)
+      return string.format("%s\t(%s)\t", tail, path)
     end
 
     telescope.setup({
@@ -88,8 +88,8 @@ return {
       },
     })
 
-    telescope.load_extension("fzf")
-    telescope.load_extension("ui-select")
+    pcall(telescope.load_extension("fzf"))
+    pcall(telescope.load_extension("ui-select"))
 
     local opts = { silent = true }
     vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>", opts)

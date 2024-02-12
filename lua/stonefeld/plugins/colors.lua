@@ -63,6 +63,17 @@ return {
           comments = false,
           operators = false,
         },
+        contrast = "hard",
+        transparent_mode = true,
+        overrides = {
+          RainbowDelimiterRed = { link = "TSRainbowRed" },
+          RainbowDelimiterOrange = { link = "TSRainbowOrange" },
+          RainbowDelimiterYellow = { link = "TSRainbowYellow" },
+          RainbowDelimiterGreen = { link = "TSRainbowGreen" },
+          RainbowDelimiterBlue = { link = "TSRainbowBlue" },
+          RainbowDelimiterCyan = { link = "TSRainbowCyan" },
+          RainbowDelimiterViolet = { link = "TSRainbowViolet" },
+        },
       })
     end,
   },

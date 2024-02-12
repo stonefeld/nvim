@@ -30,7 +30,7 @@ return {
         "tsserver",
         "html",
         "cssls",
-        "emmet_ls",
+        -- "emmet_ls",
       },
     })
 
@@ -63,14 +63,14 @@ return {
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
     end
 
-    local capabilities = cmp_nvim_lsp.default_capabilities()
-    local config = {
-      on_attach = on_attach,
-      capabilities = capabilities,
-    }
-
     mason_lspconfig.setup_handlers({
       function(server)
+        local capabilities = cmp_nvim_lsp.default_capabilities()
+        local config = {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+
         local ok, settings = pcall(require, "stonefeld.plugins.lsp.servers." .. server)
         if ok then
           config = vim.tbl_deep_extend("force", config, settings)
