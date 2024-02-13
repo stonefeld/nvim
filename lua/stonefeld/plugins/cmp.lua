@@ -18,7 +18,6 @@ return {
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    local lspkind = require("lspkind")
 
     -- load vscode like snippets
     require("luasnip.loaders.from_vscode").lazy_load()
@@ -73,20 +72,20 @@ return {
         { name = "buffer" },
         { name = "path" },
       }),
-      window = {
-        completion = cmp.config.window.bordered({
-          winhighlight = "Normal:NormalFloat,CursorLine:Visual",
-        }),
-        documentation = cmp.config.window.bordered({
-          winhighlight = "Normal:NormalFloat",
-        }),
-      },
-      formatting = {
-        format = lspkind.cmp_format({
-          maxwidth = 50,
-          ellipsis_char = "...",
-        }),
-      },
+      -- window = {
+      --   completion = cmp.config.window.bordered({
+      --     winhighlight = "Normal:NormalFloat,CursorLine:Visual",
+      --   }),
+      --   documentation = cmp.config.window.bordered({
+      --     winhighlight = "Normal:NormalFloat",
+      --   }),
+      -- },
+      -- formatting = {
+      --   format = lspkind.cmp_format({
+      --     maxwidth = 50,
+      --     ellipsis_char = "...",
+      --   }),
+      -- },
     })
   end,
 }

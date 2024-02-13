@@ -21,6 +21,7 @@ vim.o.autoindent = true
 -- don't wrap lines but when true, break lines by words (not characters)
 vim.o.wrap = false
 vim.o.linebreak = true
+vim.o.breakindent = true
 
 -- ignore case when lowercase but not when mixed
 vim.o.ignorecase = true

@@ -13,12 +13,16 @@ return {
       htmldjango = { "djlint" },
     }
 
-    local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+    local lint_augroup = vim.api.nvim_create_augroup("Lint", { clear = true })
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
       group = lint_augroup,
       callback = function()
         lint.try_lint()
       end,
     })
+
+    vim.keymap.set({ "n", "v" }, "<leader>ll", function()
+      lint.try_lint()
+    end)
   end,
 }

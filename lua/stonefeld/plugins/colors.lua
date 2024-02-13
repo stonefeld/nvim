@@ -64,7 +64,6 @@ return {
           operators = false,
         },
         contrast = "hard",
-        transparent_mode = true,
         overrides = {
           RainbowDelimiterRed = { link = "TSRainbowRed" },
           RainbowDelimiterOrange = { link = "TSRainbowOrange" },

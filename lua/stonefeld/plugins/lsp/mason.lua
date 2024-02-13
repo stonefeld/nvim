@@ -1,6 +1,8 @@
 return {
   "williamboman/mason.nvim",
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
+    { "neovim/nvim-lspconfig" },
     { "williamboman/mason-lspconfig.nvim" },
     { "WhoIsSethDaniel/mason-tool-installer.nvim" },
     { "hrsh7th/cmp-nvim-lsp" },
@@ -30,7 +32,7 @@ return {
         "tsserver",
         "html",
         "cssls",
-        -- "emmet_ls",
+        "emmet_ls",
       },
     })
 
@@ -57,6 +59,9 @@ return {
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
       vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
+      vim.keymap.set("n", "<leader>fm", function()
+        vim.lsp.buf.format({ async = true })
+      end)
 
       vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)

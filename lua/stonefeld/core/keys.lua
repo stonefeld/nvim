@@ -39,12 +39,12 @@ vim.keymap.set("n", "[q", ":cprev<CR>", { silent = true })
 vim.keymap.set("n", "<leader>q", ":ccl<CR>", { silent = true })
 
 -- using the clipboard
-vim.keymap.set({ "n", "v" }, "<leader>p", '"_+p')
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+y$')
 
 -- don't modify the registers
-vim.keymap.set("v", "<leader>p", '"_dP')
+vim.keymap.set("v", "<leader>P", '"_dP')
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 
 -- close buffer without closing window
