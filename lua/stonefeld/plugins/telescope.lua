@@ -66,6 +66,9 @@ return {
           theme = "dropdown",
           previewer = false,
           path_display = path_display_fmt,
+          show_all_buffers = true,
+          sort_mru = true,
+          ignore_current_buffer = true,
           mappings = {
             i = {
               ["<C-d>"] = actions.delete_buffer,
@@ -74,17 +77,21 @@ return {
         },
         live_grep = {
           previewer = false,
-          path_display = path_display_fmt,
+          path_display = {
+            shorten = { len = 1 },
+          },
         },
         help_tags = {
           theme = "dropdown",
           previewer = false,
         },
+        spell_suggest = {
+          theme = "cursor",
+          previewer = false,
+        },
       },
       extensions = {
-        ["ui-select"] = {
-          themes.get_dropdown(),
-        },
+        ["ui-select"] = { themes.get_dropdown() },
       },
     })
 
@@ -97,6 +104,6 @@ return {
     vim.keymap.set("n", "<leader><Space>", ":Telescope buffers<CR>", opts)
     vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics<CR>", opts)
     vim.keymap.set("n", "<leader>fw", ":Telescope live_grep<CR>", opts)
-    vim.keymap.set("n", "z=", ":Telescope spell_suggest theme=cursor<CR>", opts)
+    vim.keymap.set("n", "z=", ":Telescope spell_suggest<CR>", opts)
   end,
 }

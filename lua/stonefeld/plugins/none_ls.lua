@@ -19,9 +19,6 @@ return {
         -- javascript/typescript
         f.prettierd,
         l.eslint_d,
-
-        -- django
-        l.djlint,
       },
     })
 
@@ -29,6 +26,9 @@ return {
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = none_ls_autogroup,
       callback = function()
+        if vim.bo.filetype == "htmldjango" then
+          return
+        end
         vim.lsp.buf.format()
       end,
     })
