@@ -3,7 +3,13 @@ return {
   branch = "0.1.x",
   dependencies = {
     { "nvim-lua/plenary.nvim" },
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+      cond = function()
+        return vim.fn.executable("make") == 1
+      end,
+    },
     { "nvim-telescope/telescope-ui-select.nvim" },
     { "nvim-tree/nvim-web-devicons" },
   },
@@ -31,11 +37,17 @@ return {
       return string.format("%s\t(%s)\t", tail, path)
     end
 
+    local borderchars_squared = {
+      prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
+      results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+    }
+
     telescope.setup({
       defaults = {
         sorting_strategy = "ascending",
         layout_config = { prompt_position = "top" },
         results_title = false,
+        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         mappings = {
           i = {
             -- use telescope as if it was fzf
@@ -59,13 +71,20 @@ return {
         },
       },
       pickers = {
-        find_files = {
-          path_display = path_display_fmt,
+        find_files = { path_display = path_display_fmt },
+        live_grep = {
+          layout_strategy = "vertical",
+          layout_config = {
+            vertical = { width = 0.9, height = 0.9, preview_height = 0.4, preview_cutoff = 0 },
+            prompt_position = "bottom",
+          },
+          path_display = { "smart", shorten = { len = 3 } },
+          wrap_results = true,
         },
-        buffers = {
-          theme = "dropdown",
+        buffers = themes.get_dropdown({
           previewer = false,
           path_display = path_display_fmt,
+          borderchars = borderchars_squared,
           show_all_buffers = true,
           sort_mru = true,
           ignore_current_buffer = true,
@@ -74,29 +93,17 @@ return {
               ["<C-d>"] = actions.delete_buffer,
             },
           },
-        },
-        live_grep = {
-          previewer = false,
-          path_display = {
-            shorten = { len = 1 },
-          },
-        },
-        help_tags = {
-          theme = "dropdown",
-          previewer = false,
-        },
-        spell_suggest = {
-          theme = "cursor",
-          previewer = false,
-        },
+        }),
+        help_tags = themes.get_dropdown({ previewer = false, borderchars = borderchars_squared }),
+        spell_suggest = themes.get_cursor({ borderchars = borderchars_squared }),
       },
       extensions = {
-        ["ui-select"] = { themes.get_dropdown() },
+        ["ui-select"] = themes.get_dropdown({ borderchars = borderchars_squared }),
       },
     })
 
-    pcall(telescope.load_extension("fzf"))
-    pcall(telescope.load_extension("ui-select"))
+    pcall(telescope.load_extension, "fzf")
+    pcall(telescope.load_extension, "ui-select")
 
     local opts = { silent = true }
     vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>", opts)

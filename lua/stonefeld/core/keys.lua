@@ -17,7 +17,7 @@ vim.keymap.set("n", "<S-Tab>", ":bp<CR>", { silent = true })
 vim.keymap.set("n", "<leader>x", ":bp | sp | bn | bd<CR>", { silent = true })
 
 -- open current buffer in a new tab
-vim.keymap.set("n", "<leader>t", ":tabe %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>te", ":tabe %<CR>", { silent = true })
 
 -- manipulate the quickfix
 vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
@@ -37,7 +37,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 vim.keymap.set("v", "<leader>/", 'y/<C-R>"<CR>', { silent = true })
 
 -- toggle some useful values
-vim.keymap.set("n", "<leader>h", ":nohls<CR>", { silent = true })
+vim.keymap.set("n", "<leader>/", ":nohls<CR>", { silent = true })
 vim.keymap.set("n", "<leader>s", ":set spell!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>w", function()
   vim.o.wrap = not vim.o.wrap

@@ -18,7 +18,6 @@ return {
 
         -- javascript/typescript
         f.prettierd,
-        l.eslint_d,
       },
     })
 

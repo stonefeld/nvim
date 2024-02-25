@@ -52,8 +52,12 @@ return {
         comments = false,
         operators = false,
       },
+      invert_selection = true,
       contrast = "hard",
       overrides = {
+        GitSignsAdd = { link = "DiagnosticSignOk" },
+        GitSignsChange = { link = "DiagnosticSignWarn" },
+        GitSignsDelete = { link = "DiagnosticSignError" },
         RainbowDelimiterRed = { link = "TSRainbowRed" },
         RainbowDelimiterOrange = { link = "TSRainbowOrange" },
         RainbowDelimiterYellow = { link = "TSRainbowYellow" },

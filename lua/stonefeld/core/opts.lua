@@ -23,6 +23,13 @@ vim.o.wrap = false
 vim.o.linebreak = true
 vim.o.breakindent = true
 
+-- show some characters at the end of the line
+vim.o.showbreak = "+++ "
+
+-- use global statusline and don't show the current mode
+vim.o.laststatus = 3
+vim.o.showmode = false
+
 -- ignore case when lowercase but not when mixed
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -38,7 +45,7 @@ vim.o.signcolumn = "yes"
 vim.o.colorcolumn = "120"
 vim.o.foldcolumn = "auto:1"
 
--- increase update interval
+-- decrease update time
 vim.o.updatetime = 250
 
 -- make splits like a normal person
@@ -48,7 +55,7 @@ vim.o.splitbelow = true
 -- use 24-bit RGB color in the terminal (your term has to support it)
 vim.o.termguicolors = true
 
--- some completion options and winbar
+-- some completion options
 vim.o.completeopt = "menuone,noselect"
 
 -- swapfiles are not for me
@@ -60,5 +67,4 @@ vim.o.spelllang = "es,en_us"
 -- enable editorconfig by default
 vim.g.editorconfig = true
 
--- set a minimal and simple statusline
-vim.o.statusline = "%<%{len(expand('%'))==0?'[No Name]':pathshorten(expand('%:~:p'))} %h%m%r%=%-14.(%l,%c%V%) %P"
+vim.o.winbar = "%=%{len(expand('%'))==0?'[No Name]':pathshorten(expand('%:~:p'))} %h%m%r%="

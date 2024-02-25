@@ -1,6 +1,7 @@
 return {
   "williamboman/mason.nvim",
   event = { "BufReadPre", "BufNewFile" },
+  cmd = "Mason",
   dependencies = {
     { "neovim/nvim-lspconfig" },
     { "williamboman/mason-lspconfig.nvim" },
@@ -30,6 +31,7 @@ return {
         "pylsp",
         "lua_ls",
         "tsserver",
+        "eslint",
         "html",
         "cssls",
         "emmet_ls",
@@ -39,7 +41,6 @@ return {
     mason_tool_installer.setup({
       ensure_installed = {
         "black",
-        "eslint_d",
         "isort",
         "prettierd",
         "stylua",
