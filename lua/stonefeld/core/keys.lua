@@ -37,7 +37,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 vim.keymap.set("v", "<leader>/", 'y/<C-R>"<CR>', { silent = true })
 
 -- toggle some useful values
-vim.keymap.set("n", "<leader>/", ":nohls<CR>", { silent = true })
+vim.keymap.set("n", "<Esc>", ":nohls<CR>", { silent = true })
 vim.keymap.set("n", "<leader>s", ":set spell!<CR>", { silent = true })
 vim.keymap.set("n", "<leader>w", function()
   vim.o.wrap = not vim.o.wrap

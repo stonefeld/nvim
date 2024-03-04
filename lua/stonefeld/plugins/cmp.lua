@@ -18,6 +18,7 @@ return {
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
+    local lspkind = require("lspkind")
 
     -- load vscode like snippets
     require("luasnip.loaders.from_vscode").lazy_load()
@@ -80,12 +81,12 @@ return {
       --     winhighlight = "Normal:NormalFloat",
       --   }),
       -- },
-      -- formatting = {
-      --   format = lspkind.cmp_format({
-      --     maxwidth = 50,
-      --     ellipsis_char = "...",
-      --   }),
-      -- },
+      formatting = {
+        format = lspkind.cmp_format({
+          maxwidth = 50,
+          ellipsis_char = "...",
+        }),
+      },
     })
   end,
 }

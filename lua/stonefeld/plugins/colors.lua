@@ -8,11 +8,15 @@ return {
       integrations = {
         mason = true,
         fidget = true,
+        mini = {
+          enabled = true,
+        },
       },
       highlight_overrides = {
         all = function(colors)
           return {
             ModeMsg = { fg = colors.yellow },
+            TabLineFill = { link = "TabLine" },
             htmlTagName = { fg = colors.blue },
             htmlSpecialTagName = { fg = colors.blue },
             htmlTag = { fg = colors.teal },
@@ -67,5 +71,12 @@ return {
         RainbowDelimiterViolet = { link = "TSRainbowViolet" },
       },
     },
+  },
+
+  {
+    "folke/tokyonight.nvim",
+    name = "tokyonight",
+    priority = 1000,
+    config = true,
   },
 }

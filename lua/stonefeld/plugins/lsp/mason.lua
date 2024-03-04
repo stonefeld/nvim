@@ -48,7 +48,7 @@ return {
     })
 
     local opts = { noremap = true, silent = true }
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
       opts.buffer = bufnr
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -67,6 +67,18 @@ return {
       vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+
+      if client.server_capabilities.documentHighlightProvider then
+        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+          buffer = bufnr,
+          callback = vim.lsp.buf.document_highlight,
+        })
+
+        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+          buffer = bufnr,
+          callback = vim.lsp.buf.clear_references,
+        })
+      end
     end
 
     mason_lspconfig.setup_handlers({

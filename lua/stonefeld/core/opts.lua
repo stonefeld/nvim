@@ -1,5 +1,5 @@
 -- always use the block as cursor
-vim.o.guicursor = "a:block"
+-- vim.o.guicursor = "a:block"
 
 -- right-click mouse no paste
 vim.o.mousemodel = "extend"
@@ -23,11 +23,7 @@ vim.o.wrap = false
 vim.o.linebreak = true
 vim.o.breakindent = true
 
--- show some characters at the end of the line
-vim.o.showbreak = "+++ "
-
--- use global statusline and don't show the current mode
-vim.o.laststatus = 3
+-- don't show the current mode
 vim.o.showmode = false
 
 -- ignore case when lowercase but not when mixed
@@ -66,5 +62,3 @@ vim.o.spelllang = "es,en_us"
 
 -- enable editorconfig by default
 vim.g.editorconfig = true
-
-vim.o.winbar = "%=%{len(expand('%'))==0?'[No Name]':pathshorten(expand('%:~:p'))} %h%m%r%="

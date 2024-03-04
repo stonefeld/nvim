@@ -48,6 +48,7 @@ augs.misc = {
   visual_yank = {
     event = "TextYankPost",
     pattern = "*",
+    desc = "Highlight when yanking text",
     callback = function()
       vim.highlight.on_yank()
     end,

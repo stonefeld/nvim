@@ -5,30 +5,29 @@ return {
     local none_ls = require("null-ls")
 
     local f = none_ls.builtins.formatting
-    local l = none_ls.builtins.diagnostics
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
     none_ls.setup({
       sources = {
-        -- python
         f.isort,
         f.black,
-
-        -- lua
         f.stylua,
-
-        -- javascript/typescript
         f.prettierd,
       },
-    })
-
-    local none_ls_autogroup = vim.api.nvim_create_augroup("NoneLS", { clear = true })
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = none_ls_autogroup,
-      callback = function()
-        if vim.bo.filetype == "htmldjango" then
-          return
+      on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_clear_autocmds({
+            group = augroup,
+            buffer = bufnr,
+          })
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format({ bufnr = bufnr })
+            end,
+          })
         end
-        vim.lsp.buf.format()
       end,
     })
   end,
