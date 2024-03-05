@@ -9,6 +9,7 @@ return {
 
     none_ls.setup({
       sources = {
+        f.clang_format,
         f.isort,
         f.black,
         f.stylua,

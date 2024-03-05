@@ -40,6 +40,7 @@ return {
 
     mason_tool_installer.setup({
       ensure_installed = {
+        "clang-format",
         "black",
         "isort",
         "prettierd",
