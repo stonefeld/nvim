@@ -18,6 +18,7 @@ return {
     local actions = require("telescope.actions")
     local action_layout = require("telescope.actions.layout")
     local themes = require("telescope.themes")
+    local builtin = require("telescope.builtin")
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "TelescopeResults",
@@ -105,12 +106,15 @@ return {
     pcall(telescope.load_extension, "fzf")
     pcall(telescope.load_extension, "ui-select")
 
-    local opts = { silent = true }
-    vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>", opts)
-    vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
-    vim.keymap.set("n", "<leader><Space>", ":Telescope buffers<CR>", opts)
-    vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics<CR>", opts)
-    vim.keymap.set("n", "<leader>fw", ":Telescope live_grep<CR>", opts)
-    vim.keymap.set("n", "z=", ":Telescope spell_suggest<CR>", opts)
+    local map = function(keys, func, desc)
+      vim.keymap.set("n", keys, func, { noremap = true, silent = true, desc = desc })
+    end
+
+    map("<C-p>", builtin.find_files, "Find files in CWD")
+    map("<leader>fh", builtin.help_tags, "Find help information")
+    map("<leader><Space>", builtin.buffers, "Find open buffers")
+    map("<leader>fd", builtin.diagnostics, "Find diagnostics")
+    map("<leader>fw", builtin.live_grep, "Find text inside files from CWD")
+    map("z=", builtin.spell_suggest, "Find spelling suggestions")
   end,
 }

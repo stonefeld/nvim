@@ -1,55 +1,65 @@
 -- set leader key to space
 vim.g.mapleader = " "
 
+-- define a more simple way to map keys
+local map = function(mode, keys, func, desc)
+  vim.keymap.set(mode, keys, func, { silent = true, desc = desc or "" })
+end
+
 -- space by default shouldn't do nothing
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+map({ "n", "v" }, "<Space>", "<Nop>")
 
 -- move lines without cutting
-vim.keymap.set("v", "J", ":m '>+1<CR>gv", { silent = true })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv", { silent = true })
+map("v", "J", ":m '>+1<CR>gv", "Move selected lines down")
+map("v", "K", ":m '<-2<CR>gv", "Move selected lines up")
 
 -- open netrw
-vim.keymap.set("n", "<leader>e", ":Ex<CR>", { silent = true })
+map("n", "<leader>e", ":Ex<CR>", "Open Netrw [E]xplorer")
 
 -- managing buffers
-vim.keymap.set("n", "<Tab>", ":bn<CR>", { silent = true })
-vim.keymap.set("n", "<S-Tab>", ":bp<CR>", { silent = true })
-vim.keymap.set("n", "<leader>x", ":bp | sp | bn | bd<CR>", { silent = true })
+map("n", "<Tab>", ":bn<CR>", "Navigate bufferlist forward")
+map("n", "<S-Tab>", ":bp<CR>", "Navigate bufferlist backward")
+map("n", "<leader>x", ":bp | sp | bn | bd<CR>", "Close buffer but not windows")
 
 -- open current buffer in a new tab
-vim.keymap.set("n", "<leader>te", ":tabe %<CR>", { silent = true })
+map("n", "<leader>te", ":tabe %<CR>", "Open current buffer in a new tab")
+
+-- navigating through diagnostics
+map("n", "gl", vim.diagnostic.open_float, "Open diagnostics float")
+map("n", "]d", vim.diagnostic.goto_next, "Navigate diagnostics forward")
+map("n", "[d", vim.diagnostic.goto_prev, "Navigate diagnostics backward")
 
 -- manipulate the quickfix
-vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
-vim.keymap.set("n", "[q", ":cprev<CR>", { silent = true })
-vim.keymap.set("n", "<leader>q", ":ccl<CR>", { silent = true })
+map("n", "]q", ":cnext<CR>", "Navigate quickfix list forward")
+map("n", "[q", ":cprev<CR>", "Navigate quickfix list backward")
+map("n", "<leader>q", ":ccl<CR>", "Close quickfix list")
 
 -- using the clipboard
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+y$')
+map({ "n", "v" }, "<leader>p", '"+p', "Paste from clipboard")
+map({ "n", "v" }, "<leader>y", '"+y', "Yank to clipboard")
+map("n", "<leader>Y", '"+y$', "Yank to clipboard until the end of line")
 
 -- don't modify the registers
-vim.keymap.set("v", "<leader>P", '"_dP')
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+map("v", "<leader>P", '"_dP', "Paste without modifying the registers")
+map({ "n", "v" }, "<leader>d", '"_d', "Delete without modifying the registers")
 
 -- search the selected text
-vim.keymap.set("v", "<leader>/", 'y/<C-R>"<CR>', { silent = true })
+map("v", "<leader>/", 'y/<C-R>"<CR>', "Search the selected text")
 
 -- toggle some useful values
-vim.keymap.set("n", "<Esc>", ":nohls<CR>", { silent = true })
-vim.keymap.set("n", "<leader>s", ":set spell!<CR>", { silent = true })
-vim.keymap.set("n", "<leader>w", function()
+map("n", "<Esc>", ":nohls<CR>", "Clear search highlights")
+map("n", "<leader>s", ":set spell!<CR>", "Toggle spell checking")
+map("n", "<leader>w", function()
   vim.o.wrap = not vim.o.wrap
   if vim.o.wrap then
-    vim.keymap.set("n", "j", "gj", { silent = true, buffer = 0 })
-    vim.keymap.set("n", "k", "gk", { silent = true, buffer = 0 })
-    vim.keymap.set("n", "$", "g$", { silent = true, buffer = 0 })
-    vim.keymap.set("n", "0", "g0", { silent = true, buffer = 0 })
+    vim.keymap.set("n", "j", "gj", { buffer = 0 })
+    vim.keymap.set("n", "k", "gk", { buffer = 0 })
+    vim.keymap.set("n", "$", "g$", { buffer = 0 })
+    vim.keymap.set("n", "0", "g0", { buffer = 0 })
   else
     vim.keymap.del("n", "j", { buffer = 0 })
     vim.keymap.del("n", "k", { buffer = 0 })
     vim.keymap.del("n", "$", { buffer = 0 })
     vim.keymap.del("n", "0", { buffer = 0 })
   end
-end, { silent = true })
+end, "Toggle line wrapping")

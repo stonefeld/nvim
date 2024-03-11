@@ -15,7 +15,6 @@ local lazy = require("lazy")
 
 lazy.setup({
   { import = "stonefeld.plugins" },
-  { import = "stonefeld.plugins.lsp" },
 }, {
   checker = {
     enabled = true,

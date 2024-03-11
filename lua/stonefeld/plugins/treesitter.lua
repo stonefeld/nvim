@@ -6,10 +6,9 @@ return {
     { "windwp/nvim-ts-autotag" },
   },
   config = function()
-    local treesitter = require("nvim-treesitter.configs")
-
-    treesitter.setup({
+    require("nvim-treesitter.configs").setup({
       ensure_installed = {
+        "bash",
         "c",
         "cpp",
         "javascript",
@@ -18,7 +17,10 @@ return {
         "rust",
         "tsx",
         "typescript",
+        "vim",
+        "vimdoc",
       },
+      auto_install = false,
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
@@ -27,9 +29,7 @@ return {
         enable = true,
         disable = { "htmldjango", "dart" },
       },
-      autotag = {
-        enable = true,
-      },
+      autotag = { enable = true },
     })
   end,
 }

@@ -15,8 +15,6 @@ return {
       highlight_overrides = {
         all = function(colors)
           return {
-            ModeMsg = { fg = colors.yellow },
-            TabLineFill = { link = "TabLine" },
             htmlTagName = { fg = colors.blue },
             htmlSpecialTagName = { fg = colors.blue },
             htmlTag = { fg = colors.teal },
@@ -39,9 +37,6 @@ return {
     opts = {
       styles = {
         italic = false,
-      },
-      highlight_groups = {
-        ModeMsg = { fg = "gold", bold = true },
       },
     },
   },
@@ -77,6 +72,6 @@ return {
     "folke/tokyonight.nvim",
     name = "tokyonight",
     priority = 1000,
-    config = true,
+    opts = { style = "night" },
   },
 }
