@@ -28,13 +28,14 @@ return {
 
     local diagnostics = {
       "diagnostics",
+      symbols = { error = " ", warn = " ", hint = " ", info = " " },
       colored = false,
     }
 
     local filename = {
       "filename",
       newfile_status = true,
-      path = 3,
+      path = 1,
     }
 
     local filetype = {

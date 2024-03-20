@@ -14,6 +14,7 @@ return {
         f.black,
         f.stylua,
         f.prettierd,
+        f.gofmt,
       },
       on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then

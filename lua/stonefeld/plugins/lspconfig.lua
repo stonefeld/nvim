@@ -1,7 +1,5 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
-  cmd = "Mason",
   dependencies = {
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
@@ -42,7 +40,7 @@ return {
       end,
     })
 
-    local signs = { Error = "󰅚", Warn = "󰀪", Hint = "󰌶", Info = "󰋽" }
+    local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -106,9 +104,7 @@ return {
     })
 
     require("mason").setup()
-    require("mason-tool-installer").setup({
-      ensure_installed = ensure_installed,
-    })
+    require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
     require("mason-lspconfig").setup({
       handlers = {
         function(server_name)
@@ -116,6 +112,7 @@ return {
           server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
           require("lspconfig")[server_name].setup(server)
         end,
+        ["jdtls"] = function() end,
       },
     })
   end,

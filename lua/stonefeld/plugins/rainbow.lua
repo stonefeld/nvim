@@ -13,6 +13,7 @@ return {
         vue = "rainbow-parens",
         tsx = "rainbow-parens",
         html = "rainbow-parens",
+        xml = "rainbow-parens",
       },
     })
   end,

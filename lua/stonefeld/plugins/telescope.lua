@@ -115,6 +115,7 @@ return {
     map("<leader><Space>", builtin.buffers, "Find open buffers")
     map("<leader>fd", builtin.diagnostics, "Find diagnostics")
     map("<leader>fw", builtin.live_grep, "Find text inside files from CWD")
+    map("<leader>fk", builtin.keymaps, "Find keymaps")
     map("z=", builtin.spell_suggest, "Find spelling suggestions")
   end,
 }

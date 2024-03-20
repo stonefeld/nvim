@@ -57,6 +57,7 @@ return {
       map("n", "<leader>hu", gitsigns.undo_stage_hunk, { desc = "Undo stage the current hunk" })
       map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "Reset the whole buffer" })
       map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "Preview the current hunk" })
+      map("n", "<leader>hi", gitsigns.preview_hunk_inline, { desc = "Preview the current hunk inline" })
       map("n", "<leader>hb", function()
         gitsigns.blame_line({ full = false })
       end, { desc = "Blame the current line" })
