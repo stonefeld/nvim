@@ -52,14 +52,14 @@ map("n", "<leader>s", ":set spell!<CR>", "Toggle spell checking")
 map("n", "<leader>w", function()
   vim.o.wrap = not vim.o.wrap
   if vim.o.wrap then
-    vim.keymap.set("n", "j", "gj", { buffer = 0 })
-    vim.keymap.set("n", "k", "gk", { buffer = 0 })
-    vim.keymap.set("n", "$", "g$", { buffer = 0 })
-    vim.keymap.set("n", "0", "g0", { buffer = 0 })
+    vim.keymap.set({ "n", "v" }, "j", "gj", { buffer = 0 })
+    vim.keymap.set({ "n", "v" }, "k", "gk", { buffer = 0 })
+    vim.keymap.set({ "n", "v" }, "$", "g$", { buffer = 0 })
+    vim.keymap.set({ "n", "v" }, "0", "g0", { buffer = 0 })
   else
-    vim.keymap.del("n", "j", { buffer = 0 })
-    vim.keymap.del("n", "k", { buffer = 0 })
-    vim.keymap.del("n", "$", { buffer = 0 })
-    vim.keymap.del("n", "0", { buffer = 0 })
+    vim.keymap.del({ "n", "v" }, "j", { buffer = 0 })
+    vim.keymap.del({ "n", "v" }, "k", { buffer = 0 })
+    vim.keymap.del({ "n", "v" }, "$", { buffer = 0 })
+    vim.keymap.del({ "n", "v" }, "0", { buffer = 0 })
   end
 end, "Toggle line wrapping")
