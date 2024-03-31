@@ -89,7 +89,7 @@ return {
       tsserver = {},
       eslint = {},
       html = {
-        filetypes = { "html", "htmldjango" },
+        filetypes = { "html", "htmldjango", "jsp" },
       },
       cssls = {},
       emmet_ls = {},

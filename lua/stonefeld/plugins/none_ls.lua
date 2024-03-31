@@ -5,7 +5,7 @@ return {
     local none_ls = require("null-ls")
 
     local f = none_ls.builtins.formatting
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    -- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
     none_ls.setup({
       sources = {
@@ -18,17 +18,23 @@ return {
       },
       on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
-          vim.api.nvim_clear_autocmds({
-            group = augroup,
+          vim.keymap.set("n", "<leader>fm", function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+          end, {
+            desc = "Format the current buffer",
             buffer = bufnr,
           })
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.format({ bufnr = bufnr })
-            end,
-          })
+          -- vim.api.nvim_clear_autocmds({
+          --   group = augroup,
+          --   buffer = bufnr,
+          -- })
+          -- vim.api.nvim_create_autocmd("BufWritePre", {
+          --   group = augroup,
+          --   buffer = bufnr,
+          --   callback = function()
+          --     vim.lsp.buf.format({ bufnr = bufnr })
+          --   end,
+          -- })
         end
       end,
     })

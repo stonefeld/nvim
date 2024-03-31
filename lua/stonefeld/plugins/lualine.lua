@@ -10,6 +10,13 @@ return {
       return vim.api.nvim_win_get_width(0) > 100
     end
 
+    local spacer = {
+      function()
+        return " "
+      end,
+      padding = 0,
+    }
+
     local mode = {
       "mode",
       fmt = function(str)
@@ -42,7 +49,7 @@ return {
       "filetype",
       colored = false,
       padding = {
-        left = 1,
+        left = 0,
         right = 2,
       },
       cond = big_window,
@@ -83,7 +90,7 @@ return {
         lualine_b = { "branch", diff, diagnostics },
         lualine_c = { filename },
         lualine_x = {},
-        lualine_y = { filetype, encoding, fileformat, filesize },
+        lualine_y = { spacer, filetype, encoding, fileformat, filesize },
       },
       inactive_sections = {
         lualine_c = { filename },

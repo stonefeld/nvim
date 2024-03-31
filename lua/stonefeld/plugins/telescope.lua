@@ -100,17 +100,20 @@ return {
       },
       extensions = {
         ["ui-select"] = themes.get_dropdown({ borderchars = borderchars_squared }),
+        ["find_dirs"] = themes.get_dropdown({ previewer = false, borderchars = borderchars_squared })
       },
     })
 
     pcall(telescope.load_extension, "fzf")
     pcall(telescope.load_extension, "ui-select")
+    pcall(telescope.load_extension, "find_dirs")
 
     local map = function(keys, func, desc)
       vim.keymap.set("n", keys, func, { noremap = true, silent = true, desc = desc })
     end
 
     map("<C-p>", builtin.find_files, "Find files in CWD")
+    map("<leader>ff", ":Telescope find_dirs<CR>", "Find directories")
     map("<leader>fh", builtin.help_tags, "Find help information")
     map("<leader><Space>", builtin.buffers, "Find open buffers")
     map("<leader>fd", builtin.diagnostics, "Find diagnostics")
