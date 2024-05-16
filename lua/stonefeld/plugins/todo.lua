@@ -14,6 +14,7 @@ return {
         TEST = { icon = " " },
       },
     })
+
     vim.keymap.set("n", "<leader>fn", ":TodoTrouble<CR>", { silent = true, desc = "Find TODOs" })
   end,
 }

@@ -15,6 +15,11 @@ return {
       highlight_overrides = {
         all = function(colors)
           return {
+            TelescopeNormal = { link = "NormalFloat" },
+            TelescopeBorder = { fg = colors.blue, bg = colors.mantle },
+            TelescopePromptBorder = { fg = colors.peach, bg = colors.mantle },
+            TelescopePromptTitle = { fg = colors.peach, bg = colors.mantle },
+
             htmlTagName = { fg = colors.blue },
             htmlSpecialTagName = { fg = colors.blue },
             htmlTag = { fg = colors.teal },

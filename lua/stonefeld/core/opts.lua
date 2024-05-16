@@ -57,6 +57,9 @@ vim.o.completeopt = "menuone,noselect"
 -- swapfiles are not for me
 vim.o.swapfile = false
 
+-- show a preview of the substitution
+vim.o.inccommand = "split"
+
 -- set spell languages to spanish and english
 vim.o.spelllang = "es,en_us"
 

@@ -5,7 +5,7 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "java",
       callback = function()
-        local config = {
+        require("jdtls").start_or_attach({
           cmd = { vim.fn.stdpath("data") .. "/mason/packages/jdtls/jdtls" },
           root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml" }, { upward = true })[1]),
           settings = {
@@ -18,8 +18,7 @@ return {
               },
             },
           },
-        }
-        require("jdtls").start_or_attach(config)
+        })
       end,
     })
   end,

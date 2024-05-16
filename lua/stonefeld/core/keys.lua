@@ -21,6 +21,12 @@ map("n", "<Tab>", ":bn<CR>", "Navigate bufferlist forward")
 map("n", "<S-Tab>", ":bp<CR>", "Navigate bufferlist backward")
 map("n", "<leader>x", ":bp | sp | bn | bd<CR>", "Close buffer but not windows")
 
+-- resize windows
+map("n", "<M-,>", ":vertical resize -5<CR>", "Resize window smaller")
+map("n", "<M-.>", ":vertical resize +5<CR>", "Resize window bigger")
+map("n", "<M-t>", ":resize +1<CR>", "Resize window taller")
+map("n", "<M-s>", ":resize -1<CR>", "Resize window smaller")
+
 -- open current buffer in a new tab
 map("n", "<leader>te", ":tabe %<CR>", "Open current buffer in a new tab")
 

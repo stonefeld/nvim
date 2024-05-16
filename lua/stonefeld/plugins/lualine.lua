@@ -14,6 +14,7 @@ return {
       function()
         return " "
       end,
+      cond = big_window,
       padding = 0,
     }
 
