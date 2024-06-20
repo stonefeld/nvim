@@ -12,7 +12,7 @@ return {
       window = {
         winblend = 0,
         x_padding = 0,
-        normal_hl = "StatusLine",
+        normal_hl = "NormalFloat",
       },
     },
   },

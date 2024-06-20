@@ -4,7 +4,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = "mocha",
+      flavour = "macchiato",
       integrations = {
         mason = true,
         fidget = true,
@@ -50,27 +50,36 @@ return {
     "ellisonleao/gruvbox.nvim",
     name = "gruvbox",
     priority = 1000,
-    opts = {
-      italic = {
-        strings = false,
-        comments = false,
-        operators = false,
-      },
-      invert_selection = true,
-      contrast = "hard",
-      overrides = {
-        GitSignsAdd = { link = "DiagnosticSignOk" },
-        GitSignsChange = { link = "DiagnosticSignWarn" },
-        GitSignsDelete = { link = "DiagnosticSignError" },
-        RainbowDelimiterRed = { link = "TSRainbowRed" },
-        RainbowDelimiterOrange = { link = "TSRainbowOrange" },
-        RainbowDelimiterYellow = { link = "TSRainbowYellow" },
-        RainbowDelimiterGreen = { link = "TSRainbowGreen" },
-        RainbowDelimiterBlue = { link = "TSRainbowBlue" },
-        RainbowDelimiterCyan = { link = "TSRainbowCyan" },
-        RainbowDelimiterViolet = { link = "TSRainbowViolet" },
-      },
-    },
+    config = function()
+      local gruvbox = require("gruvbox")
+      local colors = gruvbox.palette
+
+      gruvbox.setup({
+        italic = {
+          strings = false,
+          comments = false,
+          operators = false,
+        },
+        contrast = "hard",
+        overrides = {
+          TelescopeNormal = { bg = colors.dark0 },
+          TelescopePromptBorder = { fg = colors.bright_yellow, bg = colors.dark0 },
+          TelescopeResultsBorder = { fg = colors.bright_blue, bg = colors.dark0 },
+          TelescopePreviewBorder = { fg = colors.bright_blue, bg = colors.dark0 },
+          TelescopeSelection = { fg = colors.bright_orange, bg = colors.dark1 },
+          TelescopeSelectionCaret = { fg = colors.bright_red, bg = colors.dark1 },
+
+          SignColumn = { link = "Normal" },
+          GruvboxGreenSign = { bg = "" },
+          GruvboxOrangeSign = { bg = "" },
+          GruvboxPurpleSign = { bg = "" },
+          GruvboxYellowSign = { bg = "" },
+          GruvboxRedSign = { bg = "" },
+          GruvboxBlueSign = { bg = "" },
+          GruvboxAquaSign = { bg = "" },
+        },
+      })
+    end,
   },
 
   {
@@ -78,5 +87,12 @@ return {
     name = "tokyonight",
     priority = 1000,
     opts = { style = "night" },
+  },
+
+  {
+    "Mofiqul/vscode.nvim",
+    name = "vscode",
+    priority = 1000,
+    config = true,
   },
 }

@@ -12,12 +12,8 @@ return {
       use_diagnostic_signs = true,
     })
 
-    vim.keymap.set("n", "<leader>tt", trouble.toggle)
-    vim.keymap.set("n", "<leader>td", function()
-      trouble.toggle("document_diagnostics")
-    end)
-    vim.keymap.set("n", "<leader>tw", function()
-      trouble.toggle("workspace_diagnostics")
-    end)
+    vim.keymap.set("n", "<leader>wd", function()
+      trouble.toggle("diagnostics")
+    end, { desc = "Toggle diagnostics" })
   end,
 }

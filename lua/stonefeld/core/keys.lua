@@ -54,8 +54,9 @@ map("v", "<leader>/", 'y/<C-R>"<CR>', "Search the selected text")
 
 -- toggle some useful values
 map("n", "<Esc>", ":nohls<CR>", "Clear search highlights")
-map("n", "<leader>s", ":set spell!<CR>", "Toggle spell checking")
-map("n", "<leader>w", function()
+map("n", "<leader>ts", ":set spell!<CR>", "Toggle spell checking")
+map("n", "<leader>tl", ":set list!<CR>", "Toggle list characters")
+map("n", "<leader>tw", function()
   vim.o.wrap = not vim.o.wrap
   if vim.o.wrap then
     vim.keymap.set({ "n", "v" }, "j", "gj", { buffer = 0 })

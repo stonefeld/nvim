@@ -5,7 +5,6 @@ return {
     { "williamboman/mason-lspconfig.nvim" },
     { "WhoIsSethDaniel/mason-tool-installer.nvim" },
     { "hrsh7th/cmp-nvim-lsp" },
-    { "ray-x/lsp_signature.nvim" },
   },
   config = function()
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -102,12 +101,6 @@ return {
         end,
         ["jdtls"] = function() end,
       },
-    })
-
-    require("lsp_signature").setup({
-      floating_window = false,
-      hint_prefix = " ",
-      always_trigger = true,
     })
   end,
 }

@@ -1,5 +1,5 @@
 -- always use the block as cursor
--- vim.o.guicursor = "a:block"
+vim.o.guicursor = "a:block"
 
 -- right-click mouse no paste
 vim.o.mousemodel = "extend"
@@ -62,6 +62,9 @@ vim.o.inccommand = "split"
 
 -- set spell languages to spanish and english
 vim.o.spelllang = "es,en_us"
+
+-- set listchars to display tabs, end of lines and spaces
+vim.o.listchars = "tab:| ,eol:$,space:."
 
 -- enable editorconfig by default
 vim.g.editorconfig = true
