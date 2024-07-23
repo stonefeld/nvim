@@ -1,5 +1,32 @@
-require("stonefeld.core")
-require("stonefeld.lazy")
+-- configure the core settings
+require("stonefeld.core.options")
+require("stonefeld.core.keymaps")
+require("stonefeld.core.autocmds")
 
--- set the colorscheme once everything is set up
-vim.cmd.colorscheme("gruvbox")
+-- now configure all plugins
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
+end
+
+vim.opt.rtp:prepend(lazypath)
+local lazy = require("lazy")
+
+lazy.setup({
+  { import = "stonefeld.plugins" },
+}, {
+  checker = {
+    enabled = true,
+    notify = false,
+  },
+  change_detection = {
+    notify = false,
+  },
+})

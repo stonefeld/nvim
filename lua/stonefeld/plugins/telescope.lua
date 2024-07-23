@@ -2,7 +2,9 @@ return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
   dependencies = {
-    { "nvim-lua/plenary.nvim" },
+    "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
+    { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
@@ -10,8 +12,6 @@ return {
         return vim.fn.executable("make") == 1
       end,
     },
-    { "nvim-telescope/telescope-ui-select.nvim" },
-    { "nvim-tree/nvim-web-devicons" },
   },
   config = function()
     local telescope = require("telescope")
@@ -19,6 +19,8 @@ return {
     local action_layout = require("telescope.actions.layout")
     local themes = require("telescope.themes")
     local builtin = require("telescope.builtin")
+
+    local u = require("stonefeld.core.utils")
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "TelescopeResults",
@@ -31,24 +33,19 @@ return {
     })
 
     local path_display_fmt = function(_, path)
-      local tail = require("telescope.utils").path_tail(path)
+      local tail = vim.fs.basename(path)
+      local head = vim.fs.dirname(path)
       if tail == path then
         return tail
       end
-      return string.format("%s\t(%s)\t", tail, path)
+      return string.format("%s\t(%s)\t", tail, head)
     end
-
-    local borderchars_squared = {
-      prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
-      results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
-    }
 
     telescope.setup({
       defaults = {
         sorting_strategy = "ascending",
         layout_config = { prompt_position = "top" },
         results_title = false,
-        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         mappings = {
           i = {
             -- use telescope as if it was fzf
@@ -74,18 +71,13 @@ return {
       pickers = {
         find_files = { path_display = path_display_fmt },
         live_grep = {
-          layout_strategy = "vertical",
-          layout_config = {
-            vertical = { width = 0.9, height = 0.9, preview_height = 0.4, preview_cutoff = 0 },
-            prompt_position = "bottom",
-          },
+          previewer = false,
           path_display = { "smart", shorten = { len = 3 } },
           wrap_results = true,
         },
         buffers = themes.get_dropdown({
           previewer = false,
           path_display = path_display_fmt,
-          borderchars = borderchars_squared,
           show_all_buffers = true,
           sort_mru = true,
           ignore_current_buffer = true,
@@ -95,12 +87,11 @@ return {
             },
           },
         }),
-        help_tags = themes.get_dropdown({ previewer = false, borderchars = borderchars_squared }),
-        spell_suggest = themes.get_cursor({ borderchars = borderchars_squared }),
+        help_tags = themes.get_dropdown({ previewer = false }),
       },
       extensions = {
-        ["ui-select"] = themes.get_dropdown({ borderchars = borderchars_squared }),
-        ["find_dirs"] = themes.get_dropdown({ previewer = false, borderchars = borderchars_squared })
+        ["ui-select"] = themes.get_dropdown({ previewer = false }),
+        ["find_dirs"] = themes.get_dropdown({ previewer = false }),
       },
     })
 
@@ -108,17 +99,13 @@ return {
     pcall(telescope.load_extension, "ui-select")
     pcall(telescope.load_extension, "find_dirs")
 
-    local map = function(keys, func, desc)
-      vim.keymap.set("n", keys, func, { noremap = true, silent = true, desc = desc })
-    end
-
-    map("<C-p>", builtin.find_files, "Find files in CWD")
-    map("<leader>ff", ":Telescope find_dirs<CR>", "Find directories")
-    map("<leader>fh", builtin.help_tags, "Find help information")
-    map("<leader><Space>", builtin.buffers, "Find open buffers")
-    map("<leader>fd", builtin.diagnostics, "Find diagnostics")
-    map("<leader>fw", builtin.live_grep, "Find text inside files from CWD")
-    map("<leader>fk", builtin.keymaps, "Find keymaps")
-    map("z=", builtin.spell_suggest, "Find spelling suggestions")
+    u.nmap("<C-p>", builtin.find_files, "[Telescope] Find files")
+    u.nmap("<leader>ff", ":Telescope find_dirs<CR>", "[Telescope] Find directories")
+    u.nmap("<leader><Space>", builtin.buffers, "[Telescope] Find open buffers")
+    u.map("v", "<leader>fw", "y:Telescope live_grep default_text=<C-r>0<CR>", "[Telescpe] Find selected word")
+    u.nmap("<leader>fw", builtin.live_grep, "[Telescope] Find text inside files")
+    -- u.nmap("<leader>fd", builtin.diagnostics, "[Telescope] Find diagnostics")
+    u.nmap("<leader>fk", builtin.keymaps, "[Telescope] Find keymaps")
+    u.nmap("<leader>fh", builtin.help_tags, "[Telescope] Find help information")
   end,
 }

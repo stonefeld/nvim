@@ -1,13 +1,12 @@
 return {
   "folke/todo-comments.nvim",
   event = "VimEnter",
-  dependencies = {
-    { "nvim-lua/plenary.nvim" },
-    { "folke/trouble.nvim" },
-  },
+  dependencies = { "nvim-lua/plenary.nvim" },
   config = function()
+    local u = require("stonefeld.core.utils")
     require("todo-comments").setup({
       keywords = {
+        TODO = { icon = " " },
         HACK = { icon = " " },
         PERF = { icon = " " },
         NOTE = { icon = " " },
@@ -15,6 +14,6 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>fn", ":TodoTrouble<CR>", { silent = true, desc = "Find TODOs" })
+    u.nmap("<leader>ft", ":TodoQuickFix<CR>", "[TODO] Find project-wide TODOs")
   end,
 }

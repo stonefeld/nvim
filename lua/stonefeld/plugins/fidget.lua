@@ -15,5 +15,5 @@ return {
         normal_hl = "NormalFloat",
       },
     },
-  },
+  }
 }

@@ -1,22 +1,12 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = {
-    { "nvim-tree/nvim-web-devicons" },
-  },
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local lualine = require("lualine")
 
     local function big_window()
       return vim.api.nvim_win_get_width(0) > 100
     end
-
-    local spacer = {
-      function()
-        return " "
-      end,
-      cond = big_window,
-      padding = 0,
-    }
 
     local mode = {
       "mode",
@@ -50,7 +40,7 @@ return {
       "filetype",
       colored = false,
       padding = {
-        left = 0,
+        left = 1,
         right = 2,
       },
       cond = big_window,
@@ -91,7 +81,7 @@ return {
         lualine_b = { "branch", diff, diagnostics },
         lualine_c = { filename },
         lualine_x = {},
-        lualine_y = { spacer, filetype, encoding, fileformat, filesize },
+        lualine_y = { filetype, encoding, fileformat, filesize },
       },
       inactive_sections = {
         lualine_c = { filename },

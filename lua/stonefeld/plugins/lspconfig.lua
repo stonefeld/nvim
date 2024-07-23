@@ -1,29 +1,27 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    { "williamboman/mason.nvim" },
-    { "williamboman/mason-lspconfig.nvim" },
-    { "WhoIsSethDaniel/mason-tool-installer.nvim" },
-    { "hrsh7th/cmp-nvim-lsp" },
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   config = function()
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
         local map = function(keys, func, desc)
-          vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+          vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc or "" })
         end
 
-        map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-        map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-        map("gr", vim.lsp.buf.references, "[G]oto [R]eferences")
-        map("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+        map("gd", vim.lsp.buf.definition, "[LSP] Goto Definition")
+        map("gD", vim.lsp.buf.declaration, "[LSP] Goto Declaration")
+        map("gI", vim.lsp.buf.implementation, "[LSP] Goto Implementation")
+        map("gr", vim.lsp.buf.references, "[LSP] Goto Implementation")
 
-        map("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame")
-        map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+        map("<leader>rn", vim.lsp.buf.rename, "[LSP] Rename")
+        map("<leader>ca", vim.lsp.buf.code_action, "[LSP] Code Action")
 
-        map("K", vim.lsp.buf.hover, "[K]ind (Hover documentation)")
-        map("<leader>fm", vim.lsp.buf.format, "[F]or[M]at")
+        map("K", vim.lsp.buf.hover, "[LSP] Kind (Hover documentation)")
       end,
     })
 
@@ -32,6 +30,8 @@ return {
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
     end
+
+    vim.diagnostic.config({ virtual_text = false })
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
@@ -64,6 +64,9 @@ return {
         settings = {
           pylsp = {
             plugins = {
+              -- rope_autoimport = {
+              --   enabled = true,
+              -- },
               pycodestyle = {
                 ignore = { "E501", "W391", "W503", "W504", "W291", "W293" },
                 maxLineLength = 120,
@@ -75,7 +78,7 @@ return {
       tsserver = {},
       eslint = {},
       html = {
-        filetypes = { "html", "htmldjango", "jsp" },
+        filetypes = { "html", "htmldjango" },
       },
       cssls = {},
       emmet_ls = {},
@@ -99,7 +102,6 @@ return {
           server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
           require("lspconfig")[server_name].setup(server)
         end,
-        ["jdtls"] = function() end,
       },
     })
   end,

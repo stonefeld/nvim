@@ -1,5 +1,5 @@
 return {
-  "christoomey/vim-tmux-navigator",
-  "tpope/vim-obsession",
   "tpope/vim-sleuth",
+  "tpope/vim-obsession",
+  "christoomey/vim-tmux-navigator",
 }
