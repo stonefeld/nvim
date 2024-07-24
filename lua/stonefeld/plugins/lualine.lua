@@ -5,36 +5,28 @@ return {
     local lualine = require("lualine")
 
     local function big_window()
-      return vim.api.nvim_win_get_width(0) > 100
+      return vim.api.nvim_win_get_width(0) > 120
     end
-
-    local mode = {
-      "mode",
-      fmt = function(str)
-        if big_window() then
-          return str:sub(1, 1) .. str:sub(2):lower()
-        end
-        return str:sub(1, 1)
-      end,
-    }
 
     local diff = {
       "diff",
-      colored = false,
       cond = big_window,
     }
 
     local diagnostics = {
       "diagnostics",
       symbols = { error = " ", warn = " ", hint = " ", info = " " },
-      colored = false,
     }
 
-    local filename = {
-      "filename",
-      newfile_status = true,
-      path = 1,
-    }
+    local filename = function()
+      local filepath
+      if big_window() then
+        filepath = vim.fn.pathshorten(vim.fn.expand("%:p:~"))
+      else
+        filepath = vim.fn.expand("%:t")
+      end
+      return filepath
+    end
 
     local filetype = {
       "filetype",
@@ -59,10 +51,6 @@ return {
         dos = "[dos]",
         mac = "[mac]",
       },
-      padding = {
-        left = 0,
-        right = 1,
-      },
       cond = big_window,
     }
 
@@ -77,10 +65,10 @@ return {
         section_separators = "",
       },
       sections = {
-        lualine_a = { mode },
-        lualine_b = { "branch", diff, diagnostics },
-        lualine_c = { filename },
-        lualine_x = {},
+        lualine_a = { filename },
+        lualine_b = { "branch", diff },
+        lualine_c = { diagnostics },
+        lualine_x = { "%h%m%r" },
         lualine_y = { filetype, encoding, fileformat, filesize },
       },
       inactive_sections = {

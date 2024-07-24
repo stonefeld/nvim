@@ -14,7 +14,6 @@ return {
         css = { { "prettierd", "prettier" } },
         json = { { "prettierd", "prettier" } },
         go = { "gofmt" },
-        htmldjango = { "djlint" },
       },
     })
 
