@@ -53,7 +53,7 @@ return {
             ["<C-p>"] = actions.cycle_history_prev,
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
-            ["<ESC>"] = actions.close,
+            -- ["<ESC>"] = actions.close,
 
             -- toggle the preview
             ["<M-p>"] = action_layout.toggle_preview,
@@ -82,9 +82,8 @@ return {
           sort_mru = true,
           ignore_current_buffer = true,
           mappings = {
-            i = {
-              ["<C-d>"] = actions.delete_buffer,
-            },
+            i = { ["<C-d>"] = actions.delete_buffer },
+            n = { ["<C-d>"] = actions.delete_buffer },
           },
         }),
         help_tags = themes.get_dropdown({ previewer = false }),

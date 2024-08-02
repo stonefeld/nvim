@@ -52,3 +52,14 @@ u.nmap("<leader>th", ":set hls!<CR>", "[Core] Toggle search highlighting")
 u.nmap("<leader>ts", ":set spell!<CR>", "[Core] Toggle spell checking")
 u.nmap("<leader>tl", ":set list!<CR>", "[Core] Toggle listchars")
 u.nmap("<leader>tw", ":set wrap!<CR>", "[Core] Toggle line wrapping")
+
+-- print full path of the current file
+u.nmap("<leader><C-g>", ":echo expand('%:p')<CR>", "[Core] Print full path of the current file")
+
+-- emacs style cmdline bindings
+u.map("c", "<C-a>", "<Home>", "[Core] Move to the beginning of the cmdline", { noremap = true })
+u.map("c", "<C-e>", "<End>", "[Core] Move to the end of the cmdline", { noremap = true })
+u.map("c", "<C-b>", "<Left>", "[Core] Move one character to the left in the cmdline", { noremap = true })
+u.map("c", "<C-f>", "<Right>", "[Core] Move one character to the right in the cmdline", { noremap = true })
+u.map("c", "<C-d>", "<Del>", "[Core] Delete the character under the cursor in the cmdline", { noremap = true })
+u.map("c", "<C-y>", "<C-R>0", "[Core] Paste the yanked text into the cmdline", { noremap = true })

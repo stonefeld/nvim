@@ -56,6 +56,8 @@ return {
 
       map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "Toggle current line blame" })
       map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "Toggle deleted" })
+
+      map("n", "<leader>hd", ":tabe % | Gitsigns diffthis<CR>", { desc = "Diff current buffer in a new tab", silent = true })
     end,
   },
 }

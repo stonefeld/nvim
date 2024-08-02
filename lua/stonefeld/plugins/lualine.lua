@@ -8,16 +8,6 @@ return {
       return vim.api.nvim_win_get_width(0) > 120
     end
 
-    local diff = {
-      "diff",
-      cond = big_window,
-    }
-
-    local diagnostics = {
-      "diagnostics",
-      symbols = { error = " ", warn = " ", hint = " ", info = " " },
-    }
-
     local filename = function()
       local filepath
       if big_window() then
@@ -27,6 +17,16 @@ return {
       end
       return filepath
     end
+
+    local diff = {
+      "diff",
+      cond = big_window,
+    }
+
+    local diagnostics = {
+      "diagnostics",
+      symbols = { error = " ", warn = " ", hint = " ", info = " " },
+    }
 
     local filetype = {
       "filetype",

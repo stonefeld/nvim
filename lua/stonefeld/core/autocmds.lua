@@ -76,12 +76,12 @@ augs.CoreExtras = {
       vim.opt_local.colorcolumn = ""
     end,
   },
-  disable_folds = {
+  wrap_on_dap_windows = {
     event = "FileType",
-    pattern = { "NeogitStatus", "NeogitDiffView", "NeogitCommitView" },
-    desc = "Disable fold column for neogit status",
+    pattern = { "dap-repl", "dapui_console" },
+    desc = "Wrap lines on DAP windows",
     callback = function()
-      vim.opt_local.foldcolumn = "0"
+      vim.opt_local.wrap = true
     end,
   },
 }
