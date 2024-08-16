@@ -22,6 +22,9 @@ return {
         map("<leader>ca", vim.lsp.buf.code_action, "[LSP] Code Action")
 
         map("K", vim.lsp.buf.hover, "[LSP] Kind (Hover documentation)")
+
+        -- enable inlay hints
+        vim.lsp.inlay_hint.enable()
       end,
     })
 

@@ -17,9 +17,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
-local lazy = require("lazy")
 
-lazy.setup({
+require("lazy").setup({
   { import = "stonefeld.plugins" },
 }, {
   checker = {

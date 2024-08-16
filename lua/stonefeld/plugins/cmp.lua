@@ -1,5 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
+  event = "InsertEnter",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
@@ -7,6 +8,11 @@ return {
     {
       "saadparwaiz1/cmp_luasnip",
       dependencies = { "L3MON4D3/LuaSnip" },
+    },
+    {
+      "kristijanhusak/vim-dadbod-completion",
+      ft = { "sql", "mysql", "plsql" },
+      lazy = true,
     },
     "onsails/lspkind.nvim",
   },
@@ -57,6 +63,7 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "vim-dadbod-completion" },
         { name = "buffer" },
         { name = "path" },
       }),
