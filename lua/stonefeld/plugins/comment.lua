@@ -1,7 +1,7 @@
 return {
   "numToStr/Comment.nvim",
   event = { "BufReadPre", "BufNewFile" },
-  dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+  dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
   config = function()
     local comment = require("Comment")
     local ft = require("Comment.ft")

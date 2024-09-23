@@ -7,7 +7,7 @@ return {
     "hrsh7th/cmp-path",
     {
       "saadparwaiz1/cmp_luasnip",
-      dependencies = { "L3MON4D3/LuaSnip" },
+      dependencies = "L3MON4D3/LuaSnip",
     },
     {
       "kristijanhusak/vim-dadbod-completion",

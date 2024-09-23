@@ -1,14 +1,8 @@
 return {
   "mfussenegger/nvim-dap",
   dependencies = {
-    {
-      "rcarriga/nvim-dap-ui",
-      dependencies = { "nvim-neotest/nvim-nio" },
-    },
-    {
-      "jay-babu/mason-nvim-dap.nvim",
-      dependencies = { "williamboman/mason.nvim" },
-    },
+    { "rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio" },
+    { "jay-babu/mason-nvim-dap.nvim", dependencies = "williamboman/mason.nvim" },
   },
   lazy = true,
   cmd = { "DapContinue", "DapToggleBreakpoint" },

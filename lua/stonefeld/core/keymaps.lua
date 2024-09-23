@@ -12,12 +12,13 @@ u.map("v", "J", ":m '>+1<CR>gv", "[Core] Move selected lines down")
 u.map("v", "K", ":m '<-2<CR>gv", "[Core] Move selected lines up")
 
 -- open netrw
-u.nmap("<leader>e", ":Ex<CR>", "[Core] Open netrw (file explorer)")
+u.nmap("<leader>e", ":Ex $PWD<CR>", "[Core] Open netrw (file explorer)")
+u.nmap("<leader>fe", ":Ex<CR>", "[Core] Open netrw (file explorer)")
 
 -- manage buffers
 u.nmap("<Tab>", ":bn<CR>", "[Core] Focus next buffer")
 u.nmap("<S-Tab>", ":bp<CR>", "[Core] Focus previous buffer")
-u.nmap("<leader>x", ":bp | sp | bn | bd<CR>", "[Core] Close current buffer")
+u.nmap("<leader>x", ":b# | sp | b# | bd<CR>", "[Core] Close current buffer")
 u.nmap("<leader>o", ":b#<CR>", "[Core] Switch to the alternate buffer")
 
 -- manage tabs

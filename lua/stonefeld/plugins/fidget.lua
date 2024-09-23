@@ -4,9 +4,7 @@ return {
   opts = {
     progress = {
       suppress_on_insert = true,
-      display = {
-        done_icon = "✔ ",
-      },
+      display = { done_icon = "✔ " },
     },
     notification = {
       window = {
@@ -15,5 +13,5 @@ return {
         normal_hl = "NormalFloat",
       },
     },
-  }
+  },
 }

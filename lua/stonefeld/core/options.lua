@@ -41,9 +41,6 @@ vim.o.scrolloff = 3
 vim.o.signcolumn = "yes"
 vim.o.foldcolumn = "auto:1"
 
--- 120 characters width limit is ok
-vim.o.colorcolumn = "121"
-
 -- increase update speed
 vim.o.updatetime = 250
 

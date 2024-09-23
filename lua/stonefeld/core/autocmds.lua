@@ -1,4 +1,5 @@
 local augs = {}
+local u = require("stonefeld.core.utils")
 
 -- format the file
 augs.CoreFormatting = {
@@ -34,6 +35,18 @@ augs.CoreSetFiletypes = {
     desc = "Use NASM for Assembly files",
     command = [[ setl ft=nasm ]],
   },
+  set_angular_ft = {
+    event = { "BufNewFile", "BufRead" },
+    pattern = "*.component.html",
+    desc = "Use Angular for Angular files",
+    command = [[ setl ft=htmlangular ]],
+  },
+  set_pandoc_ft = {
+    event = { "BufNewFile", "BufRead" },
+    pattern = "*.md",
+    desc = "Use Pandoc for Markdown files",
+    command = [[ setl ft=markdown.pandoc ]],
+  },
 }
 
 -- set specific keymaps for some filetypes
@@ -46,12 +59,57 @@ augs.CoreFiletypeKeymaps = {
       vim.keymap.set("n", "q", ":q<CR>", { buffer = 0, silent = true })
     end,
   },
-  q_to_close_netrw = {
+  compile_markdown = {
     event = "FileType",
-    pattern = "netrw",
-    desc = "Close netrw",
+    pattern = "markdown.pandoc",
+    desc = "Compile markdown files",
     callback = function()
-      vim.keymap.set("n", "<leader>e", ":b#<CR>", { buffer = 0, silent = true })
+      u.nmap("<M-m>", ":w | make<CR>", "[Core] Compile markdown file", { buffer = 0 })
+      u.nmap("<M-o>", function()
+        local file = vim.fn.expand("%:p:r")
+        vim.fn.jobstart("xdg-open " .. file .. ".pdf", { detach = true })
+      end, "[Core] Open generated PDF", { buffer = 0 })
+
+      u.nmap("j", "gj", "[Core] Move in wrapped lines", { buffer = 0 })
+      u.nmap("k", "gk", "[Core] Move in wrapped lines", { buffer = 0 })
+      u.nmap("$", "g$", "[Core] Move in wrapped lines", { buffer = 0 })
+      u.nmap("0", "g0", "[Core] Move in wrapped lines", { buffer = 0 })
+    end,
+  },
+}
+
+augs.CoreFiletypeSettings = {
+  quickfix_styles = {
+    event = "FileType",
+    pattern = "qf",
+    desc = "Set quickfix window styles",
+    callback = function()
+      vim.opt_local.number = false
+      vim.opt_local.relativenumber = false
+      vim.opt_local.colorcolumn = ""
+    end,
+  },
+  markdown_styles = {
+    event = "FileType",
+    pattern = "markdown.pandoc",
+    desc = "Set markdown styles",
+    callback = function()
+      vim.opt_local.wrap = true
+      vim.opt_local.breakindent = false
+      vim.opt_local.number = false
+      vim.opt_local.relativenumber = false
+      vim.opt_local.textwidth = 80
+      vim.opt_local.colorcolumn = "81"
+      vim.opt_local.spell = true
+      vim.opt_local.makeprg = "mdc %"
+    end,
+  },
+  wrap_on_dap_windows = {
+    event = "FileType",
+    pattern = { "dap-repl", "dapui_console" },
+    desc = "Wrap lines on DAP windows",
+    callback = function()
+      vim.opt_local.wrap = true
     end,
   },
 }
@@ -64,24 +122,6 @@ augs.CoreExtras = {
     desc = "Highlight when yanking text",
     callback = function()
       vim.highlight.on_yank()
-    end,
-  },
-  quickfix_styles = {
-    event = "FileType",
-    pattern = "qf",
-    desc = "Set quickfix window styles",
-    callback = function()
-      vim.opt_local.number = false
-      vim.opt_local.relativenumber = false
-      vim.opt_local.colorcolumn = ""
-    end,
-  },
-  wrap_on_dap_windows = {
-    event = "FileType",
-    pattern = { "dap-repl", "dapui_console" },
-    desc = "Wrap lines on DAP windows",
-    callback = function()
-      vim.opt_local.wrap = true
     end,
   },
 }

@@ -87,6 +87,7 @@ return {
           },
         }),
         help_tags = themes.get_dropdown({ previewer = false }),
+        spell_suggest = themes.get_cursor(),
       },
       extensions = {
         ["ui-select"] = themes.get_dropdown({ previewer = false }),
@@ -105,5 +106,6 @@ return {
     u.map("v", "<leader>fw", "y:Telescope live_grep default_text=<C-r>0<CR>", "[Telescpe] Find selected word")
     u.nmap("<leader>fk", builtin.keymaps, "[Telescope] Find keymaps")
     u.nmap("<leader>fh", builtin.help_tags, "[Telescope] Find help information")
+    u.nmap("<leader>fs", builtin.spell_suggest, "[Telescope] Find spelling suggestions")
   end,
 }
