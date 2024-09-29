@@ -16,10 +16,10 @@ Simply clone the repository into your neovim config folder:
 
 ```bash
 # For Linux/MacOS users
-git clone ~/.config/nvim
+git clone https://github.com/stonefeld/nvim ~/.config/nvim
 
 # For Windows users
-git clone C:/Users/user/AppData/Local\nvim
+git clone https://github.com/stonefeld/nvim C:/Users/user/AppData/Local/nvim
 ```
 
 Once neovim is launched after cloning the repo, all plugins and tools will start downloading.
