@@ -100,10 +100,9 @@ return {
     pcall(telescope.load_extension, "find_dirs")
 
     u.nmap("<C-p>", builtin.find_files, "[Telescope] Find files")
-    u.nmap("<leader>ff", ":Telescope find_dirs<CR>", "[Telescope] Find directories")
+    u.nmap("<leader>ff", "<cmd>Telescope find_dirs<CR>", "[Telescope] Find directories")
     u.nmap("<leader><Space>", builtin.buffers, "[Telescope] Find open buffers")
     u.nmap("<leader>fw", builtin.live_grep, "[Telescope] Find text inside files")
-    u.map("v", "<leader>fw", "y:Telescope live_grep default_text=<C-r>0<CR>", "[Telescpe] Find selected word")
     u.nmap("<leader>fk", builtin.keymaps, "[Telescope] Find keymaps")
     u.nmap("<leader>fh", builtin.help_tags, "[Telescope] Find help information")
     u.nmap("<leader>fs", builtin.spell_suggest, "[Telescope] Find spelling suggestions")

@@ -24,7 +24,7 @@ return {
         map("K", vim.lsp.buf.hover, "[LSP] Kind (Hover documentation)")
 
         -- enable inlay hints
-        vim.lsp.inlay_hint.enable()
+        -- vim.lsp.inlay_hint.enable()
       end,
     })
 
@@ -37,7 +37,7 @@ return {
     vim.diagnostic.config({ virtual_text = false })
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+    capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
 
     local ensure_installed = {
       -- lsp
@@ -45,7 +45,6 @@ return {
       "clangd",
       "pylsp",
       "ts_ls",
-      "eslint",
       "html",
       "cssls",
       "emmet_ls",

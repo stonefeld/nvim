@@ -12,8 +12,8 @@ u.map("v", "J", ":m '>+1<CR>gv", "[Core] Move selected lines down")
 u.map("v", "K", ":m '<-2<CR>gv", "[Core] Move selected lines up")
 
 -- open netrw
-u.nmap("<leader>e", ":Ex $PWD<CR>", "[Core] Open netrw (file explorer)")
-u.nmap("<leader>fe", ":Ex<CR>", "[Core] Open netrw (file explorer)")
+-- u.nmap("<leader>e", ":Ex $PWD<CR>", "[Core] Open netrw (file explorer)")
+-- u.nmap("<leader>fe", ":Ex<CR>", "[Core] Open netrw (file explorer)")
 
 -- manage buffers
 u.nmap("<Tab>", ":bn<CR>", "[Core] Focus next buffer")
@@ -22,8 +22,8 @@ u.nmap("<leader>x", ":b# | sp | b# | bd<CR>", "[Core] Close current buffer")
 u.nmap("<leader>o", ":b#<CR>", "[Core] Switch to the alternate buffer")
 
 -- manage tabs
-u.nmap("<leader>te", ":tabedit %<CR>", "[Core] Open current buffer in a new tab")
 u.nmap("<leader>tc", ":tabclose<CR>", "[Core] Close current tab")
+u.nmap("<leader>to", ":tabonly<CR>", "[Core] Leave only one tab open")
 
 -- navigating through diagnostics
 u.nmap("gl", vim.diagnostic.open_float, "[Core] Open diagnostics message")
@@ -56,11 +56,3 @@ u.nmap("<leader>tw", ":set wrap!<CR>", "[Core] Toggle line wrapping")
 
 -- print full path of the current file
 u.nmap("<leader><C-g>", ":echo expand('%:p')<CR>", "[Core] Print full path of the current file")
-
--- emacs style cmdline bindings
-u.map("c", "<C-a>", "<Home>", "[Core] Move to the beginning of the cmdline", { noremap = true })
-u.map("c", "<C-e>", "<End>", "[Core] Move to the end of the cmdline", { noremap = true })
-u.map("c", "<C-b>", "<Left>", "[Core] Move one character to the left in the cmdline", { noremap = true })
-u.map("c", "<C-f>", "<Right>", "[Core] Move one character to the right in the cmdline", { noremap = true })
-u.map("c", "<C-d>", "<Del>", "[Core] Delete the character under the cursor in the cmdline", { noremap = true })
-u.map("c", "<C-y>", "<C-R>0", "[Core] Paste the yanked text into the cmdline", { noremap = true })

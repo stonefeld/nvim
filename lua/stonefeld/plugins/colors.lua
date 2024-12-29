@@ -1,4 +1,4 @@
-local colors = "gruvbox"
+local colors = "tokyonight"
 local set_colors = function(colorscheme)
   if colors == colorscheme then
     return function()
@@ -13,7 +13,7 @@ return {
     "catppuccin/nvim",
     priority = 1000,
     name = "catppuccin",
-    opts = { flavour = "macchiato" },
+    -- opts = { no_italic = true },
     init = set_colors("catppuccin"),
   },
   {
@@ -32,19 +32,9 @@ return {
     init = set_colors("gruvbox"),
   },
   {
-    "navarasu/onedark.nvim",
+    "folke/tokyonight.nvim",
     priority = 1000,
-    name = "onedark",
-    init = set_colors("onedark"),
-  },
-  {
-    "rose-pine/neovim",
-    priority = 1000,
-    name = "rose-pine",
-    opts = {
-      variant = "moon",
-      styles = { italic = false },
-    },
-    init = set_colors("rose-pine"),
+    init = set_colors("tokyonight"),
+    opts = { style = "moon" },
   },
 }
