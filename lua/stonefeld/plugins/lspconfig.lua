@@ -16,7 +16,7 @@ return {
         map("gd", vim.lsp.buf.definition, "[LSP] Goto Definition")
         map("gD", vim.lsp.buf.declaration, "[LSP] Goto Declaration")
         map("gI", vim.lsp.buf.implementation, "[LSP] Goto Implementation")
-        map("gr", vim.lsp.buf.references, "[LSP] Goto Implementation")
+        map("gr", vim.lsp.buf.references, "[LSP] Goto References")
 
         map("<leader>rn", vim.lsp.buf.rename, "[LSP] Rename")
         map("<leader>ca", vim.lsp.buf.code_action, "[LSP] Code Action")

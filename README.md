@@ -5,7 +5,7 @@ My setup of `nvim` written in `lua`.
 ## Dependencies
 
 * `node` and `npm`
-* `python` with `python-venv` package installed
+* `python` with `pip` and `python-venv` packages installed
 * `tar`, `curl` and/or `git`
 * A **C** compiler and `libstdc++`
 * `fd` and `ripgrep`
@@ -19,7 +19,7 @@ Simply clone the repository into your neovim config folder:
 git clone https://github.com/stonefeld/nvim ~/.config/nvim
 
 # For Windows users
-git clone https://github.com/stonefeld/nvim C:/Users/user/AppData/Local/nvim
+git clone https://github.com/stonefeld/nvim C:/Users/<user>/AppData/Local/nvim
 ```
 
 Once neovim is launched after cloning the repo, all plugins and tools will start downloading.

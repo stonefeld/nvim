@@ -3,15 +3,14 @@ return {
   dependencies = "rafamadriz/friendly-snippets",
   version = "v0.*",
   opts = {
-    keymap = {
-      preset = "default",
-      cmdline = { preset = "super-tab" },
-    },
     signature = { enabled = true },
     appearance = {
       use_nvim_cmp_as_default = true,
       nerd_font_variant = "normal",
     },
+    cmdline = {
+      enabled = false,
+    }
   },
   opts_extend = { "sources.default" },
 }

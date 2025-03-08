@@ -1,5 +1,5 @@
 -- always show a block as cursor
--- vim.o.guicursor = "a:block"
+vim.o.guicursor = "a:block"
 
 -- disable right-click menu
 vim.o.mousemodel = "extend"

@@ -22,6 +22,9 @@ return {
       "nvim-lua/plenary.nvim",
     },
     build = "make tiktoken",
+    cond = function()
+      return vim.fn.executable("make") == 1
+    end,
     config = function()
       local copilot = require("CopilotChat")
       local selections = require("CopilotChat.select")
