@@ -4,7 +4,8 @@ return {
     { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
   },
   init = function()
-    vim.o.laststatus = 3
+    -- vim.o.laststatus = 3
+    vim.o.showmode = false
   end,
   config = function()
     local conditions = {
@@ -80,24 +81,24 @@ return {
     require("lualine").setup({
       options = {
         section_separators = "",
-        component_separators = "|",
+        component_separators = "",
       },
-      -- sections = {
-      --   lualine_a = { mode },
-      --   lualine_b = { branch, diff, "diagnostics" },
-      --   lualine_c = { filename },
-      --   lualine_x = {},
-      --   lualine_y = { sep, filetype, encoding, fileformat, filesize },
-      --   lualine_z = { "location" },
-      -- },
-      -- inactive_sections = {
-      --   lualine_a = {},
-      --   lualine_b = {},
-      --   lualine_c = { filename },
-      --   lualine_x = { "location" },
-      --   lualine_y = {},
-      --   lualine_z = {},
-      -- },
+      sections = {
+        lualine_a = { mode },
+        lualine_b = { branch, diff, "diagnostics" },
+        lualine_c = { filename },
+        lualine_x = {},
+        lualine_y = { sep, filetype, encoding, fileformat, filesize },
+        lualine_z = { "location" },
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { filename },
+        lualine_x = { "location" },
+        lualine_y = {},
+        lualine_z = {},
+      },
     })
   end,
 }

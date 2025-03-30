@@ -27,8 +27,6 @@ u.nmap("<leader>to", ":tabonly<CR>", "[Core] Leave only one tab open")
 
 -- navigating through diagnostics
 u.nmap("gl", vim.diagnostic.open_float, "[Core] Open diagnostics message")
-u.nmap("]d", vim.diagnostic.goto_next, "[Core] Goto next error")
-u.nmap("[d", vim.diagnostic.goto_prev, "[Core] Goto previous error")
 u.nmap("<leader>fd", vim.diagnostic.setqflist, "[Core] Open quickfix list with diagnostics")
 
 -- moving through the quickfix

@@ -1,5 +1,4 @@
 -- always show a block as cursor
-vim.o.guicursor = "a:block"
 
 -- disable right-click menu
 vim.o.mousemodel = "extend"
@@ -22,9 +21,6 @@ vim.o.autoindent = true
 vim.o.wrap = false
 vim.o.linebreak = true
 vim.o.breakindent = true
-
--- don't show current mode
-vim.o.showmode = false
 
 -- case insensitive unless specified
 vim.o.ignorecase = true

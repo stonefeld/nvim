@@ -6,35 +6,16 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   config = function()
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
-      callback = function(event)
-        local map = function(keys, func, desc)
-          vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc or "" })
-        end
-
-        map("gd", vim.lsp.buf.definition, "[LSP] Goto Definition")
-        map("gD", vim.lsp.buf.declaration, "[LSP] Goto Declaration")
-        map("gI", vim.lsp.buf.implementation, "[LSP] Goto Implementation")
-        map("gr", vim.lsp.buf.references, "[LSP] Goto References")
-
-        map("<leader>rn", vim.lsp.buf.rename, "[LSP] Rename")
-        map("<leader>ca", vim.lsp.buf.code_action, "[LSP] Code Action")
-
-        map("K", vim.lsp.buf.hover, "[LSP] Kind (Hover documentation)")
-
-        -- enable inlay hints
-        -- vim.lsp.inlay_hint.enable()
-      end,
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = "󰅚",
+          [vim.diagnostic.severity.WARN] = "󰀪",
+          [vim.diagnostic.severity.INFO] = "󰋽",
+          [vim.diagnostic.severity.HINT] = "󰌶",
+        }
+      }
     })
-
-    local signs = { Error = "󰅚", Warn = "󰀪", Hint = "󰌶", Info = "󰋽" }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-    end
-
-    vim.diagnostic.config({ virtual_text = false })
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())

@@ -1,7 +1,6 @@
 return {
   "j-hui/fidget.nvim",
   event = "LspAttach",
-  enabled = false,
   opts = {
     progress = {
       suppress_on_insert = true,

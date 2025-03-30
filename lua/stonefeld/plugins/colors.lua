@@ -13,6 +13,7 @@ return {
     "catppuccin/nvim",
     priority = 1000,
     name = "catppuccin",
+    init = set_colors("catppuccin"),
     opts = {
       no_italic = true,
       flavour = "mocha",
@@ -22,6 +23,5 @@ return {
         nvimtree = true,
       },
     },
-    init = set_colors("catppuccin"),
   },
 }
