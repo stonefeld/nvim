@@ -3,11 +3,7 @@ return {
   dependencies = "rafamadriz/friendly-snippets",
   version = "v0.*",
   opts = {
-    signature = { enabled = true },
-    appearance = {
-      use_nvim_cmp_as_default = true,
-      nerd_font_variant = "normal",
-    },
+    appearance = { nerd_font_variant = "normal" },
     cmdline = { enabled = false },
     keymap = {
       preset = "default",

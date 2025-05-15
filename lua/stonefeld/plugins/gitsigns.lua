@@ -1,6 +1,11 @@
 return {
   "lewis6991/gitsigns.nvim",
   opts = {
+    preview_config = {
+      border = "rounded",
+      row = 1,
+      col = 0,
+    },
     on_attach = function(bufnr)
       local gitsigns = package.loaded.gitsigns
 
@@ -43,7 +48,7 @@ return {
       map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "Stage the whole buffer" })
       map("n", "<leader>hu", gitsigns.undo_stage_hunk, { desc = "Undo stage the current hunk" })
       map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "Reset the whole buffer" })
-      map("n", "<leader>hi", gitsigns.preview_hunk_inline, { desc = "Preview the current hunk inline" })
+      map("n", "<leader>hi", gitsigns.preview_hunk, { desc = "Preview the current hunk inline" })
       map("n", "<leader>hb", gitsigns.blame, { desc = "Blame the current line" })
 
       map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "Toggle current line blame" })

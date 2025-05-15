@@ -12,8 +12,8 @@ u.map("v", "J", ":m '>+1<CR>gv", "[Core] Move selected lines down")
 u.map("v", "K", ":m '<-2<CR>gv", "[Core] Move selected lines up")
 
 -- open netrw
--- u.nmap("<leader>e", ":Ex $PWD<CR>", "[Core] Open netrw (file explorer)")
--- u.nmap("<leader>fe", ":Ex<CR>", "[Core] Open netrw (file explorer)")
+u.nmap("<leader>e", ":Ex $PWD<CR>", "[Core] Open netrw (file explorer)")
+u.nmap("<leader>fe", ":Ex<CR>", "[Core] Open netrw (file explorer)")
 
 -- manage buffers
 u.nmap("<Tab>", ":bn<CR>", "[Core] Focus next buffer")
@@ -26,7 +26,13 @@ u.nmap("<leader>tc", ":tabclose<CR>", "[Core] Close current tab")
 u.nmap("<leader>to", ":tabonly<CR>", "[Core] Leave only one tab open")
 
 -- navigating through diagnostics
-u.nmap("gl", vim.diagnostic.open_float, "[Core] Open diagnostics message")
+u.nmap("gl", function()
+  vim.diagnostic.open_float({
+    max_width = 100,
+    max_height = 14,
+    border = "rounded",
+  })
+end, "[Core] Open diagnostics message")
 u.nmap("<leader>fd", vim.diagnostic.setqflist, "[Core] Open quickfix list with diagnostics")
 
 -- moving through the quickfix
@@ -51,6 +57,7 @@ u.nmap("<leader>th", ":set hls!<CR>", "[Core] Toggle search highlighting")
 u.nmap("<leader>ts", ":set spell!<CR>", "[Core] Toggle spell checking")
 u.nmap("<leader>tl", ":set list!<CR>", "[Core] Toggle listchars")
 u.nmap("<leader>tw", ":set wrap!<CR>", "[Core] Toggle line wrapping")
+u.nmap("<leader>tr", ":set relativenumber!<CR>", "[Core] Toggle relative line numbers")
 
 -- print full path of the current file
 u.nmap("<leader><C-g>", ":echo expand('%:p')<CR>", "[Core] Print full path of the current file")

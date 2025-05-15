@@ -1,3 +1,3 @@
 return {
-  filetypes = "html*",
+  filetypes = { "html", "htmldjango" },
 }

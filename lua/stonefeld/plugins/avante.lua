@@ -11,16 +11,16 @@ return {
     "nvim-telescope/telescope.nvim",
     "nvim-tree/nvim-web-devicons",
     "zbirenbaum/copilot.lua",
-    {
-      "MeanderingProgrammer/render-markdown.nvim",
-      opts = { file_types = { "Avante" } },
-      ft = "Avante",
-    },
+    -- {
+    --   "MeanderingProgrammer/render-markdown.nvim",
+    --   opts = { file_types = { "Avante" } },
+    --   ft = "Avante",
+    -- },
   },
   opts = {
     provider = "copilot",
     copilot = {
-      model = "claude-3.7-sonnet",
+      model = "gpt-4.1",
     },
   },
 }

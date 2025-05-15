@@ -48,7 +48,8 @@ vim.o.splitbelow = true
 vim.o.termguicolors = true
 
 -- completion options
-vim.o.completeopt = "menuone,noselect"
+-- vim.o.completeopt = "menuone,noselect"
+vim.g.completeopt = "noinsert,noselect,popup"
 
 -- swapfiles are kind of useless
 vim.o.swapfile = false
