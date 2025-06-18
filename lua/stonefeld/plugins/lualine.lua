@@ -24,16 +24,8 @@ return {
     local mode = {
       "mode",
       fmt = function(str)
-        if conditions.window_width() then
-          return str:sub(1, 1) .. str:sub(2):lower()
-        end
-        return str:sub(1, 1)
+        return str:sub(1, 3)
       end,
-    }
-
-    local branch = {
-      "branch",
-      cond = conditions.window_width,
     }
 
     local diff = {
@@ -47,35 +39,18 @@ return {
       path = 1,
     }
 
-    local filetype = {
-      "filetype",
-      colored = false,
-      cond = conditions.window_width,
-      padding = { left = 0, right = 1 },
-    }
-
-    local encoding = {
-      "encoding",
-      padding = 0,
-    }
-
-    local fileformat = {
-      "fileformat",
+    local diagnostics = {
+      "diagnostics",
       symbols = {
-        unix = "unix",
-        dos = "dos",
-        mac = "mac",
+        -- error = "● ",
+        -- warn = "● ",
+        -- info = "● ",
+        -- hint = "● ",
+        error = "E ",
+        warn = "W ",
+        info = "I ",
+        hint = "H ",
       },
-      fmt = function(str)
-        return "[" .. str .. "]"
-      end,
-      padding = { left = 0, right = 1 },
-    }
-
-    local filesize = {
-      "filesize",
-      cond = conditions.window_width,
-      padding = { left = 0, right = 1 },
     }
 
     require("lualine").setup({
@@ -84,12 +59,12 @@ return {
         component_separators = "",
       },
       sections = {
-        lualine_a = { mode },
-        lualine_b = { branch, diff, "diagnostics" },
-        lualine_c = { filename },
-        lualine_x = {},
-        lualine_y = { sep, filetype, encoding, fileformat, filesize },
-        lualine_z = { "location" },
+        lualine_a = {},
+        lualine_b = { mode },
+        lualine_c = { sep, filename },
+        lualine_x = { diagnostics, sep, diff, sep, "location" },
+        lualine_y = {},
+        lualine_z = {},
       },
       inactive_sections = {
         lualine_a = {},

@@ -45,7 +45,7 @@ return {
       virtual_text = {
         -- prefix = "● ",
         -- prefix = ":",
-        prefix = ":",
+        prefix = "",
         current_line = true,
         spacing = 8,
       },
