@@ -82,6 +82,8 @@ return {
       "clangd",
       "pylsp",
       "ts_ls",
+      "vtsls",
+      "vue_ls",
       "html",
       "cssls",
       "emmet_ls",
@@ -109,10 +111,10 @@ return {
     local servers = require("mason-lspconfig").get_installed_servers()
 
     for _, server_name in ipairs(servers) do
-      local ok, server = pcall(require, "stonefeld.plugins.lsp." .. server_name)
-      server = ok and server or {}
-      server.capabilities = vim.tbl_deep_extend("force", capabilities, server.capabilities or {})
-      vim.lsp.config[server_name] = server
+      local ok, config = pcall(require, "stonefeld.plugins.lsp." .. server_name)
+      config = ok and config or {}
+      config.capabilities = vim.tbl_deep_extend("force", capabilities, config.capabilities or {})
+      vim.lsp.config(server_name, config)
     end
 
     vim.lsp.enable(servers)
