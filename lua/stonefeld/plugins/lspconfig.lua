@@ -24,16 +24,6 @@ return {
 
     vim.diagnostic.config({
       signs = {
-        -- text = {
-        --   -- [vim.diagnostic.severity.ERROR] = "󰅚",
-        --   -- [vim.diagnostic.severity.WARN] = "󰀪",
-        --   -- [vim.diagnostic.severity.INFO] = "󰋽",
-        --   -- [vim.diagnostic.severity.HINT] = "󰌶",
-        --   [vim.diagnostic.severity.ERROR] = "● ",
-        --   [vim.diagnostic.severity.WARN] = "● ",
-        --   [vim.diagnostic.severity.INFO] = "● ",
-        --   [vim.diagnostic.severity.HINT] = "● ",
-        -- },
         linehl = {
           [vim.diagnostic.severity.ERROR] = "DiagnosticErrorLn",
           [vim.diagnostic.severity.WARN] = "DiagnosticWarnLn",
@@ -43,10 +33,7 @@ return {
       },
       underline = false,
       virtual_text = {
-        -- prefix = "● ",
-        -- prefix = ":",
         prefix = "",
-        current_line = true,
         spacing = 8,
       },
     })
@@ -76,27 +63,6 @@ return {
       capabilities = vim.tbl_deep_extend("force", capabilities, blink.get_lsp_capabilities())
     end
 
-    local ensure_installed = {
-      -- lsp
-      "lua_ls",
-      "clangd",
-      "pylsp",
-      "ts_ls",
-      "vtsls",
-      "vue_ls",
-      "html",
-      "cssls",
-      "emmet_ls",
-      -- formatters
-      "stylua",
-      "clang-format",
-      "black",
-      "isort",
-      "prettierd",
-      -- dap
-      "cpptools",
-    }
-
     require("mason").setup({
       ui = {
         icons = {
@@ -106,7 +72,28 @@ return {
         },
       },
     })
-    require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+    require("mason-tool-installer").setup({
+      ensure_installed = {
+        -- lsp
+        "clangd",
+        "cssls",
+        "emmet_ls",
+        "html",
+        "lua_ls",
+        "pylsp",
+        -- "ts_ls",
+        "vtsls",
+        "vue_ls",
+        -- formatters
+        "black",
+        "clang-format",
+        "isort",
+        "prettier",
+        "stylua",
+        -- dap
+        "cpptools",
+      },
+    })
 
     local servers = require("mason-lspconfig").get_installed_servers()
 

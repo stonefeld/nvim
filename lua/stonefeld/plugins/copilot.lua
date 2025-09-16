@@ -3,6 +3,11 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
+    init = function()
+      local u = require("stonefeld.core.utils")
+
+      u.nmap("<leader>ct", "<cmd>Copilot toggle<cr>", "[Copilot] Toggle")
+    end,
     opts = {
       suggestion = {
         auto_trigger = true,
@@ -27,10 +32,7 @@ return {
         local chat = require("CopilotChat")
 
         chat.setup({
-          window = {
-            width = 0.4,
-          },
-          insert_at_end = true,
+          window = { width = 0.4 },
         })
 
         u.nmap("<leader>cc", chat.open, "[Copilot Chat] Open chat")

@@ -4,7 +4,6 @@ return {
     { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
   },
   init = function()
-    -- vim.o.laststatus = 3
     vim.o.showmode = false
   end,
   config = function()

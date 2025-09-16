@@ -14,10 +14,10 @@ return {
       end
 
       return {
-        DiagnosticVirtualTextHint = make_diagnostic_color(theme.diag.hint),
-        DiagnosticVirtualTextInfo = make_diagnostic_color(theme.diag.info),
-        DiagnosticVirtualTextWarn = make_diagnostic_color(theme.diag.warning),
         DiagnosticVirtualTextError = make_diagnostic_color(theme.diag.error),
+        DiagnosticVirtualTextWarn = make_diagnostic_color(theme.diag.warning),
+        DiagnosticVirtualTextInfo = make_diagnostic_color(theme.diag.info),
+        DiagnosticVirtualTextHint = make_diagnostic_color(theme.diag.hint),
       }
     end,
   },
