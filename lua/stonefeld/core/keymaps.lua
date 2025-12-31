@@ -58,6 +58,9 @@ u.nmap("<leader>ts", ":set spell!<CR>", "[Core] Toggle spell checking")
 u.nmap("<leader>tl", ":set list!<CR>", "[Core] Toggle listchars")
 u.nmap("<leader>tw", ":set wrap!<CR>", "[Core] Toggle line wrapping")
 u.nmap("<leader>tr", ":set relativenumber!<CR>", "[Core] Toggle relative line numbers")
+u.nmap("<leader>ti", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, "[Core] Toggle LSP inlay hints")
 
 -- print full path of the current file
 u.nmap("<leader><C-g>", ":echo expand('%:p')<CR>", "[Core] Print full path of the current file")

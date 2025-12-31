@@ -101,7 +101,6 @@ augs.CoreFiletypeSettings = {
       vim.opt_local.textwidth = 80
       vim.opt_local.colorcolumn = "81"
       vim.opt_local.spell = true
-      vim.opt_local.makeprg = "mdc %"
     end,
   },
   wrap_on_dap_windows = {

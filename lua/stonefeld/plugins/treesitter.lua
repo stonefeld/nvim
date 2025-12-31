@@ -1,19 +1,30 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPre", "BufNewFile" },
+  lazy = false,
   build = ":TSUpdate",
-  config = function()
-    require("nvim-treesitter.configs").setup({
-      ensure_installed = { "lua", "vimdoc", "markdown", "markdown_inline" },
-      auto_install = false,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-      indent = {
-        enable = true,
-        disable = { "htmldjango" },
-      },
+  init = function()
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("tree-sitter-highlight", { clear = true }),
+      pattern = "*",
+      callback = function(args)
+        local lang = vim.treesitter.language.get_lang(args.match)
+        if not lang then
+          return
+        end
+
+        if vim.treesitter.query.get(lang, "highlights") then
+          vim.treesitter.start(args.buf)
+        end
+
+        if vim.treesitter.query.get(lang, "indents") then
+          vim.opt_local.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+        end
+
+        -- if vim.treesitter.query.get(lang, "folds") then
+        --   vim.opt_local.foldmethod = "expr"
+        --   vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        -- end
+      end,
     })
   end,
 }
