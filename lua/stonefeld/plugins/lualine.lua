@@ -2,7 +2,7 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
-    'AndreM222/copilot-lualine'
+    "AndreM222/copilot-lualine",
   },
   init = function()
     vim.o.showmode = false
@@ -62,7 +62,7 @@ return {
         lualine_a = { "copilot" },
         lualine_b = { mode },
         lualine_c = { sep, filename },
-        lualine_x = { diagnostics, sep, diff, sep, "location" },
+        lualine_x = { diagnostics, sep, diff, sep, "location", "progress" },
         lualine_y = {},
         lualine_z = {},
       },
@@ -70,7 +70,7 @@ return {
         lualine_a = {},
         lualine_b = {},
         lualine_c = { filename },
-        lualine_x = { "location" },
+        lualine_x = { "location", "progress" },
         lualine_y = {},
         lualine_z = {},
       },

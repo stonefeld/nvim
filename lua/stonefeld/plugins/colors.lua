@@ -13,11 +13,20 @@ return {
         return { fg = color, bg = c(color):blend(theme.ui.bg, 0.95):to_hex() }
       end
 
+      local error = make_diagnostic_color(theme.diag.error)
+      local warning = make_diagnostic_color(theme.diag.warning)
+      local info = make_diagnostic_color(theme.diag.info)
+      local hint = make_diagnostic_color(theme.diag.hint)
+
       return {
-        DiagnosticVirtualTextError = make_diagnostic_color(theme.diag.error),
-        DiagnosticVirtualTextWarn = make_diagnostic_color(theme.diag.warning),
-        DiagnosticVirtualTextInfo = make_diagnostic_color(theme.diag.info),
-        DiagnosticVirtualTextHint = make_diagnostic_color(theme.diag.hint),
+        DiagnosticVirtualTextError = error,
+        DiagnosticVirtualTextWarn = warning,
+        DiagnosticVirtualTextInfo = info,
+        DiagnosticVirtualTextHint = hint,
+        DiagnosticErrorLn = { fg = "NONE", bg = error.bg },
+        DiagnosticWarnLn = { fg = "NONE", bg = warning.bg },
+        DiagnosticInfoLn = { fg = "NONE", bg = info.bg },
+        DiagnosticHintLn = { fg = "NONE", bg = hint.bg }
       }
     end,
   },

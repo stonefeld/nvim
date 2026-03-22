@@ -7,21 +7,6 @@ return {
     "saghen/blink.cmp",
   },
   config = function()
-    local function get_hl_bg(name)
-      local hl = vim.api.nvim_get_hl(0, { name = name })
-      return hl and hl.bg
-    end
-
-    local error_bg = get_hl_bg("DiagnosticVirtualTextError")
-    local warn_bg = get_hl_bg("DiagnosticVirtualTextWarn")
-    local info_bg = get_hl_bg("DiagnosticVirtualTextInfo")
-    local hint_bg = get_hl_bg("DiagnosticVirtualTextHint")
-
-    vim.api.nvim_set_hl(0, "DiagnosticErrorLn", { bg = error_bg, fg = "NONE" })
-    vim.api.nvim_set_hl(0, "DiagnosticWarnLn", { bg = warn_bg, fg = "NONE" })
-    vim.api.nvim_set_hl(0, "DiagnosticInfoLn", { bg = info_bg, fg = "NONE" })
-    vim.api.nvim_set_hl(0, "DiagnosticHintLn", { bg = hint_bg, fg = "NONE" })
-
     vim.diagnostic.config({
       signs = {
         linehl = {
@@ -31,7 +16,7 @@ return {
           [vim.diagnostic.severity.HINT] = "DiagnosticHintLn",
         },
       },
-      underline = false,
+      underline = true,
       virtual_text = {
         prefix = "",
         spacing = 8,
@@ -80,7 +65,7 @@ return {
         "emmet_ls",
         "html",
         "lua_ls",
-        "pylsp",
+        -- "pylsp",
         -- "ts_ls",
         "vtsls",
         "vue_ls",
