@@ -1,7 +1,7 @@
 return {
   "saghen/blink.cmp",
   dependencies = "rafamadriz/friendly-snippets",
-  version = "v0.*",
+  version = "v1.*",
   opts = {
     appearance = { nerd_font_variant = "normal" },
     cmdline = { enabled = false },
@@ -11,5 +11,4 @@ return {
       ["<C-o>"] = { "show", "show_documentation", "hide_documentation", "fallback" },
     },
   },
-  opts_extend = { "sources.default" },
 }

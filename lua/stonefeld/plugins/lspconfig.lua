@@ -8,6 +8,17 @@ return {
   },
   config = function()
     vim.diagnostic.config({
+      severity_sort = true,
+      update_in_insert = false,
+      float = {
+        border = "rounded",
+        source = "if_many",
+      },
+      underline = true,
+      virtual_text = {
+        prefix = "",
+        spacing = 8,
+      },
       signs = {
         linehl = {
           [vim.diagnostic.severity.ERROR] = "DiagnosticErrorLn",
@@ -15,11 +26,6 @@ return {
           [vim.diagnostic.severity.INFO] = "DiagnosticInfoLn",
           [vim.diagnostic.severity.HINT] = "DiagnosticHintLn",
         },
-      },
-      underline = true,
-      virtual_text = {
-        prefix = "",
-        spacing = 8,
       },
     })
 
@@ -42,12 +48,6 @@ return {
       })
     end
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    local status_ok, blink = pcall(require, "blink.cmp")
-    if status_ok then
-      capabilities = vim.tbl_deep_extend("force", capabilities, blink.get_lsp_capabilities())
-    end
-
     require("mason").setup({
       ui = {
         icons = {
@@ -57,17 +57,18 @@ return {
         },
       },
     })
+    require("mason-lspconfig").setup()
     require("mason-tool-installer").setup({
       ensure_installed = {
         -- lsp
+        "basedpyright",
         "clangd",
         "cssls",
         "emmet_ls",
         "html",
         "lua_ls",
-        "basedpyright",
+        "lua_ls",
         "ruff",
-        -- "ts_ls",
         "vtsls",
         "vue_ls",
         -- formatters
@@ -76,20 +77,7 @@ return {
         "isort",
         "prettier",
         "stylua",
-        -- dap
-        "cpptools",
       },
     })
-
-    local servers = require("mason-lspconfig").get_installed_servers()
-
-    for _, server_name in ipairs(servers) do
-      local ok, config = pcall(require, "stonefeld.plugins.lsp." .. server_name)
-      config = ok and config or {}
-      config.capabilities = vim.tbl_deep_extend("force", capabilities, config.capabilities or {})
-      vim.lsp.config(server_name, config)
-    end
-
-    vim.lsp.enable(servers)
   end,
 }

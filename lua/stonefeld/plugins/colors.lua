@@ -26,7 +26,7 @@ return {
         DiagnosticErrorLn = { fg = "NONE", bg = error.bg },
         DiagnosticWarnLn = { fg = "NONE", bg = warning.bg },
         DiagnosticInfoLn = { fg = "NONE", bg = info.bg },
-        DiagnosticHintLn = { fg = "NONE", bg = hint.bg }
+        DiagnosticHintLn = { fg = "NONE", bg = hint.bg },
       }
     end,
   },
